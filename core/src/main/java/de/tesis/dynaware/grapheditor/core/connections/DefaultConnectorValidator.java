@@ -4,7 +4,7 @@
 package de.tesis.dynaware.grapheditor.core.connections;
 
 import de.tesis.dynaware.grapheditor.GConnectorValidator;
-import de.tesis.dynaware.grapheditor.core.skins.defaults.utils.DefaultConnectorTypes;
+import de.tesis.dynaware.grapheditor.DefaultConnectorTypes;
 import de.tesis.dynaware.grapheditor.model.GConnector;
 
 /**
@@ -17,7 +17,8 @@ public class DefaultConnectorValidator implements GConnectorValidator {
 
         if (source == null || target == null) {
             return false;
-        } else if (source.equals(target)) {
+        }
+        else if (source.equals(target)) {
             return false;
         }
 
@@ -29,7 +30,8 @@ public class DefaultConnectorValidator implements GConnectorValidator {
 
         if (source.getType() == null || target.getType() == null) {
             return false;
-        } else if (!source.getConnections().isEmpty() || !target.getConnections().isEmpty()) {
+        } else if (/*!source.getConnections().isEmpty() || */ !target.getConnections().isEmpty() &&
+                DefaultConnectorTypes.isInput(target.getType())) {
             return false;
         } else if (source.getParent().equals(target.getParent())) {
             return false;

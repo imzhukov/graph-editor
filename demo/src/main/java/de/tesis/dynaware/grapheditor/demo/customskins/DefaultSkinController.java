@@ -2,6 +2,9 @@ package de.tesis.dynaware.grapheditor.demo.customskins;
 
 import javafx.geometry.Side;
 
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.edit.command.AddCommand;
@@ -12,7 +15,7 @@ import de.tesis.dynaware.grapheditor.Commands;
 import de.tesis.dynaware.grapheditor.GraphEditor;
 import de.tesis.dynaware.grapheditor.GraphEditorContainer;
 import de.tesis.dynaware.grapheditor.SkinLookup;
-import de.tesis.dynaware.grapheditor.core.skins.defaults.utils.DefaultConnectorTypes;
+import de.tesis.dynaware.grapheditor.DefaultConnectorTypes;
 import de.tesis.dynaware.grapheditor.model.GConnector;
 import de.tesis.dynaware.grapheditor.model.GModel;
 import de.tesis.dynaware.grapheditor.model.GNode;
@@ -42,6 +45,39 @@ public class DefaultSkinController implements SkinController {
 
         this.graphEditor = graphEditor;
         this.graphEditorContainer = graphEditorContainer;
+
+//        graphEditorContainer.setOnDragOver(event -> {
+//            Dragboard db = event.getDragboard();
+//            if (db.hasContent(DataFormat.PLAIN_TEXT)) {
+//                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+//                event.consume();
+//            }
+//        });
+//
+//        graphEditorContainer.setOnDragDropped(event -> {
+//            Dragboard db = event.getDragboard();
+//            if (db.hasContent(DataFormat.PLAIN_TEXT)) {
+//                //addNode(1.0);
+////                final double windowXOffset = windowXProperty().get() / 1.0f;
+////                final double windowYOffset = windowYProperty().get() / 1.0f;
+//
+//                final GNode node = GraphFactory.eINSTANCE.createGNode();
+//                node.setY(event.getScreenY());
+//
+//                final GConnector rightOutput = GraphFactory.eINSTANCE.createGConnector();
+//                node.getConnectors().add(rightOutput);
+//
+//                final GConnector leftInput = GraphFactory.eINSTANCE.createGConnector();
+//                node.getConnectors().add(leftInput);
+//
+//                node.setX(event.getScreenX());
+//
+//                rightOutput.setType(DefaultConnectorTypes.RIGHT_OUTPUT);
+//                leftInput.setType(DefaultConnectorTypes.LEFT_INPUT);
+//
+//                Commands.addNode(graphEditor.getModel(), node);
+//            }
+//        });
     }
 
     @Override

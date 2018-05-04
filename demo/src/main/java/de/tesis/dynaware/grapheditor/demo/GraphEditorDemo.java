@@ -5,10 +5,13 @@ package de.tesis.dynaware.grapheditor.demo;
 
 import java.net.URL;
 
+import de.tesis.dynaware.grapheditor.zoom.SceneGestures;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import de.tesis.dynaware.grapheditor.GraphEditor;
@@ -38,6 +41,11 @@ public class GraphEditorDemo extends Application {
         scene.getStylesheets().add(getClass().getResource(TREE_SKIN_STYLESHEET).toExternalForm());
         scene.getStylesheets().add(getClass().getResource(TITLED_SKIN_STYLESHEET).toExternalForm());
         Font.loadFont(getClass().getResource(FONT_AWESOME).toExternalForm(), 12);
+
+        SceneGestures sceneGestures = new SceneGestures(controller.getGraphEditorContainer());
+        scene.addEventFilter( MouseEvent.MOUSE_PRESSED, sceneGestures.getOnMousePressedEventHandler());
+        scene.addEventFilter( MouseEvent.MOUSE_DRAGGED, sceneGestures.getOnMouseDraggedEventHandler());
+        scene.addEventFilter( ScrollEvent.ANY, sceneGestures.getOnScrollEventHandler());
 
         stage.setScene(scene);
         stage.setTitle(APPLICATION_TITLE);

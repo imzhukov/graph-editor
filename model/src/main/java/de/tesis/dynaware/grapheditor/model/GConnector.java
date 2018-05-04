@@ -177,6 +177,31 @@ public interface GConnector extends EObject {
     void setY(double value);
 
     /**
+     * Returns the value of the '<em><b>Y</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Y</em>' attribute isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Y</em>' attribute.
+     * @see #setY(double)
+     * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGConnector_Y()
+     * @model
+     * @generated
+     */
+    String getName();
+
+    /**
+     * Sets the value of the '{@link de.tesis.dynaware.grapheditor.model.GConnector#getY <em>Y</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Y</em>' attribute.
+     * @generated
+     */
+    void setName(String value);
+
+    /**
      * Returns the value of the '<em><b>Connection Detached On Drag</b></em>' attribute.
      * The default value is <code>"true"</code>.
      * <!-- begin-user-doc -->

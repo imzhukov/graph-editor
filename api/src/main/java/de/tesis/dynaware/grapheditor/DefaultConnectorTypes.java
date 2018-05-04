@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2005 - 2014 by TESIS DYNAware GmbH
  */
-package de.tesis.dynaware.grapheditor.core.skins.defaults.utils;
+package de.tesis.dynaware.grapheditor;
 
 import javafx.geometry.Side;
 

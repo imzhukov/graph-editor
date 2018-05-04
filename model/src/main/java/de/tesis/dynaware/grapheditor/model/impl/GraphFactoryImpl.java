@@ -84,6 +84,11 @@ public class GraphFactoryImpl extends EFactoryImpl implements GraphFactory {
         return gNode;
     }
 
+    @Override
+    public GNode cerateGNodeByName() {
+        return null;
+    }
+
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

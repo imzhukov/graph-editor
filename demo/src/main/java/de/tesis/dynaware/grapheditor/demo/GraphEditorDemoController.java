@@ -117,6 +117,9 @@ public class GraphEditorDemoController {
 
         graphEditor.setModel(model);
         graphEditorContainer.setGraphEditor(graphEditor);
+
+
+
         setDetouredStyle();
 
         defaultSkinController = new DefaultSkinController(graphEditor, graphEditorContainer);
@@ -272,6 +275,10 @@ public class GraphEditorDemoController {
      */
     public void panToCenter() {
         graphEditorContainer.panTo(WindowPosition.CENTER);
+    }
+
+    public GraphEditorContainer getGraphEditorContainer() {
+        return graphEditorContainer;
     }
 
     /**

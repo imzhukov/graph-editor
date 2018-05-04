@@ -17,7 +17,7 @@ import de.tesis.dynaware.grapheditor.GConnectorSkin;
 import de.tesis.dynaware.grapheditor.GConnectorStyle;
 import de.tesis.dynaware.grapheditor.core.skins.defaults.utils.AnimatedColor;
 import de.tesis.dynaware.grapheditor.core.skins.defaults.utils.ColorAnimationUtils;
-import de.tesis.dynaware.grapheditor.core.skins.defaults.utils.DefaultConnectorTypes;
+import de.tesis.dynaware.grapheditor.DefaultConnectorTypes;
 import de.tesis.dynaware.grapheditor.core.utils.LogMessages;
 import de.tesis.dynaware.grapheditor.model.GConnector;
 

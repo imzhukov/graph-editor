@@ -3,7 +3,13 @@
  */
 package de.tesis.dynaware.grapheditor;
 
+import de.tesis.dynaware.grapheditor.model.GConnector;
+import de.tesis.dynaware.grapheditor.model.GNode;
+import de.tesis.dynaware.grapheditor.model.GraphFactory;
 import javafx.beans.value.ChangeListener;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import de.tesis.dynaware.grapheditor.model.GModel;
@@ -52,6 +58,9 @@ public class GraphEditorContainer extends AutoScrollingWindow {
     /**
      * Creates a new {@link GraphEditorContainer}.
      */
+    protected static final int NODE_INITIAL_X = 19;
+    protected static final int NODE_INITIAL_Y = 19;
+
     public GraphEditorContainer() {
         initializeMinimap();
         createModelChangeListener();

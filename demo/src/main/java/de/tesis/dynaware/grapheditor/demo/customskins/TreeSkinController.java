@@ -2,6 +2,7 @@ package de.tesis.dynaware.grapheditor.demo.customskins;
 
 import java.util.List;
 
+import de.tesis.dynaware.grapheditor.DefaultConnectorTypes;
 import javafx.geometry.Side;
 import de.tesis.dynaware.grapheditor.Commands;
 import de.tesis.dynaware.grapheditor.GraphEditor;
@@ -14,6 +15,9 @@ import de.tesis.dynaware.grapheditor.demo.customskins.tree.TreeTailSkin;
 import de.tesis.dynaware.grapheditor.model.GConnector;
 import de.tesis.dynaware.grapheditor.model.GNode;
 import de.tesis.dynaware.grapheditor.model.GraphFactory;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 
 /**
  * Responsible for tree-skin specific logic in the graph editor demo.
@@ -35,6 +39,40 @@ public class TreeSkinController implements SkinController {
 
         this.graphEditor = graphEditor;
         this.graphEditorContainer = graphEditorContainer;
+
+        graphEditorContainer.setOnDragOver(event -> {
+            Dragboard db = event.getDragboard();
+            if (db.hasContent(DataFormat.PLAIN_TEXT)) {
+                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                event.consume();
+            }
+        });
+
+        graphEditorContainer.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            if (db.hasContent(DataFormat.PLAIN_TEXT)) {
+//              addNode(1.0);
+//              final double windowXOffset = windowXProperty().get() / 1.0f;
+//              final double windowYOffset = windowYProperty().get() / 1.0f;
+
+                final GNode node = GraphFactory.eINSTANCE.createGNode();
+                node.setY(TREE_NODE_INITIAL_Y);
+
+                final GConnector output = GraphFactory.eINSTANCE.createGConnector();
+                node.getConnectors().add(output);
+
+                final double initialX = graphEditorContainer.getWidth() / (2) - node.getWidth() / 2;
+                node.setX(Math.floor(initialX));
+
+                node.setType(TreeSkinConstants.TREE_NODE);
+                output.setType(TreeSkinConstants.TREE_OUTPUT_CONNECTOR);
+
+                // This allows multiple connections to be created from the output.
+                output.setConnectionDetachedOnDrag(false);
+
+                Commands.addNode(graphEditor.getModel(), node);
+            }
+        });
 
         graphEditor.setNodeSkin(TreeSkinConstants.TREE_NODE, TreeNodeSkin.class);
         graphEditor.setConnectorSkin(TreeSkinConstants.TREE_INPUT_CONNECTOR, TreeConnectorSkin.class);

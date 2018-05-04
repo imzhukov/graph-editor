@@ -130,6 +130,26 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
     protected double y = Y_EDEFAULT;
 
     /**
+     * The default value of the '{@link #getY() <em>Y</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getY()
+     * @generated
+     * @ordered
+     */
+    protected static final String NAME_EDEFAULT = "";
+
+    /**
+     * The cached value of the '{@link #getY() <em>Y</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getY()
+     * @generated
+     * @ordered
+     */
+    protected String name = NAME_EDEFAULT;
+
+    /**
      * The default value of the '{@link #isConnectionDetachedOnDrag() <em>Connection Detached On Drag</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -303,6 +323,22 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
         y = newY;
         if (eNotificationRequired())
             eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GCONNECTOR__Y, oldY, y));
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setName(String newName) {
+        String oldName = name;
+        name = newName;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GCONNECTOR__ID, oldName, name));
     }
 
     /**

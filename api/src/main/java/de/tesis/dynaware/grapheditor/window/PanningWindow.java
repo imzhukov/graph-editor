@@ -3,6 +3,7 @@
  */
 package de.tesis.dynaware.grapheditor.window;
 
+import de.tesis.dynaware.grapheditor.zoom.PannableCanvas;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
@@ -26,7 +27,7 @@ import javafx.scene.shape.Rectangle;
  * </p>
  *
  */
-public class PanningWindow extends Region {
+public class PanningWindow extends PannableCanvas {
 
     private final Rectangle clip = new Rectangle();
 

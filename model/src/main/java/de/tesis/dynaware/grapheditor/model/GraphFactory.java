@@ -39,6 +39,8 @@ public interface GraphFactory extends EFactory {
      */
     GNode createGNode();
 
+    GNode cerateGNodeByName();
+
     /**
      * Returns a new object of class '<em>GConnector</em>'.
      * <!-- begin-user-doc -->
