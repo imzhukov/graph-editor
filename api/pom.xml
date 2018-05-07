@@ -20,15 +20,28 @@
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>edit</artifactId>
-			<version>${org.eclipse.emf.edit.version}</version>
+			<version>2.1.1</version>
 			<!-- EMF Edit brings a bunch of transitive junk that we don't need right now. -->
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
+			<!--<exclusions>-->
+				<!--<exclusion>-->
+					<!--<groupId>*</groupId>-->
+					<!--<artifactId>*</artifactId>-->
+				<!--</exclusion>-->
+			<!--</exclusions>-->
 		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.eclipse.emf</groupId>-->
+			<!--<artifactId>edit</artifactId>-->
+			<!--<version>${org.eclipse.emf.edit.version}</version>-->
+			<!--&lt;!&ndash; EMF Edit brings a bunch of transitive junk that we don't need right now. &ndash;&gt;-->
+			<!--<exclusions>-->
+				<!--<exclusion>-->
+					<!--<groupId>*</groupId>-->
+					<!--<artifactId>*</artifactId>-->
+				<!--</exclusion>-->
+			<!--</exclusions>-->
+		<!--</dependency>-->
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
