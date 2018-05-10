@@ -75,14 +75,14 @@ public class GraphEditorContainer extends AutoScrollingWindow {
 
         if (this.graphEditor != null) {
             this.graphEditor.modelProperty().removeListener(modelChangeListener);
-            this.graphEditor.getView().setOnScroll(null);
+            //this.graphEditor.getView().setOnScroll(null);
         }
 
         this.graphEditor = graphEditor;
 
         if (graphEditor != null) {
 
-            graphEditor.modelProperty().addListener(modelChangeListener);
+            //graphEditor.modelProperty().addListener(modelChangeListener);
 
             final Region view = graphEditor.getView();
             final GModel model = graphEditor.getModel();
@@ -98,7 +98,7 @@ public class GraphEditorContainer extends AutoScrollingWindow {
             minimap.setSkinLookup(skinLookup);
 
             view.toBack();
-            view.setOnScroll(event -> panBy(-event.getDeltaX(), -event.getDeltaY()));
+            //view.setOnScroll(event -> panBy(-event.getDeltaX(), -event.getDeltaY()));
 
         } else {
             minimap.setContent(null);
@@ -137,12 +137,12 @@ public class GraphEditorContainer extends AutoScrollingWindow {
      */
     private void createModelChangeListener() {
 
-        modelChangeListener = (ChangeListener<GModel>) (observable, oldValue, newValue) -> {
-            if (newValue == null || (newValue != null && !newValue.equals(oldValue))) {
-                graphEditor.getView().resize(newValue.getContentWidth(), newValue.getContentHeight());
-                checkWindowBounds();
-                minimap.setModel(newValue);
-            }
-        };
+//        modelChangeListener = (ChangeListener<GModel>) (observable, oldValue, newValue) -> {
+//            if (newValue == null || (newValue != null && !newValue.equals(oldValue))) {
+//                graphEditor.getView().resize(newValue.getContentWidth(), newValue.getContentHeight());
+//                checkWindowBounds();
+//                minimap.setModel(newValue);
+//            }
+//        };
     }
 }
