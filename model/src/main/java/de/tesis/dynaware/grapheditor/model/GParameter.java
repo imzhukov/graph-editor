@@ -13,21 +13,21 @@ public interface GParameter extends EObject {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Y</em>' attribute.
-     * @see #setName(String)
-     * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGParameter_Name()
+     * @see #setValue(String)
+     * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGParameter_ID()
      * @model
      * @generated
      */
-    String getName();
+    String getValue();
 
     /**
-     * Sets the value of the '{@link de.tesis.dynaware.grapheditor.model.GParameter#getName <em>Y</em>}' attribute.
+     * Sets the value of the '{@link de.tesis.dynaware.grapheditor.model.GParameter#getValue <em>Y</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Y</em>' attribute.
      * @generated
      */
-    void setName(String value);
+    void setValue(String value);
 
     /**
      * Returns the value of the '<em><b>Y</b></em>' attribute.
@@ -38,7 +38,7 @@ public interface GParameter extends EObject {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Y</em>' attribute.
-     * @see #setName(String)
+     * @see #setId(int)
      * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGParameter_ID()
      * @model
      * @generated
@@ -52,5 +52,5 @@ public interface GParameter extends EObject {
      * @param value the new value of the '<em>Y</em>' attribute.
      * @generated
      */
-    void setID(int value);
+    void setId(int value);
 }

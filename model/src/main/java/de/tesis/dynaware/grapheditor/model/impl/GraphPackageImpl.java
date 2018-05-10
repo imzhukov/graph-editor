@@ -507,6 +507,8 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
         createEAttribute(gNodeEClass, GNODE__WIDTH);
         createEAttribute(gNodeEClass, GNODE__HEIGHT);
         createEReference(gNodeEClass, GNODE__SUBGRAPH);
+        createEReference(gNodeEClass, GNODE__PARAMETERS);
+        createEAttribute(gNodeEClass, GNODE__LIBRARY_BLOCK_ID);
 
         gConnectionEClass = createEClass(GCONNECTION);
         createEAttribute(gConnectionEClass, GCONNECTION__ID);

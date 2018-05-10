@@ -4,13 +4,20 @@ package de.tesis.dynaware.grapheditor.model.impl;
 
 import de.tesis.dynaware.grapheditor.model.GModel;
 import de.tesis.dynaware.grapheditor.model.GNode;
+import de.tesis.dynaware.grapheditor.model.GParameter;
 import de.tesis.dynaware.grapheditor.model.GraphPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
@@ -162,6 +169,11 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
      */
     protected GModel subgraph;
 
+    protected EList<GParameter> parameters;
+
+    protected static final int LIBRARY_BLOCK_ID_EDEFAULT = -1;
+
+    protected int libraryBlockId = LIBRARY_BLOCK_ID_EDEFAULT;
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -350,6 +362,37 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
             eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GNODE__SUBGRAPH, newSubgraph, newSubgraph));
     }
 
+    @Override
+    public EList<GParameter> getParameters() {
+        if (parameters == null) {
+            parameters = new EObjectContainmentEList<GParameter>(GParameter.class, this, GraphPackage.GNODE__PARAMETERS);
+        }
+        return parameters;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public int getLibraryBlockId() {
+        return libraryBlockId;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setLibraryBlockId(int newLibraryBlockId) {
+        int oldLibraryBlockId = libraryBlockId;
+        libraryBlockId = newLibraryBlockId;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GNODE__LIBRARY_BLOCK_ID
+                    , oldLibraryBlockId
+                    , libraryBlockId));
+    }
+
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -376,6 +419,8 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
         switch (featureID) {
             case GraphPackage.GNODE__SUBGRAPH:
                 return basicSetSubgraph(null, msgs);
+            case GraphPackage.GNODE__PARAMETERS:
+                return ((InternalEList<?>) getParameters()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -402,6 +447,10 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
                 return getHeight();
             case GraphPackage.GNODE__SUBGRAPH:
                 return getSubgraph();
+            case GraphPackage.GNODE__PARAMETERS:
+                return getParameters();
+            case GraphPackage.GNODE__LIBRARY_BLOCK_ID:
+                return getLibraryBlockId();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -415,25 +464,32 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
             case GraphPackage.GNODE__ID:
-                setId((String)newValue);
+                setId((String) newValue);
                 return;
             case GraphPackage.GNODE__TYPE:
-                setType((String)newValue);
+                setType((String) newValue);
                 return;
             case GraphPackage.GNODE__X:
-                setX((Double)newValue);
+                setX((Double) newValue);
                 return;
             case GraphPackage.GNODE__Y:
-                setY((Double)newValue);
+                setY((Double) newValue);
                 return;
             case GraphPackage.GNODE__WIDTH:
-                setWidth((Double)newValue);
+                setWidth((Double) newValue);
                 return;
             case GraphPackage.GNODE__HEIGHT:
-                setHeight((Double)newValue);
+                setHeight((Double) newValue);
                 return;
             case GraphPackage.GNODE__SUBGRAPH:
-                setSubgraph((GModel)newValue);
+                setSubgraph((GModel) newValue);
+                return;
+            case GraphPackage.GNODE__PARAMETERS:
+                getParameters().clear();
+                getParameters().addAll((Collection<? extends GParameter>) newValue);
+                return;
+            case GraphPackage.GNODE__LIBRARY_BLOCK_ID:
+                setLibraryBlockId((Integer) newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -466,7 +522,13 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
                 setHeight(HEIGHT_EDEFAULT);
                 return;
             case GraphPackage.GNODE__SUBGRAPH:
-                setSubgraph((GModel)null);
+                setSubgraph((GModel) null);
+                return;
+            case GraphPackage.GNODE__PARAMETERS:
+                getParameters().clear();
+                return;
+            case GraphPackage.GNODE__LIBRARY_BLOCK_ID:
+                setLibraryBlockId(LIBRARY_BLOCK_ID_EDEFAULT);
                 return;
         }
         super.eUnset(featureID);
@@ -494,6 +556,10 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
                 return height != HEIGHT_EDEFAULT;
             case GraphPackage.GNODE__SUBGRAPH:
                 return subgraph != null;
+            case GraphPackage.GNODE__PARAMETERS:
+                return parameters != null && !parameters.isEmpty();
+            case GraphPackage.GNODE__LIBRARY_BLOCK_ID:
+                return libraryBlockId != LIBRARY_BLOCK_ID_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }

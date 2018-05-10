@@ -258,13 +258,30 @@ public interface GraphPackage extends EPackage {
     int GNODE__SUBGRAPH = GCONNECTABLE_FEATURE_COUNT + 6;
 
     /**
+     * The feature id for the '<em><b>Parameters</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GNODE__PARAMETERS = GCONNECTABLE_FEATURE_COUNT + 7;
+
+    /**
+     * The feature id for the '<em><b>LibraryBlockId</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GNODE__LIBRARY_BLOCK_ID = GCONNECTABLE_FEATURE_COUNT + 8;
+    /**
      * The number of structural features of the '<em>GNode</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int GNODE_FEATURE_COUNT = GCONNECTABLE_FEATURE_COUNT + 7;
+    int GNODE_FEATURE_COUNT = GCONNECTABLE_FEATURE_COUNT + 9;
 
     /**
      * The number of operations of the '<em>GNode</em>' class.
@@ -530,6 +547,23 @@ public interface GraphPackage extends EPackage {
      */
     int GJOINT_OPERATION_COUNT = 0;
 
+    /**
+     * The number of operations of the '<em>GParameter</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GPARAMETER__ID = 0;
+
+    /**
+     * The number of operations of the '<em>GParameter</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GPARAMETER__VALUE = 1;
 
     /**
      * Returns the meta object for class '{@link de.tesis.dynaware.grapheditor.model.GModel <em>GModel</em>}'.

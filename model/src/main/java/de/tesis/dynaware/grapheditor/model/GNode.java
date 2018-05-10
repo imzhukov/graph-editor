@@ -3,6 +3,8 @@
 package de.tesis.dynaware.grapheditor.model;
 
 
+import org.eclipse.emf.common.util.EList;
+
 import java.util.Vector;
 
 /**
@@ -216,5 +218,11 @@ public interface GNode extends GConnectable {
      * @generated
      */
     void setSubgraph(GModel value);
+
+    EList<GParameter> getParameters();
+
+    int getLibraryBlockId();
+
+    void setLibraryBlockId(int libraryBlockId);
 
 } // GNode
