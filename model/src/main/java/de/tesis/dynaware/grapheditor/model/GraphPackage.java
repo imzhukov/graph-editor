@@ -440,6 +440,15 @@ public interface GraphPackage extends EPackage {
     int GCONNECTOR_FEATURE_COUNT = 7;
 
     /**
+     * The number of structural features of the '<em>GConnector</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GCONNECTOR__NAME = 7;
+
+    /**
      * The number of operations of the '<em>GConnector</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

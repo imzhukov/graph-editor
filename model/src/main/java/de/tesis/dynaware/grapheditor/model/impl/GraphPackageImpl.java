@@ -523,6 +523,7 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
         createEAttribute(gConnectorEClass, GCONNECTOR__X);
         createEAttribute(gConnectorEClass, GCONNECTOR__Y);
         createEAttribute(gConnectorEClass, GCONNECTOR__CONNECTION_DETACHED_ON_DRAG);
+        createEAttribute(gConnectorEClass, GCONNECTOR__NAME);
 
         gJointEClass = createEClass(GJOINT);
         createEAttribute(gJointEClass, GJOINT__ID);

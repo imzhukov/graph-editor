@@ -3,6 +3,8 @@
 package de.tesis.dynaware.grapheditor.model;
 
 
+import java.util.Vector;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>GNode</b></em>'.
@@ -26,6 +28,7 @@ package de.tesis.dynaware.grapheditor.model;
  * @generated
  */
 public interface GNode extends GConnectable {
+
     /**
      * Returns the value of the '<em><b>Id</b></em>' attribute.
      * <!-- begin-user-doc -->

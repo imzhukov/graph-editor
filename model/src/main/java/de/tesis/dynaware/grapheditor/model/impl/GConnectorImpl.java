@@ -140,10 +140,10 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
     protected static final String NAME_EDEFAULT = "";
 
     /**
-     * The cached value of the '{@link #getY() <em>Y</em>}' attribute.
+     * The cached value of the '{@link #getName() <em>Y</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getY()
+     * @see #getName() ()
      * @generated
      * @ordered
      */
@@ -325,6 +325,11 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
             eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GCONNECTOR__Y, oldY, y));
     }
 
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public String getName() {
         return name;
     }
@@ -338,7 +343,7 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
         String oldName = name;
         name = newName;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GCONNECTOR__ID, oldName, name));
+            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GCONNECTOR__NAME, oldName, name));
     }
 
     /**
@@ -428,6 +433,8 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
                 return getY();
             case GraphPackage.GCONNECTOR__CONNECTION_DETACHED_ON_DRAG:
                 return isConnectionDetachedOnDrag();
+            case GraphPackage.GCONNECTOR__NAME:
+                return getName();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -463,6 +470,9 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
             case GraphPackage.GCONNECTOR__CONNECTION_DETACHED_ON_DRAG:
                 setConnectionDetachedOnDrag((Boolean)newValue);
                 return;
+            case GraphPackage.GCONNECTOR__NAME:
+                setName((String) newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
@@ -496,6 +506,9 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
             case GraphPackage.GCONNECTOR__CONNECTION_DETACHED_ON_DRAG:
                 setConnectionDetachedOnDrag(CONNECTION_DETACHED_ON_DRAG_EDEFAULT);
                 return;
+            case GraphPackage.GCONNECTOR__NAME:
+                setName(NAME_EDEFAULT);
+                return;
         }
         super.eUnset(featureID);
     }
@@ -522,6 +535,8 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
                 return y != Y_EDEFAULT;
             case GraphPackage.GCONNECTOR__CONNECTION_DETACHED_ON_DRAG:
                 return connectionDetachedOnDrag != CONNECTION_DETACHED_ON_DRAG_EDEFAULT;
+            case GraphPackage.GCONNECTOR__NAME:
+                return !name.equalsIgnoreCase(NAME_EDEFAULT);
         }
         return super.eIsSet(featureID);
     }
