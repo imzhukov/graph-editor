@@ -98,6 +98,29 @@ public class Commands {
     }
 
     /**
+     * Adds a node to the model.
+     *
+     * <p>
+     * The node's x, y, width, and height values should be set before calling this method.
+     * </p>
+     *
+     * @param model the {@link GModel} to which the node should be added
+     * @param node the {@link GNode} to add to the model
+     */
+    public static void addConnection(final GModel model, final GConnection connection) {
+
+        final EditingDomain editingDomain = getEditingDomain(model);
+
+        if (editingDomain != null) {
+            final Command command = AddCommand.create(editingDomain, model, CONNECTIONS, connection);
+
+            if (command.canExecute()) {
+                editingDomain.getCommandStack().execute(command);
+            }
+        }
+    }
+
+    /**
      * Removes a node from the model.
      * 
      * <p>

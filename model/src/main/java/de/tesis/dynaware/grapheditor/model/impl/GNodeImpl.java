@@ -193,6 +193,17 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
         return GraphPackage.Literals.GNODE;
     }
 
+    protected int logicId = -1;
+
+    @Override
+    public int getLogicId() {
+        return logicId;
+    }
+
+    public void setLogicId(int logicId) {
+        this.logicId = logicId;
+    }
+
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

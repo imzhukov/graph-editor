@@ -31,6 +31,10 @@ import java.util.Vector;
  */
 public interface GNode extends GConnectable {
 
+    int getLogicId();
+
+    void setLogicId(int logicId);
+
     /**
      * Returns the value of the '<em><b>Id</b></em>' attribute.
      * <!-- begin-user-doc -->
