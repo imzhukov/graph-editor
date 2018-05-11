@@ -31,7 +31,7 @@ public class GParameterImpl extends MinimalEObjectImpl.Container implements GPar
     }
 
     @Override
-    public int getID() {
+    public int getId() {
         return id;
     }
 
@@ -47,7 +47,7 @@ public class GParameterImpl extends MinimalEObjectImpl.Container implements GPar
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
             case GraphPackage.GPARAMETER__ID:
-                return getID();
+                return getId();
             case GraphPackage.GPARAMETER__VALUE:
                 return getValue();
         }

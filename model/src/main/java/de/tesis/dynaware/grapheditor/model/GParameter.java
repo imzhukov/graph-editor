@@ -43,10 +43,10 @@ public interface GParameter extends EObject {
      * @model
      * @generated
      */
-    int getID();
+    int getId();
 
     /**
-     * Sets the value of the '{@link de.tesis.dynaware.grapheditor.model.GParameter#getID <em>Y</em>}' attribute.
+     * Sets the value of the '{@link de.tesis.dynaware.grapheditor.model.GParameter#getId <em>Y</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Y</em>' attribute.

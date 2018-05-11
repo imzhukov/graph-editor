@@ -3,6 +3,7 @@ package de.tesis.dynaware.grapheditor.demo.customskins;
 import java.util.List;
 
 import de.tesis.dynaware.grapheditor.DefaultConnectorTypes;
+import de.tesis.dynaware.grapheditor.core.skins.defaults.DefaultConnectorSkin;
 import javafx.geometry.Side;
 import de.tesis.dynaware.grapheditor.Commands;
 import de.tesis.dynaware.grapheditor.GraphEditor;

@@ -95,9 +95,13 @@ public class DefaultSkinController implements SkinController {
         final GConnector leftInput = GraphFactory.eINSTANCE.createGConnector();
         node.getConnectors().add(leftInput);
 
+        final GConnector topOutput = GraphFactory.eINSTANCE.createGConnector();
+        node.getConnectors().add(topOutput);
+
         node.setX(NODE_INITIAL_X + windowXOffset);
 
         rightOutput.setType(DefaultConnectorTypes.RIGHT_OUTPUT);
+        topOutput.setType(DefaultConnectorTypes.TOP_OUTPUT);
         leftInput.setType(DefaultConnectorTypes.LEFT_INPUT);
 
         Commands.addNode(graphEditor.getModel(), node);
