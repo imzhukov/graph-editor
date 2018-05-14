@@ -128,10 +128,10 @@ public class ModelEditingManager {
     }
 
     /**
-     * Initializes the editing domain and resource for the new model.
+     * Initializes the editing domain and property for the new model.
      *
      * <p>
-     * If a resource and/or editing domain are already associated to this model, these will be used. Otherwise they will
+     * If a property and/or editing domain are already associated to this model, these will be used. Otherwise they will
      * be created.
      * </p>
      */

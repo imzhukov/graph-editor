@@ -610,7 +610,7 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
         initEAttribute(getGJoint_X(), ecorePackage.getEDouble(), "x", "0", 1, 1, GJoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getGJoint_Y(), ecorePackage.getEDouble(), "y", "0", 1, 1, GJoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-        // Create resource
+        // Create property
         createResource(eNS_URI);
     }
 
