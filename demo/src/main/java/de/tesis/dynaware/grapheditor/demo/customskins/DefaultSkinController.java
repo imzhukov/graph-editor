@@ -45,39 +45,6 @@ public class DefaultSkinController implements SkinController {
 
         this.graphEditor = graphEditor;
         this.graphEditorContainer = graphEditorContainer;
-
-//        graphEditorContainer.setOnDragOver(event -> {
-//            Dragboard db = event.getDragboard();
-//            if (db.hasContent(DataFormat.PLAIN_TEXT)) {
-//                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-//                event.consume();
-//            }
-//        });
-//
-//        graphEditorContainer.setOnDragDropped(event -> {
-//            Dragboard db = event.getDragboard();
-//            if (db.hasContent(DataFormat.PLAIN_TEXT)) {
-//                //addNode(1.0);
-////                final double windowXOffset = windowXProperty().get() / 1.0f;
-////                final double windowYOffset = windowYProperty().get() / 1.0f;
-//
-//                final GNode node = GraphFactory.eINSTANCE.createGNode();
-//                node.setY(event.getScreenY());
-//
-//                final GConnector rightOutput = GraphFactory.eINSTANCE.createGConnector();
-//                node.getConnectors().add(rightOutput);
-//
-//                final GConnector leftInput = GraphFactory.eINSTANCE.createGConnector();
-//                node.getConnectors().add(leftInput);
-//
-//                node.setX(event.getScreenX());
-//
-//                rightOutput.setType(DefaultConnectorTypes.RIGHT_OUTPUT);
-//                leftInput.setType(DefaultConnectorTypes.LEFT_INPUT);
-//
-//                Commands.addNode(graphEditor.getModel(), node);
-//            }
-//        });
     }
 
     @Override
