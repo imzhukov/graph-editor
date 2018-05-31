@@ -286,7 +286,7 @@ public class GraphEditorView extends Region {
      * All connections are redrawn when the children of a view layer are layed out.
      * </p>
      */
-    private class GraphEditorViewLayer extends Region {
+    public class GraphEditorViewLayer extends Region {
 
         @Override
         public ObservableList<Node> getChildren() {
