@@ -39,6 +39,20 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * @generated
  */
 public class GConnectorImpl extends MinimalEObjectImpl.Container implements GConnector {
+
+    protected static final short DATA_TYPE_EDEFAULT = -1;
+    protected short dataType = DATA_TYPE_EDEFAULT;
+    public short getDataType() {
+        return dataType;
+    }
+
+    public void setDataType(short newDataType) {
+        int oldDataType = dataType;
+        dataType = newDataType;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GCONNECTOR__DATATYPE, oldDataType, dataType));
+    }
+
     /**
      * The default value of the '{@link #getId() <em>Id</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -435,6 +449,8 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
                 return isConnectionDetachedOnDrag();
             case GraphPackage.GCONNECTOR__NAME:
                 return getName();
+            case GraphPackage.GCONNECTOR__DATATYPE:
+                return getDataType();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -473,6 +489,9 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
             case GraphPackage.GCONNECTOR__NAME:
                 setName((String) newValue);
                 return;
+            case GraphPackage.GCONNECTOR__DATATYPE:
+                setDataType((Short) newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
@@ -509,6 +528,9 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
             case GraphPackage.GCONNECTOR__NAME:
                 setName(NAME_EDEFAULT);
                 return;
+            case GraphPackage.GCONNECTOR__DATATYPE:
+                setDataType(DATA_TYPE_EDEFAULT);
+                return;
         }
         super.eUnset(featureID);
     }
@@ -537,6 +559,8 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
                 return connectionDetachedOnDrag != CONNECTION_DETACHED_ON_DRAG_EDEFAULT;
             case GraphPackage.GCONNECTOR__NAME:
                 return !name.equalsIgnoreCase(NAME_EDEFAULT);
+            case GraphPackage.GCONNECTOR__DATATYPE:
+                return dataType != DATA_TYPE_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }

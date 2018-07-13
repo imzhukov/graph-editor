@@ -28,6 +28,11 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface GConnector extends EObject {
+
+    /** types for verifying
+     * connection */
+    short getDataType();
+    void setDataType(short dataType);
     /**
      * Returns the value of the '<em><b>Id</b></em>' attribute.
      * <!-- begin-user-doc -->

@@ -464,6 +464,7 @@ public interface GraphPackage extends EPackage {
      * @ordered
      */
     int GCONNECTOR__NAME = 7;
+    int GCONNECTOR__DATATYPE = 8;
 
     /**
      * The number of operations of the '<em>GConnector</em>' class.
