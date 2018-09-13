@@ -40,14 +40,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class GConnectorImpl extends MinimalEObjectImpl.Container implements GConnector {
 
-    protected static final short DATA_TYPE_EDEFAULT = -1;
-    protected short dataType = DATA_TYPE_EDEFAULT;
-    public short getDataType() {
+    protected static final String DATA_TYPE_EDEFAULT = "";
+    protected String dataType = DATA_TYPE_EDEFAULT;
+    public String getDataType() {
         return dataType;
     }
 
-    public void setDataType(short newDataType) {
-        int oldDataType = dataType;
+    public void setDataType(String newDataType) {
+        String oldDataType = dataType;
         dataType = newDataType;
         if (eNotificationRequired())
             eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GCONNECTOR__DATATYPE, oldDataType, dataType));
@@ -490,7 +490,7 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
                 setName((String) newValue);
                 return;
             case GraphPackage.GCONNECTOR__DATATYPE:
-                setDataType((Short) newValue);
+                setDataType((String) newValue);
                 return;
         }
         super.eSet(featureID, newValue);
