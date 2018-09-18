@@ -465,6 +465,7 @@ public interface GraphPackage extends EPackage {
      */
     int GCONNECTOR__NAME = 7;
     int GCONNECTOR__DATATYPE = 8;
+    int GCONNECTOR__INVERSION = 9;
 
     /**
      * The number of operations of the '<em>GConnector</em>' class.

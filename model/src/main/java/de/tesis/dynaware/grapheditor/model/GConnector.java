@@ -29,6 +29,9 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface GConnector extends EObject {
 
+    boolean isInversion();
+    void setInversion(boolean inversion);
+
     /** types for verifying
      * connection */
     String getDataType();
@@ -47,7 +50,7 @@ public interface GConnector extends EObject {
      * @model id="true"
      * @generated
      */
-    String getId();
+    int getId();
 
     /**
      * Sets the value of the '{@link de.tesis.dynaware.grapheditor.model.GConnector#getId <em>Id</em>}' attribute.
@@ -57,7 +60,7 @@ public interface GConnector extends EObject {
      * @see #getId()
      * @generated
      */
-    void setId(String value);
+    void setId(int value);
 
     /**
      * Returns the value of the '<em><b>Type</b></em>' attribute.

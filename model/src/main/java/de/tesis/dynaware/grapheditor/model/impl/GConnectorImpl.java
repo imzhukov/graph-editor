@@ -40,8 +40,25 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class GConnectorImpl extends MinimalEObjectImpl.Container implements GConnector {
 
+    protected static final boolean INVERSION_EDEFAULT = false;
+    protected boolean inversion = INVERSION_EDEFAULT;
+
+
+    public boolean isInversion() {
+        return inversion;
+    }
+
+    public void setInversion(boolean newInversion) {
+        boolean oldInversion = inversion;
+        inversion = newInversion;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GCONNECTOR__INVERSION, oldInversion, inversion));
+    }
+
+
     protected static final String DATA_TYPE_EDEFAULT = "";
     protected String dataType = DATA_TYPE_EDEFAULT;
+
     public String getDataType() {
         return dataType;
     }
@@ -61,7 +78,7 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
      * @generated
      * @ordered
      */
-    protected static final String ID_EDEFAULT = null;
+    protected static final int ID_EDEFAULT = -1;
 
     /**
      * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -71,7 +88,7 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
      * @generated
      * @ordered
      */
-    protected String id = ID_EDEFAULT;
+    protected int id = ID_EDEFAULT;
 
     /**
      * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -207,7 +224,7 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
      * <!-- end-user-doc -->
      * @generated
      */
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -216,8 +233,8 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
      * <!-- end-user-doc -->
      * @generated
      */
-    public void setId(String newId) {
-        String oldId = id;
+    public void setId(int newId) {
+        int oldId = id;
         id = newId;
         if (eNotificationRequired())
             eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GCONNECTOR__ID, oldId, id));
@@ -451,6 +468,8 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
                 return getName();
             case GraphPackage.GCONNECTOR__DATATYPE:
                 return getDataType();
+            case GraphPackage.GCONNECTOR__INVERSION:
+                return isInversion();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -465,7 +484,7 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
             case GraphPackage.GCONNECTOR__ID:
-                setId((String)newValue);
+                setId((int)newValue);
                 return;
             case GraphPackage.GCONNECTOR__TYPE:
                 setType((String)newValue);
@@ -491,6 +510,9 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
                 return;
             case GraphPackage.GCONNECTOR__DATATYPE:
                 setDataType((String) newValue);
+                return;
+            case GraphPackage.GCONNECTOR__INVERSION:
+                setInversion((boolean) newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -531,6 +553,9 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
             case GraphPackage.GCONNECTOR__DATATYPE:
                 setDataType(DATA_TYPE_EDEFAULT);
                 return;
+            case GraphPackage.GCONNECTOR__INVERSION:
+                setInversion(INVERSION_EDEFAULT);
+                return;
         }
         super.eUnset(featureID);
     }
@@ -544,7 +569,7 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
     public boolean eIsSet(int featureID) {
         switch (featureID) {
             case GraphPackage.GCONNECTOR__ID:
-                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+                return ID_EDEFAULT != -1 ? id != -1 : ID_EDEFAULT != id;
             case GraphPackage.GCONNECTOR__TYPE:
                 return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
             case GraphPackage.GCONNECTOR__PARENT:
@@ -561,6 +586,8 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
                 return !name.equalsIgnoreCase(NAME_EDEFAULT);
             case GraphPackage.GCONNECTOR__DATATYPE:
                 return dataType != DATA_TYPE_EDEFAULT;
+            case GraphPackage.GCONNECTOR__INVERSION:
+                return inversion != INVERSION_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }
