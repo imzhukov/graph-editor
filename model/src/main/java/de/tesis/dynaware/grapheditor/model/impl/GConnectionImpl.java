@@ -44,7 +44,7 @@ public class GConnectionImpl extends GConnectableImpl implements GConnection {
      * @generated
      * @ordered
      */
-    protected static final String ID_EDEFAULT = null;
+    protected static final int ID_EDEFAULT = -1;
 
     /**
      * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -54,7 +54,7 @@ public class GConnectionImpl extends GConnectableImpl implements GConnection {
      * @generated
      * @ordered
      */
-    protected String id = ID_EDEFAULT;
+    protected int id = ID_EDEFAULT;
 
     /**
      * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -130,7 +130,7 @@ public class GConnectionImpl extends GConnectableImpl implements GConnection {
      * <!-- end-user-doc -->
      * @generated
      */
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -139,8 +139,8 @@ public class GConnectionImpl extends GConnectableImpl implements GConnection {
      * <!-- end-user-doc -->
      * @generated
      */
-    public void setId(String newId) {
-        String oldId = id;
+    public void setId(int newId) {
+        int oldId = id;
         id = newId;
         if (eNotificationRequired())
             eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GCONNECTION__ID, oldId, id));
@@ -318,7 +318,7 @@ public class GConnectionImpl extends GConnectableImpl implements GConnection {
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
             case GraphPackage.GCONNECTION__ID:
-                setId((String)newValue);
+                setId((int)newValue);
                 return;
             case GraphPackage.GCONNECTION__TYPE:
                 setType((String)newValue);
@@ -373,7 +373,7 @@ public class GConnectionImpl extends GConnectableImpl implements GConnection {
     public boolean eIsSet(int featureID) {
         switch (featureID) {
             case GraphPackage.GCONNECTION__ID:
-                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+                return ID_EDEFAULT == -1 ? id != -1 : ID_EDEFAULT != id;
             case GraphPackage.GCONNECTION__TYPE:
                 return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
             case GraphPackage.GCONNECTION__SOURCE:

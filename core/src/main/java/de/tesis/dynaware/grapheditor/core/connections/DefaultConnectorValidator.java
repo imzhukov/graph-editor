@@ -30,17 +30,14 @@ public class DefaultConnectorValidator implements GConnectorValidator {
 
         if (source.getType() == null || target.getType() == null) {
             return false;
-        } else if (/*!source.getConnections().isEmpty() || */ !target.getConnections().isEmpty() &&
-                DefaultConnectorTypes.isInput(target.getType())) {
+        } else if (!target.getConnections().isEmpty() && DefaultConnectorTypes.isInput(target.getType())) {
+            //few connections to input ports is wrong!!!
             return false;
         } else if (source.getParent().equals(target.getParent())) {
             return false;
         }
 
-        final boolean sourceIsInput = DefaultConnectorTypes.isInput(source.getType());
-        final boolean targetIsInput = DefaultConnectorTypes.isInput(target.getType());
-
-        return sourceIsInput != targetIsInput;
+        return notAllInputs(source, target);
     }
 
     @Override
@@ -51,5 +48,12 @@ public class DefaultConnectorValidator implements GConnectorValidator {
     @Override
     public String createJointType(final GConnector source, final GConnector target) {
         return null;
+    }
+
+    public boolean notAllInputs(final GConnector source, final GConnector target) {
+        final boolean sourceIsInput = DefaultConnectorTypes.isInput(source.getType());
+        final boolean targetIsInput = DefaultConnectorTypes.isInput(target.getType());
+
+        return sourceIsInput != targetIsInput;
     }
 }

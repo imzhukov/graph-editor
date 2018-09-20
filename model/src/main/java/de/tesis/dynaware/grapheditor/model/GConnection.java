@@ -34,12 +34,12 @@ public interface GConnection extends GConnectable {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Id</em>' attribute.
-     * @see #setId(String)
+     * @see #setId(int)
      * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGConnection_Id()
      * @model id="true"
      * @generated
      */
-    String getId();
+    int getId();
 
     /**
      * Sets the value of the '{@link de.tesis.dynaware.grapheditor.model.GConnection#getId <em>Id</em>}' attribute.
@@ -49,7 +49,7 @@ public interface GConnection extends GConnectable {
      * @see #getId()
      * @generated
      */
-    void setId(String value);
+    void setId(int value);
 
     /**
      * Returns the value of the '<em><b>Type</b></em>' attribute.

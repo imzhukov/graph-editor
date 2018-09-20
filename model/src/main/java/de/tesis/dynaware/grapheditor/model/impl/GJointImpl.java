@@ -40,7 +40,7 @@ public class GJointImpl extends MinimalEObjectImpl.Container implements GJoint {
      * @generated
      * @ordered
      */
-    protected static final String ID_EDEFAULT = null;
+    protected static final int ID_EDEFAULT = -1;
 
     /**
      * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -50,7 +50,7 @@ public class GJointImpl extends MinimalEObjectImpl.Container implements GJoint {
      * @generated
      * @ordered
      */
-    protected String id = ID_EDEFAULT;
+    protected int id = ID_EDEFAULT;
 
     /**
      * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -136,7 +136,7 @@ public class GJointImpl extends MinimalEObjectImpl.Container implements GJoint {
      * <!-- end-user-doc -->
      * @generated
      */
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -145,8 +145,8 @@ public class GJointImpl extends MinimalEObjectImpl.Container implements GJoint {
      * <!-- end-user-doc -->
      * @generated
      */
-    public void setId(String newId) {
-        String oldId = id;
+    public void setId(int newId) {
+        int oldId = id;
         id = newId;
         if (eNotificationRequired())
             eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GJOINT__ID, oldId, id));
@@ -331,7 +331,7 @@ public class GJointImpl extends MinimalEObjectImpl.Container implements GJoint {
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
             case GraphPackage.GJOINT__ID:
-                setId((String)newValue);
+                setId((int)newValue);
                 return;
             case GraphPackage.GJOINT__TYPE:
                 setType((String)newValue);
@@ -385,7 +385,7 @@ public class GJointImpl extends MinimalEObjectImpl.Container implements GJoint {
     public boolean eIsSet(int featureID) {
         switch (featureID) {
             case GraphPackage.GJOINT__ID:
-                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+                return ID_EDEFAULT == -1 ? id != -1 : ID_EDEFAULT != id;
             case GraphPackage.GJOINT__TYPE:
                 return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
             case GraphPackage.GJOINT__CONNECTION:
