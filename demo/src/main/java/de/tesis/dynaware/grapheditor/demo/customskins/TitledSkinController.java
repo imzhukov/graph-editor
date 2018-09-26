@@ -89,7 +89,7 @@ public class TitledSkinController extends DefaultSkinController {
 
             if (checkNeedsNewId(node, nodes)) {
 
-                final String id = allocateNewId();
+                final int id = allocateNewId();
                 final Command setCommand = SetCommand.create(domain, node, feature, id);
 
                 if (setCommand.canExecute()) {
@@ -112,7 +112,7 @@ public class TitledSkinController extends DefaultSkinController {
         final List<GNode> nodes = new ArrayList<>(graphEditor.getModel().getNodes());
         nodes.removeAll(pastedNodes);
 
-        return nodes.stream().anyMatch(other -> other.getId().equals(node.getId()));
+        return nodes.stream().anyMatch(other -> other.getId() == node.getId());
     }
 
     /**
@@ -120,15 +120,15 @@ public class TitledSkinController extends DefaultSkinController {
      * 
      * @return the new ID
      */
-    private String allocateNewId() {
+    private int allocateNewId() {
 
         final List<GNode> nodes = graphEditor.getModel().getNodes();
-        final OptionalInt max = nodes.stream().mapToInt(node -> Integer.parseInt(node.getId())).max();
+        final OptionalInt max = nodes.stream().mapToInt(node -> node.getId()).max();
 
         if (max.isPresent()) {
-            return Integer.toString(max.getAsInt() + 1);
+            return max.getAsInt() + 1;
         } else {
-            return "1";
+            return 1;
         }
     }
 }

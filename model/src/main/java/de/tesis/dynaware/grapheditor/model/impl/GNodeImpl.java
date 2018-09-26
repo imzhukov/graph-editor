@@ -47,7 +47,7 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
      * @generated
      * @ordered
      */
-    protected static final String ID_EDEFAULT = null;
+    protected static final int ID_EDEFAULT = -1;
 
     /**
      * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -57,7 +57,7 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
      * @generated
      * @ordered
      */
-    protected String id = ID_EDEFAULT;
+    protected int id = ID_EDEFAULT;
 
     /**
      * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -193,15 +193,17 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
         return GraphPackage.Literals.GNODE;
     }
 
-    protected int logicId = -1;
+    protected static final int PAGE_ID_EDEFAULT = -1;
 
-    @Override
-    public int getLogicId() {
-        return logicId;
-    }
+    protected int pageId = -1;
 
-    public void setLogicId(int logicId) {
-        this.logicId = logicId;
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public int getPageId() {
+        return pageId;
     }
 
     /**
@@ -209,7 +211,19 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
      * <!-- end-user-doc -->
      * @generated
      */
-    public String getId() {
+    public void setPageId(int newPageId) {
+        int oldPageId = pageId;
+        pageId = newPageId;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GNODE__PAGE_ID, oldPageId, pageId));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public int getId() {
         return id;
     }
 
@@ -218,8 +232,8 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
      * <!-- end-user-doc -->
      * @generated
      */
-    public void setId(String newId) {
-        String oldId = id;
+    public void setId(int newId) {
+        int oldId = id;
         id = newId;
         if (eNotificationRequired())
             eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GNODE__ID, oldId, id));
@@ -462,6 +476,8 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
                 return getParameters();
             case GraphPackage.GNODE__LIBRARY_BLOCK_ID:
                 return getLibraryBlockId();
+            case GraphPackage.GNODE__PAGE_ID:
+                return getPageId();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -475,7 +491,7 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
             case GraphPackage.GNODE__ID:
-                setId((String) newValue);
+                setId((int) newValue);
                 return;
             case GraphPackage.GNODE__TYPE:
                 setType((String) newValue);
@@ -501,6 +517,9 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
                 return;
             case GraphPackage.GNODE__LIBRARY_BLOCK_ID:
                 setLibraryBlockId((Integer) newValue);
+                return;
+            case GraphPackage.GNODE__PAGE_ID:
+                setPageId((int) newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -541,6 +560,9 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
             case GraphPackage.GNODE__LIBRARY_BLOCK_ID:
                 setLibraryBlockId(LIBRARY_BLOCK_ID_EDEFAULT);
                 return;
+            case GraphPackage.GNODE__PAGE_ID:
+                setPageId(PAGE_ID_EDEFAULT);
+                return;
         }
         super.eUnset(featureID);
     }
@@ -554,7 +576,7 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
     public boolean eIsSet(int featureID) {
         switch (featureID) {
             case GraphPackage.GNODE__ID:
-                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+                return ID_EDEFAULT == -1 ? id != -1 : ID_EDEFAULT != id;
             case GraphPackage.GNODE__TYPE:
                 return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
             case GraphPackage.GNODE__X:
@@ -571,6 +593,8 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
                 return parameters != null && !parameters.isEmpty();
             case GraphPackage.GNODE__LIBRARY_BLOCK_ID:
                 return libraryBlockId != LIBRARY_BLOCK_ID_EDEFAULT;
+            case GraphPackage.GNODE__PAGE_ID:
+                return pageId != PAGE_ID_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }

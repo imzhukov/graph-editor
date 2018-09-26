@@ -31,10 +31,9 @@ import java.util.Vector;
  */
 public interface GNode extends GConnectable {
 
-    int getLogicId();
+    int getPageId();
 
-    void setLogicId(int logicId);
-
+    void setPageId(int pageId);
     /**
      * Returns the value of the '<em><b>Id</b></em>' attribute.
      * <!-- begin-user-doc -->
@@ -44,12 +43,12 @@ public interface GNode extends GConnectable {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Id</em>' attribute.
-     * @see #setId(String)
+     * @see #setId(int)
      * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGNode_Id()
      * @model id="true"
      * @generated
      */
-    String getId();
+    int getId();
 
     /**
      * Sets the value of the '{@link de.tesis.dynaware.grapheditor.model.GNode#getId <em>Id</em>}' attribute.
@@ -59,7 +58,7 @@ public interface GNode extends GConnectable {
      * @see #getId()
      * @generated
      */
-    void setId(String value);
+    void setId(int value);
 
     /**
      * Returns the value of the '<em><b>Type</b></em>' attribute.
