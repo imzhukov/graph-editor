@@ -276,13 +276,22 @@ public interface GraphPackage extends EPackage {
     int GNODE__LIBRARY_BLOCK_ID = GCONNECTABLE_FEATURE_COUNT + 8;
 
     /**
+     * The feature id for the '<em><b>LibraryBlockId</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GNODE__ROTATE_ANGLE = GCONNECTABLE_FEATURE_COUNT + 9;
+
+    /**
      * The feature id for the '<em><b>PageId</b></em>' containment reference.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int GNODE__PAGE_ID = GCONNECTABLE_FEATURE_COUNT + 9;
+    int GNODE__PAGE_ID = GCONNECTABLE_FEATURE_COUNT + 10;
     /**
      * The number of structural features of the '<em>GNode</em>' class.
      * <!-- begin-user-doc -->

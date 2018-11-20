@@ -228,4 +228,8 @@ public interface GNode extends GConnectable {
 
     void setLibraryBlockId(int libraryBlockId);
 
+    double getRotateAngle();
+
+    void setRotateAngle(double rotateAngle);
+
 } // GNode

@@ -174,6 +174,10 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
     protected static final int LIBRARY_BLOCK_ID_EDEFAULT = -1;
 
     protected int libraryBlockId = LIBRARY_BLOCK_ID_EDEFAULT;
+
+    protected static final double ROTATE_EDEFAULT = 0;
+
+    protected double rotateAngle = ROTATE_EDEFAULT ;
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -418,6 +422,25 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
                     , libraryBlockId));
     }
 
+    public double getRotateAngle() {
+        return rotateAngle;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setRotateAngle(double newRotateAngle) {
+        double oldRotateAngle = rotateAngle;
+        rotateAngle = newRotateAngle;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GNODE__ROTATE_ANGLE
+                    , oldRotateAngle
+                    , rotateAngle));
+    }
+
+
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -476,6 +499,8 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
                 return getParameters();
             case GraphPackage.GNODE__LIBRARY_BLOCK_ID:
                 return getLibraryBlockId();
+            case GraphPackage.GNODE__ROTATE_ANGLE:
+                return getRotateAngle();
             case GraphPackage.GNODE__PAGE_ID:
                 return getPageId();
         }
@@ -517,6 +542,9 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
                 return;
             case GraphPackage.GNODE__LIBRARY_BLOCK_ID:
                 setLibraryBlockId((Integer) newValue);
+                return;
+            case GraphPackage.GNODE__ROTATE_ANGLE:
+                setRotateAngle((Double) newValue);
                 return;
             case GraphPackage.GNODE__PAGE_ID:
                 setPageId((int) newValue);
@@ -560,6 +588,9 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
             case GraphPackage.GNODE__LIBRARY_BLOCK_ID:
                 setLibraryBlockId(LIBRARY_BLOCK_ID_EDEFAULT);
                 return;
+            case GraphPackage.GNODE__ROTATE_ANGLE:
+                setRotateAngle(ROTATE_EDEFAULT);
+                return;
             case GraphPackage.GNODE__PAGE_ID:
                 setPageId(PAGE_ID_EDEFAULT);
                 return;
@@ -593,6 +624,8 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
                 return parameters != null && !parameters.isEmpty();
             case GraphPackage.GNODE__LIBRARY_BLOCK_ID:
                 return libraryBlockId != LIBRARY_BLOCK_ID_EDEFAULT;
+            case GraphPackage.GNODE__ROTATE_ANGLE:
+                return rotateAngle != ROTATE_EDEFAULT;
             case GraphPackage.GNODE__PAGE_ID:
                 return pageId != PAGE_ID_EDEFAULT;
         }
