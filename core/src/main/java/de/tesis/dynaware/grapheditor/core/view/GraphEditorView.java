@@ -3,16 +3,19 @@
  */
 package de.tesis.dynaware.grapheditor.core.view;
 
-import javafx.collections.ObservableList;
-import javafx.scene.CacheHint;
-import javafx.scene.Node;
-import javafx.scene.layout.Region;
 import de.tesis.dynaware.grapheditor.GConnectionSkin;
 import de.tesis.dynaware.grapheditor.GJointSkin;
 import de.tesis.dynaware.grapheditor.GNodeSkin;
 import de.tesis.dynaware.grapheditor.GTailSkin;
 import de.tesis.dynaware.grapheditor.core.DefaultGraphEditor;
+import de.tesis.dynaware.grapheditor.core.graphlayers.GraphEditorViewLayer;
 import de.tesis.dynaware.grapheditor.utils.GraphEditorProperties;
+import javafx.collections.FXCollections;
+import javafx.scene.CacheHint;
+import javafx.scene.Node;
+import javafx.scene.layout.Region;
+
+import java.util.Comparator;
 
 /**
  * The {@link Region} that all visual elements in the graph editor are added to.
@@ -34,6 +37,7 @@ import de.tesis.dynaware.grapheditor.utils.GraphEditorProperties;
  */
 public class GraphEditorView extends Region {
 
+    private static final String NODE_PROP_Z_INDEX = "CUSTOM_Z_INDEX";
     private static final String STYLESHEET_VIEW = "view.css";
     private static final String STYLESHEET_DEFAULTS = "defaults.css";
 
@@ -53,6 +57,14 @@ public class GraphEditorView extends Region {
     private final SelectionBox selectionBox = new SelectionBox();
 
     private GraphEditorProperties editorProperties;
+    private Comparator<Node> comparator = (o1, o2) -> {
+        Object o1Z = o1.getProperties().get(NODE_PROP_Z_INDEX);
+        Object o2Z = o2.getProperties().get(NODE_PROP_Z_INDEX);
+        int z1, z2;
+        z1 = o1Z == null ? 0 : (int) o1Z;
+        z2 = o2Z == null ? 0 : (int) o2Z;
+        return z1 - z2;
+    };
 
     /**
      * Creates a new {@link GraphEditorView} to which skin instances can be added and removed.
@@ -79,15 +91,22 @@ public class GraphEditorView extends Region {
      * @param connectionLayouter the graph editor's {@link ConnectionLayouter} instance
      */
     public void setConnectionLayouter(final ConnectionLayouter connectionLayouter) {
-        this.connectionLayouter = connectionLayouter;
+        getChildren().forEach(node -> {
+            if (node instanceof GraphEditorViewLayer) {
+                ((GraphEditorViewLayer) node).setConnectionLayouter(connectionLayouter);
+            }
+        });
     }
 
     /**
      * Clears all elements from the view.
      */
     public void clear() {
-        nodeLayer.getChildren().clear();
-        connectionLayer.getChildren().clear();
+        getChildren().forEach(elem -> {
+            if (elem instanceof GraphEditorViewLayer) {
+                ((GraphEditorViewLayer) elem).getChildren().clear();
+            }
+        });
     }
 
     /**
@@ -225,46 +244,24 @@ public class GraphEditorView extends Region {
      * @param cache {@code true} to enable caching, {@code false} to disable it
      */
     public void setContentCache(final boolean cache) {
-        nodeLayer.setCache(cache);
-        connectionLayer.setCache(cache);
+        getChildren().forEach(elem -> {
+            if (elem instanceof GraphEditorViewLayer) {
+                elem.setCache(cache);
+            }
+        });
     }
 
     @Override
     protected void layoutChildren() {
-        nodeLayer.resizeRelocate(0, 0, getWidth(), getHeight());
-        connectionLayer.resizeRelocate(0, 0, getWidth(), getHeight());
-    }
-
-    /**
-     * Initializes the two layers (node and connection) that the view is composed of.
-     */
-    private void initializeLayers() {
-
-        nodeLayer.setPickOnBounds(false);
-        connectionLayer.setPickOnBounds(false);
-
-        nodeLayer.cacheHintProperty().set(CacheHint.SPEED);
-        connectionLayer.cacheHintProperty().set(CacheHint.SPEED);
-
-        nodeLayer.getStyleClass().addAll(STYLE_CLASS_NODE_LAYER);
-        connectionLayer.getStyleClass().addAll(STYLE_CLASS_CONNECTION_LAYER);
-
-        nodeLayer.setId(NODE_LAYER_ID);
-        connectionLayer.setId(CONNECTION_LAYER_ID);
-
-        nodeLayer.maxWidthProperty().bind(maxWidthProperty());
-        nodeLayer.maxHeightProperty().bind(maxHeightProperty());
-        nodeLayer.minWidthProperty().bind(minWidthProperty());
-        nodeLayer.minHeightProperty().bind(minHeightProperty());
-
-        connectionLayer.maxWidthProperty().bind(maxWidthProperty());
-        connectionLayer.maxHeightProperty().bind(maxHeightProperty());
-        connectionLayer.minWidthProperty().bind(minWidthProperty());
-        connectionLayer.minHeightProperty().bind(minHeightProperty());
-
-        // Node layer should be on top of connection layer, so we add it second.
-        getChildren().add(connectionLayer);
-        getChildren().add(nodeLayer);
+        getChildren().forEach(elem -> {
+            if (elem instanceof GraphEditorViewLayer) {
+//                if (elem.getId().equals(NODE_LAYER_ID)
+//                    || elem.getId().equals(CONNECTION_LAYER_ID)
+//                ) {
+                    elem.resizeRelocate(0, 0, getWidth(), getHeight());
+//                }
+            }
+        });
     }
 
     /**
@@ -279,24 +276,52 @@ public class GraphEditorView extends Region {
         heightProperty().addListener((v, o, n) -> grid.draw(getWidth(), getHeight()));
     }
 
+    public void addLayer(String layerId, GraphEditorViewLayer layer, String cssClass, int zIndex) {
+        layer.setPickOnBounds(false);
+        layer.cacheHintProperty().set(CacheHint.SPEED);
+        layer.getStyleClass().addAll(cssClass);
+        layer.setId(layerId);
+        layer.getProperties().put(NODE_PROP_Z_INDEX, zIndex);
+        getChildren().add(layer);
+
+        FXCollections.sort(getChildren(), comparator);
+    }
+
+    public GraphEditorViewLayer getLayer(String layerId) {
+        for (Node node : getChildren()) {
+            if (node.getId() != null && node.getId().equals(layerId)) {
+                return (GraphEditorViewLayer) node;
+            }
+        }
+        return null;
+    }
+
+    public void removeLayer(String layerId) {
+        GraphEditorViewLayer layer = getLayer(layerId);
+        if (layer != null) {
+            getChildren().remove(layer);
+        }
+    }
+
     /**
-     * A layer inside the graph editor view. Used for grouping elements together in the z-direction.
-     *
-     * <p>
-     * All connections are redrawn when the children of a view layer are layed out.
-     * </p>
+     * Initializes the two layers (node and connection) that the view is composed of.
      */
-    public class GraphEditorViewLayer extends Region {
+    public void initializeLayers() {
+        addLayer(NODE_LAYER_ID, nodeLayer, STYLE_CLASS_NODE_LAYER, 10001);
+        addLayer(CONNECTION_LAYER_ID, connectionLayer, STYLE_CLASS_CONNECTION_LAYER, 10000);
 
-        @Override
-        public ObservableList<Node> getChildren() {
-            return super.getChildren();
-        }
+        fitToView(NODE_LAYER_ID);
+        fitToView(CONNECTION_LAYER_ID);
+    }
 
-        @Override
-        protected void layoutChildren() {
-            super.layoutChildren();
-            connectionLayouter.redraw();
-        }
+    public void fitToView(String layerId) {
+        getChildren().forEach(node -> {
+            if (node.getId() != null && node.getId().equals(layerId)) {
+                ((GraphEditorViewLayer) node).maxWidthProperty().bind(maxWidthProperty());
+                ((GraphEditorViewLayer) node).maxHeightProperty().bind(maxHeightProperty());
+                ((GraphEditorViewLayer) node).minWidthProperty().bind(minWidthProperty());
+                ((GraphEditorViewLayer) node).minHeightProperty().bind(minHeightProperty());
+            }
+        });
     }
 }
