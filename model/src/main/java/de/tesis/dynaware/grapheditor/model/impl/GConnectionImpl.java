@@ -56,6 +56,9 @@ public class GConnectionImpl extends GConnectableImpl implements GConnection {
      */
     protected int id = ID_EDEFAULT;
 
+    protected static final int DB_OBJECT_ID_EDEFAULT = -1;
+    protected int dbObjectId = DB_OBJECT_ID_EDEFAULT;
+
     /**
      * The default value of the '{@link #getType() <em>Type</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -144,6 +147,27 @@ public class GConnectionImpl extends GConnectableImpl implements GConnection {
         id = newId;
         if (eNotificationRequired())
             eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GCONNECTION__ID, oldId, id));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public int getDbObjectId() {
+        return dbObjectId;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setDbObjectId(int value) {
+        int oldId = dbObjectId;
+        dbObjectId = value;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GCONNECTION__DB_OBJECT_ID, oldId, dbObjectId));
     }
 
     /**
@@ -304,6 +328,8 @@ public class GConnectionImpl extends GConnectableImpl implements GConnection {
                 return basicGetTarget();
             case GraphPackage.GCONNECTION__JOINTS:
                 return getJoints();
+            case GraphPackage.GCONNECTION__DB_OBJECT_ID:
+                return getDbObjectId();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -333,6 +359,9 @@ public class GConnectionImpl extends GConnectableImpl implements GConnection {
                 getJoints().clear();
                 getJoints().addAll((Collection<? extends GJoint>)newValue);
                 return;
+            case GraphPackage.GCONNECTION__DB_OBJECT_ID:
+                setDbObjectId((int)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
@@ -360,6 +389,9 @@ public class GConnectionImpl extends GConnectableImpl implements GConnection {
             case GraphPackage.GCONNECTION__JOINTS:
                 getJoints().clear();
                 return;
+            case GraphPackage.GCONNECTION__DB_OBJECT_ID:
+                setDbObjectId(DB_OBJECT_ID_EDEFAULT);
+                return;
         }
         super.eUnset(featureID);
     }
@@ -382,6 +414,8 @@ public class GConnectionImpl extends GConnectableImpl implements GConnection {
                 return target != null;
             case GraphPackage.GCONNECTION__JOINTS:
                 return joints != null && !joints.isEmpty();
+            case GraphPackage.GCONNECTION__DB_OBJECT_ID:
+                return DB_OBJECT_ID_EDEFAULT == -1 ? dbObjectId != -1 : DB_OBJECT_ID_EDEFAULT != id;
         }
         return super.eIsSet(featureID);
     }

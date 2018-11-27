@@ -51,6 +51,9 @@ public interface GConnection extends GConnectable {
      */
     void setId(int value);
 
+    int getDbObjectId();
+    void setDbObjectId(int value);
+
     /**
      * Returns the value of the '<em><b>Type</b></em>' attribute.
      * <!-- begin-user-doc -->

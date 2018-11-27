@@ -283,6 +283,7 @@ public interface GraphPackage extends EPackage {
      * @ordered
      */
     int GNODE__ROTATE_ANGLE = GCONNECTABLE_FEATURE_COUNT + 9;
+    int GNODE__DB_OBJECT_ID = GCONNECTABLE_FEATURE_COUNT + 10;
 
     /**
      * The feature id for the '<em><b>PageId</b></em>' containment reference.
@@ -291,7 +292,7 @@ public interface GraphPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int GNODE__PAGE_ID = GCONNECTABLE_FEATURE_COUNT + 10;
+    int GNODE__PAGE_ID = GCONNECTABLE_FEATURE_COUNT + 11;
     /**
      * The number of structural features of the '<em>GNode</em>' class.
      * <!-- begin-user-doc -->
@@ -392,6 +393,7 @@ public interface GraphPackage extends EPackage {
      * @ordered
      */
     int GCONNECTION_FEATURE_COUNT = GCONNECTABLE_FEATURE_COUNT + 5;
+    int GCONNECTION__DB_OBJECT_ID = GCONNECTABLE_FEATURE_COUNT + 6;
 
     /**
      * The number of operations of the '<em>GConnection</em>' class.

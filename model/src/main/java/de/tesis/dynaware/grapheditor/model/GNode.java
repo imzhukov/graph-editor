@@ -31,6 +31,9 @@ import java.util.Vector;
  */
 public interface GNode extends GConnectable {
 
+    int getDbObjectId();
+    void setDbObjectId(int value);
+
     int getPageId();
 
     void setPageId(int pageId);

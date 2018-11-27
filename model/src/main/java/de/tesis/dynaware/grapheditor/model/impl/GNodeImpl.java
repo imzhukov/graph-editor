@@ -59,6 +59,9 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
      */
     protected int id = ID_EDEFAULT;
 
+    protected static final int DB_OBJECT_ID_EDEFAULT = -1;
+    protected int dbObjectId = DB_OBJECT_ID_EDEFAULT;
+
     /**
      * The default value of the '{@link #getType() <em>Type</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -241,6 +244,27 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
         id = newId;
         if (eNotificationRequired())
             eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GNODE__ID, oldId, id));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public int getDbObjectId() {
+        return dbObjectId;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setDbObjectId(int value) {
+        int oldId = dbObjectId;
+        dbObjectId = value;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GNODE__DB_OBJECT_ID, oldId, dbObjectId));
     }
 
     /**
@@ -503,6 +527,8 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
                 return getRotateAngle();
             case GraphPackage.GNODE__PAGE_ID:
                 return getPageId();
+            case GraphPackage.GNODE__DB_OBJECT_ID:
+                return getDbObjectId();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -545,6 +571,9 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
                 return;
             case GraphPackage.GNODE__ROTATE_ANGLE:
                 setRotateAngle((Double) newValue);
+                return;
+            case GraphPackage.GNODE__DB_OBJECT_ID:
+                setDbObjectId((Integer) newValue);
                 return;
             case GraphPackage.GNODE__PAGE_ID:
                 setPageId((int) newValue);
@@ -591,6 +620,9 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
             case GraphPackage.GNODE__ROTATE_ANGLE:
                 setRotateAngle(ROTATE_EDEFAULT);
                 return;
+            case GraphPackage.GNODE__DB_OBJECT_ID:
+                setDbObjectId(DB_OBJECT_ID_EDEFAULT);
+                return;
             case GraphPackage.GNODE__PAGE_ID:
                 setPageId(PAGE_ID_EDEFAULT);
                 return;
@@ -628,6 +660,8 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
                 return rotateAngle != ROTATE_EDEFAULT;
             case GraphPackage.GNODE__PAGE_ID:
                 return pageId != PAGE_ID_EDEFAULT;
+            case GraphPackage.GNODE__DB_OBJECT_ID:
+                return dbObjectId != DB_OBJECT_ID_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }
