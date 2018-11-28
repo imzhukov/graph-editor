@@ -5,10 +5,12 @@ package de.tesis.dynaware.grapheditor.demo;
 
 import java.util.Map;
 
+import de.tesis.dynaware.grapheditor.zoom.ZoomService;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
 import javafx.scene.control.Menu;
@@ -17,6 +19,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Scale;
 
@@ -100,14 +103,14 @@ public class GraphEditorDemoController {
     private final GraphEditorPersistence graphEditorPersistence = new GraphEditorPersistence();
 
     private Scale scaleTransform;
-    private double currentZoomFactor = 1;
+    private double currentZoomFactor = 1.0d;
+    private ZoomService zoomService;
 
     private DefaultSkinController defaultSkinController;
     private TreeSkinController treeSkinController;
     private TitledSkinController titledSkinController;
 
     private final ObjectProperty<SkinController> activeSkinController = new SimpleObjectProperty<>();
-
     /**
      * Called by JavaFX when FXML is loaded.
      */
@@ -118,7 +121,7 @@ public class GraphEditorDemoController {
         graphEditor.setModel(model);
         graphEditorContainer.setGraphEditor(graphEditor);
 
-
+        this.zoomService = new ZoomService(graphEditor, graphEditorContainer);
 
         setDetouredStyle();
 
@@ -279,6 +282,10 @@ public class GraphEditorDemoController {
 
     public GraphEditorContainer getGraphEditorContainer() {
         return graphEditorContainer;
+    }
+
+    public ZoomService getZoomService() {
+        return zoomService;
     }
 
     /**
