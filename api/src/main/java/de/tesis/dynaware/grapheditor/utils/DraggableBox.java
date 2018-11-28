@@ -15,6 +15,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.transform.Transform;
 
 /**
  * A draggable box that can display children.
@@ -402,11 +403,11 @@ public class DraggableBox extends StackPane {
     private void handleDrag(final double x, final double y) {
 
         if (dragEnabledXProperty.get()) {
-            handleDragX(x);
+            handleDragX(x, y);
         }
 
         if (dragEnabledYProperty.get()) {
-            handleDragY(y);
+            handleDragY(x, y);
         }
     }
 
@@ -415,16 +416,22 @@ public class DraggableBox extends StackPane {
      *
      * @param x the cursor x position
      */
-    private void handleDragX(final double x) {
+    private void handleDragX(final double x, final double y) {
 
         final double maxParentWidth = editorProperties.isEastBoundActive() ? lastParentWidth : absoluteMaxWidth;
 
         final double minLayoutX = editorProperties.getWestBoundValue();
         final double maxLayoutX = maxParentWidth - getWidth() - editorProperties.getEastBoundValue();
 
-        final double scaleFactor = getLocalToSceneTransform().getMxx();
+        final double affineShiftX = ((x - lastMouseX) * getLocalToSceneTransform().getMyy() - (y - lastMouseY) * getLocalToSceneTransform().getMxy())
+                / (getLocalToSceneTransform().getMxx() * getLocalToSceneTransform().getMyy() -
+                   getLocalToSceneTransform().getMyx() * getLocalToSceneTransform().getMxy());
 
-        double newLayoutX = lastLayoutX + (x - lastMouseX) / scaleFactor;
+        final double affineShiftY = ((y - lastMouseY) * getLocalToSceneTransform().getMxx() - (x - lastMouseX) * getLocalToSceneTransform().getMyx())
+                / (getLocalToSceneTransform().getMxx() * getLocalToSceneTransform().getMyy() -
+                getLocalToSceneTransform().getMyx() * getLocalToSceneTransform().getMxy());
+
+        double newLayoutX = lastLayoutX + affineShiftX * getLocalToSceneTransform().getMxx() + affineShiftY * getLocalToSceneTransform().getMxy();
 
         if (editorProperties.isSnapToGridOn()) {
             // The -1 here is to put the rectangle border exactly on top of a grid line.
@@ -452,16 +459,25 @@ public class DraggableBox extends StackPane {
      *
      * @param y the cursor y position
      */
-    private void handleDragY(final double y) {
+    private void handleDragY(final double x, final double y) {
 
         final double maxParentHeight = editorProperties.isSouthBoundActive() ? lastParentHeight : absoluteMaxHeight;
 
         final double minLayoutY = editorProperties.getNorthBoundValue();
         final double maxLayoutY = maxParentHeight - getHeight() - editorProperties.getSouthBoundValue();
 
-        final double scaleFactor = getLocalToSceneTransform().getMxx();
+        final Transform localToSceneTransform = getLocalToSceneTransform();
 
-        double newLayoutY = lastLayoutY + (y - lastMouseY) / scaleFactor;
+        final double affineShiftX = ((x - lastMouseX) * localToSceneTransform.getMyy() - (y - lastMouseY) * localToSceneTransform.getMxy())
+                / (localToSceneTransform.getMxx() * localToSceneTransform.getMyy() -
+                localToSceneTransform.getMyx() * localToSceneTransform.getMxy());
+
+        final double affineShiftY = ((y - lastMouseY) * localToSceneTransform.getMxx() - (x - lastMouseX) * localToSceneTransform.getMyx())
+                / (localToSceneTransform.getMxx() * localToSceneTransform.getMyy() -
+                localToSceneTransform.getMyx() * localToSceneTransform.getMxy());
+
+
+        double newLayoutY = lastLayoutY + affineShiftX * localToSceneTransform.getMyx() + affineShiftY * localToSceneTransform.getMyy();
 
         if (editorProperties.isSnapToGridOn()) {
             // The -1 here is to put the rectangle border exactly on top of a grid line.
