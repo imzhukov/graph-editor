@@ -5,7 +5,6 @@ package de.tesis.dynaware.grapheditor.utils;
 
 import java.util.List;
 
-import de.tesis.dynaware.grapheditor.zoom.ZoomService;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Point2D;
