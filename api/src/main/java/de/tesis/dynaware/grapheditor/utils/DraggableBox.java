@@ -405,27 +405,6 @@ public class DraggableBox extends StackPane {
      */
     private void handleDrag(final double x, final double y) {
 
-        if (dragEnabledXProperty.get()) {
-            handleDragX(x, y);
-        }
-
-        if (dragEnabledYProperty.get()) {
-            handleDragY(x, y);
-        }
-    }
-
-    /**
-     * Handles the x component of a drag event to the given cursor x position.
-     *
-     * @param x the cursor x position
-     */
-    private void handleDragX(final double x, final double y) {
-
-        final double maxParentWidth = editorProperties.isEastBoundActive() ? lastParentWidth : absoluteMaxWidth;
-
-        final double minLayoutX = editorProperties.getWestBoundValue();
-        final double maxLayoutX = maxParentWidth - getWidth() - editorProperties.getEastBoundValue();
-
         Point2D shiftPoint = new Point2D(x - lastMouseX, y - lastMouseY);
         Transform localToSceneTransform = getLocalToSceneTransform();
         for(Transform transform : getTransforms()) {
@@ -439,7 +418,26 @@ public class DraggableBox extends StackPane {
             }
         }
 
-        double newLayoutX = lastLayoutX + shiftPoint.getX() / localToSceneTransform.getMxx();
+        if (dragEnabledXProperty.get())
+            handleDragX(shiftPoint.getX() / localToSceneTransform.getMxx());
+
+        if (dragEnabledYProperty.get())
+            handleDragY(shiftPoint.getY() / localToSceneTransform.getMyy());
+    }
+
+    /**
+     * Handles the x component of a drag event to the given cursor x position.
+     *
+     * @param offsetX offset x coordinate
+     */
+    private void handleDragX(final double offsetX) {
+
+        final double maxParentWidth = editorProperties.isEastBoundActive() ? lastParentWidth : absoluteMaxWidth;
+
+        final double minLayoutX = editorProperties.getWestBoundValue();
+        final double maxLayoutX = maxParentWidth - getWidth() - editorProperties.getEastBoundValue();
+
+        double newLayoutX = lastLayoutX + offsetX;
 
         if (editorProperties.isSnapToGridOn()) {
             // The -1 here is to put the rectangle border exactly on top of a grid line.
@@ -465,29 +463,16 @@ public class DraggableBox extends StackPane {
     /**
      * Handles the y component of a drag event to the given cursor y position.
      *
-     * @param y the cursor y position
+     * @param offsetY the cursor y position
      */
-    private void handleDragY(final double x, final double y) {
+    private void handleDragY(final double offsetY) {
 
         final double maxParentHeight = editorProperties.isSouthBoundActive() ? lastParentHeight : absoluteMaxHeight;
 
         final double minLayoutY = editorProperties.getNorthBoundValue();
         final double maxLayoutY = maxParentHeight - getHeight() - editorProperties.getSouthBoundValue();
 
-        Point2D shiftPoint = new Point2D(x - lastMouseX, y - lastMouseY);
-        Transform localToSceneTransform = getLocalToSceneTransform();
-        for(Transform transform : getTransforms()) {
-            if(transform instanceof Rotate) {
-                try {
-                    shiftPoint = transform.inverseDeltaTransform(shiftPoint.getX(), shiftPoint.getY());
-                    localToSceneTransform = localToSceneTransform.createConcatenation(transform.createInverse());
-                } catch (NonInvertibleTransformException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        double newLayoutY = lastLayoutY + shiftPoint.getY() / localToSceneTransform.getMyy();
+        double newLayoutY = lastLayoutY + offsetY;
 
         if (editorProperties.isSnapToGridOn()) {
             // The -1 here is to put the rectangle border exactly on top of a grid line.
