@@ -5,6 +5,7 @@ package de.tesis.dynaware.grapheditor.utils;
 
 import java.util.List;
 
+import de.tesis.dynaware.grapheditor.zoom.ZoomService;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Point2D;
@@ -15,6 +16,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.transform.NonInvertibleTransformException;
+import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Transform;
 
 /**
@@ -423,15 +426,20 @@ public class DraggableBox extends StackPane {
         final double minLayoutX = editorProperties.getWestBoundValue();
         final double maxLayoutX = maxParentWidth - getWidth() - editorProperties.getEastBoundValue();
 
-        final double affineShiftX = ((x - lastMouseX) * getLocalToSceneTransform().getMyy() - (y - lastMouseY) * getLocalToSceneTransform().getMxy())
-                / (getLocalToSceneTransform().getMxx() * getLocalToSceneTransform().getMyy() -
-                   getLocalToSceneTransform().getMyx() * getLocalToSceneTransform().getMxy());
+        Point2D shiftPoint = new Point2D(x - lastMouseX, y - lastMouseY);
+        Transform localToSceneTransform = getLocalToSceneTransform();
+        for(Transform transform : getTransforms()) {
+            if(transform instanceof Rotate) {
+                try {
+                    shiftPoint = transform.inverseDeltaTransform(shiftPoint.getX(), shiftPoint.getY());
+                    localToSceneTransform = localToSceneTransform.createConcatenation(transform.createInverse());
+                } catch (NonInvertibleTransformException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
-        final double affineShiftY = ((y - lastMouseY) * getLocalToSceneTransform().getMxx() - (x - lastMouseX) * getLocalToSceneTransform().getMyx())
-                / (getLocalToSceneTransform().getMxx() * getLocalToSceneTransform().getMyy() -
-                getLocalToSceneTransform().getMyx() * getLocalToSceneTransform().getMxy());
-
-        double newLayoutX = lastLayoutX + affineShiftX * getLocalToSceneTransform().getMxx() + affineShiftY * getLocalToSceneTransform().getMxy();
+        double newLayoutX = lastLayoutX + shiftPoint.getX() / localToSceneTransform.getMxx();
 
         if (editorProperties.isSnapToGridOn()) {
             // The -1 here is to put the rectangle border exactly on top of a grid line.
@@ -466,18 +474,20 @@ public class DraggableBox extends StackPane {
         final double minLayoutY = editorProperties.getNorthBoundValue();
         final double maxLayoutY = maxParentHeight - getHeight() - editorProperties.getSouthBoundValue();
 
-        final Transform localToSceneTransform = getLocalToSceneTransform();
+        Point2D shiftPoint = new Point2D(x - lastMouseX, y - lastMouseY);
+        Transform localToSceneTransform = getLocalToSceneTransform();
+        for(Transform transform : getTransforms()) {
+            if(transform instanceof Rotate) {
+                try {
+                    shiftPoint = transform.inverseDeltaTransform(shiftPoint.getX(), shiftPoint.getY());
+                    localToSceneTransform = localToSceneTransform.createConcatenation(transform.createInverse());
+                } catch (NonInvertibleTransformException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
-        final double affineShiftX = ((x - lastMouseX) * localToSceneTransform.getMyy() - (y - lastMouseY) * localToSceneTransform.getMxy())
-                / (localToSceneTransform.getMxx() * localToSceneTransform.getMyy() -
-                localToSceneTransform.getMyx() * localToSceneTransform.getMxy());
-
-        final double affineShiftY = ((y - lastMouseY) * localToSceneTransform.getMxx() - (x - lastMouseX) * localToSceneTransform.getMyx())
-                / (localToSceneTransform.getMxx() * localToSceneTransform.getMyy() -
-                localToSceneTransform.getMyx() * localToSceneTransform.getMxy());
-
-
-        double newLayoutY = lastLayoutY + affineShiftX * localToSceneTransform.getMyx() + affineShiftY * localToSceneTransform.getMyy();
+        double newLayoutY = lastLayoutY + shiftPoint.getY() / localToSceneTransform.getMyy();
 
         if (editorProperties.isSnapToGridOn()) {
             // The -1 here is to put the rectangle border exactly on top of a grid line.
