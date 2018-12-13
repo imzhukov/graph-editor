@@ -409,7 +409,6 @@ public class DraggableBox extends StackPane {
         for(Transform transform : getTransforms()) {
             if(transform instanceof Rotate) {
                 try {
-                    shiftPoint = transform.inverseDeltaTransform(shiftPoint.getX(), shiftPoint.getY());
                     localToSceneTransform = localToSceneTransform.createConcatenation(transform.createInverse());
                 } catch (NonInvertibleTransformException e) {
                     e.printStackTrace();
