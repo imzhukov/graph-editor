@@ -280,6 +280,7 @@ public class SelectionCopier {
         final CompoundCommand command = new CompoundCommand();
 
         for (final GNode pastedNode : pastedNodes) {
+            pastedNode.setId(-1);
             command.append(AddCommand.create(editingDomain, model, NODES, pastedNode));
         }
 
