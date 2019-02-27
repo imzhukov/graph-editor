@@ -49,7 +49,7 @@ public class GConnectionImpl extends GConnectableImpl implements GConnection {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int ID_EDEFAULT = 0;
+	protected static final int ID_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -69,7 +69,7 @@ public class GConnectionImpl extends GConnectableImpl implements GConnection {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int DB_OBJECT_ID_EDEFAULT = 0;
+	protected static final int DB_OBJECT_ID_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getDbObjectId() <em>Db Object Id</em>}' attribute.

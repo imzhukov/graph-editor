@@ -55,7 +55,7 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int ID_EDEFAULT = 0;
+	protected static final int ID_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -185,7 +185,7 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double ROTATE_ANGLE_EDEFAULT = 101.0;
+	protected static final double ROTATE_ANGLE_EDEFAULT = 0.0;
 
 	/**
 	 * The cached value of the '{@link #getRotateAngle() <em>Rotate Angle</em>}' attribute.
@@ -205,7 +205,7 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int LIBRARY_BLOCK_ID_EDEFAULT = 0;
+	protected static final int LIBRARY_BLOCK_ID_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getLibraryBlockId() <em>Library Block Id</em>}' attribute.
@@ -225,7 +225,7 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int PAGE_ID_EDEFAULT = 0;
+	protected static final int PAGE_ID_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getPageId() <em>Page Id</em>}' attribute.
@@ -245,7 +245,7 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int DB_OBJECT_ID_EDEFAULT = 0;
+	protected static final int DB_OBJECT_ID_EDEFAULT = -1;
 
 	/**
 	 * The cached value of the '{@link #getDbObjectId() <em>Db Object Id</em>}' attribute.

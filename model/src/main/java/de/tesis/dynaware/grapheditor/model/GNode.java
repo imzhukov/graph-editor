@@ -34,6 +34,7 @@ import org.eclipse.emf.common.util.EList;
 public interface GNode extends GConnectable {
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * The default value is <code>"-1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
@@ -43,7 +44,7 @@ public interface GNode extends GConnectable {
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(int)
 	 * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGNode_Id()
-	 * @model id="true"
+	 * @model default="-1" id="true"
 	 * @generated
 	 */
 	int getId();
@@ -222,7 +223,7 @@ public interface GNode extends GConnectable {
 
 	/**
 	 * Returns the value of the '<em><b>Rotate Angle</b></em>' attribute.
-	 * The default value is <code>"101"</code>.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Rotate Angle</em>' attribute isn't clear,
@@ -232,7 +233,7 @@ public interface GNode extends GConnectable {
 	 * @return the value of the '<em>Rotate Angle</em>' attribute.
 	 * @see #setRotateAngle(double)
 	 * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGNode_RotateAngle()
-	 * @model default="101" required="true"
+	 * @model default="0" required="true"
 	 * @generated
 	 */
 	double getRotateAngle();
@@ -249,6 +250,7 @@ public interface GNode extends GConnectable {
 
 	/**
 	 * Returns the value of the '<em><b>Library Block Id</b></em>' attribute.
+	 * The default value is <code>"-1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Library Block Id</em>' attribute isn't clear,
@@ -258,7 +260,7 @@ public interface GNode extends GConnectable {
 	 * @return the value of the '<em>Library Block Id</em>' attribute.
 	 * @see #setLibraryBlockId(int)
 	 * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGNode_LibraryBlockId()
-	 * @model
+	 * @model default="-1"
 	 * @generated
 	 */
 	int getLibraryBlockId();
@@ -275,6 +277,7 @@ public interface GNode extends GConnectable {
 
 	/**
 	 * Returns the value of the '<em><b>Page Id</b></em>' attribute.
+	 * The default value is <code>"-1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Page Id</em>' attribute isn't clear,
@@ -284,7 +287,7 @@ public interface GNode extends GConnectable {
 	 * @return the value of the '<em>Page Id</em>' attribute.
 	 * @see #setPageId(int)
 	 * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGNode_PageId()
-	 * @model
+	 * @model default="-1"
 	 * @generated
 	 */
 	int getPageId();
@@ -301,6 +304,7 @@ public interface GNode extends GConnectable {
 
 	/**
 	 * Returns the value of the '<em><b>Db Object Id</b></em>' attribute.
+	 * The default value is <code>"-1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Db Object Id</em>' attribute isn't clear,
@@ -310,7 +314,7 @@ public interface GNode extends GConnectable {
 	 * @return the value of the '<em>Db Object Id</em>' attribute.
 	 * @see #setDbObjectId(int)
 	 * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGNode_DbObjectId()
-	 * @model
+	 * @model default="-1"
 	 * @generated
 	 */
 	int getDbObjectId();
