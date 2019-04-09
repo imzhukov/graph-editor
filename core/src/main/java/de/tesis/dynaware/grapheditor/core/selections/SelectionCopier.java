@@ -1,19 +1,28 @@
 package de.tesis.dynaware.grapheditor.core.selections;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.awt.*;
+import java.awt.datatransfer.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.function.BiConsumer;
 
+import de.tesis.dynaware.grapheditor.model.*;
+import de.tesis.dynaware.grapheditor.model.impl.GModelImpl;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Region;
 
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.common.util.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -21,11 +30,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import de.tesis.dynaware.grapheditor.GNodeSkin;
 import de.tesis.dynaware.grapheditor.SkinLookup;
 import de.tesis.dynaware.grapheditor.core.utils.GModelUtils;
-import de.tesis.dynaware.grapheditor.model.GConnection;
-import de.tesis.dynaware.grapheditor.model.GJoint;
-import de.tesis.dynaware.grapheditor.model.GModel;
-import de.tesis.dynaware.grapheditor.model.GNode;
-import de.tesis.dynaware.grapheditor.model.GraphPackage;
+import org.slf4j.LoggerFactory;
 
 /**
  * Manages cut, copy, & paste actions on the current selection.
@@ -39,6 +44,7 @@ import de.tesis.dynaware.grapheditor.model.GraphPackage;
  * </p>
  */
 public class SelectionCopier {
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(SelectionCopier.class);
 
     private static final EReference NODES = GraphPackage.Literals.GMODEL__NODES;
     private static final EReference CONNECTIONS = GraphPackage.Literals.GMODEL__CONNECTIONS;
@@ -58,6 +64,8 @@ public class SelectionCopier {
     private double parentSceneYAtTimeOfCopy;
 
     private GModel model;
+
+    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
     /**
      * Creates a new {@link SelectionCopier} instance.
@@ -87,9 +95,9 @@ public class SelectionCopier {
 
     /**
      * Cuts the current selection and stores it in memory.
-     * 
-     * @param handler a {@link CommandAppender} to allow custom commands to be appended to the cut command
+     *
      */
+    //* @param handler a {@link CommandAppender} to allow custom commands to be appended to the cut command
     public void cut(final BiConsumer<List<GNode>, CompoundCommand> consumer) {
 
         if (selectionTracker.getSelectedNodes().isEmpty()) {
@@ -102,9 +110,10 @@ public class SelectionCopier {
 
     /**
      * Copies the current selection and stores it in memory.
+     *
+     * <p><u>modified by Drobyshev</u></p>
      */
     public void copy() {
-
         if (selectionTracker.getSelectedNodes().isEmpty()) {
             return;
         }
@@ -117,7 +126,6 @@ public class SelectionCopier {
         // Don't iterate directly over selectionTracker.getSelectedNodes() because that will not preserve ordering.
         for (final GNode node : model.getNodes()) {
             if (selectionTracker.getSelectedNodes().contains(node)) {
-
                 final GNode copiedNode = EcoreUtil.copy(node);
                 copiedNodes.add(copiedNode);
                 copyStorage.put(node, copiedNode);
@@ -126,6 +134,31 @@ public class SelectionCopier {
 
         copiedConnections.addAll(GModelUtils.copyConnections(copyStorage));
         saveParentPositionInScene();
+        saveToClipboard();
+    }
+
+    /**
+     * Copies the current selection and stores it in system clipboard.
+     *
+     * <p><u>created by Drobyshev</u></p>
+     */
+    private void saveToClipboard() {
+        GModelImpl copyModel = (GModelImpl) GraphFactory.eINSTANCE.createGModel();
+        copyModel.getNodes().addAll(copiedNodes);
+        copyModel.getConnections().addAll(copiedConnections);
+
+        final URI fileUri = URI.createFileURI(System.getProperty("user.dir"));
+        final XMIResourceFactoryImpl resourceFactory = new XMIResourceFactoryImpl();
+        final Resource resource = resourceFactory.createResource(fileUri);
+        resource.getContents().add(copyModel);
+
+        try (ByteArrayOutputStream output = new ByteArrayOutputStream()){
+            resource.save(output, Collections.EMPTY_MAP);
+            StringSelection data = new StringSelection(output.toString());
+            clipboard.setContents(data,null);
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -137,13 +170,17 @@ public class SelectionCopier {
      *
      * @param consumer a consumer to allow custom commands to be appended to the paste command
      * @return the list of new {@link GNode} instances created by the paste operation
+     *
+     * <p><u>modified by Drobyshev</u></p>
      */
-    public List<GNode> paste(final BiConsumer<List<GNode>, CompoundCommand> consumer) {
+    public List<GNode>  paste(final BiConsumer<List<GNode>, CompoundCommand> consumer) {
 
         selectionCreator.deselectAll();
 
         final List<GNode> pastedNodes = new ArrayList<>();
         final List<GConnection> pastedConnections = new ArrayList<>();
+
+        loadGModelFromClipboard();
 
         preparePastedElements(pastedNodes, pastedConnections);
         addPasteOffset(pastedNodes, pastedConnections);
@@ -163,6 +200,42 @@ public class SelectionCopier {
         return pastedNodes;
     }
 
+    /**
+     * Load string text from system clipboard
+     * If text format is correct identitfy internal elements as copied.
+     *
+     * <p><u>created by Drobyshev</u></p>
+     */
+    private void loadGModelFromClipboard(){
+        copiedNodes.clear();
+        copiedConnections.clear();
+
+        final URI fileUri = URI.createFileURI(System.getProperty("user.dir"));
+
+        final XMIResourceFactoryImpl resourceFactory = new XMIResourceFactoryImpl();
+        final Resource resource = resourceFactory.createResource(fileUri);
+
+        Transferable contents = clipboard.getContents(null);
+        if (contents.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+            try {
+                String copyText = contents.getTransferData(DataFlavor.stringFlavor).toString();
+                try (ByteArrayInputStream inputStream = new ByteArrayInputStream(copyText.getBytes())){
+                    resource.load(inputStream, Collections.EMPTY_MAP);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            } catch (UnsupportedFlavorException | IOException e) {
+                e.printStackTrace();
+                LOGGER.info("Unsupported text format to paste.");
+            }
+        }
+
+        if (!resource.getContents().isEmpty() && resource.getContents().get(0) instanceof GModel) {
+            final GModel model = (GModel) resource.getContents().get(0);
+            copiedNodes.addAll(model.getNodes());
+            copiedConnections.addAll(model.getConnections());
+        }
+    }
     /**
      * Clears the memory of what was cut / copied. Future paste operations will do nothing.
      */
