@@ -127,12 +127,14 @@ public class SelectionCopier {
         for (final GNode node : model.getNodes()) {
             if (selectionTracker.getSelectedNodes().contains(node)) {
                 final GNode copiedNode = EcoreUtil.copy(node);
+                copiedNode.setId(-1);
+                copiedNode.getConnectors().forEach(connector -> connector.setId(0));
                 copiedNodes.add(copiedNode);
                 copyStorage.put(node, copiedNode);
             }
         }
-
         copiedConnections.addAll(GModelUtils.copyConnections(copyStorage));
+        copiedConnections.forEach(connection -> connection.setId(-1));
         saveParentPositionInScene();
         saveToClipboard();
     }
