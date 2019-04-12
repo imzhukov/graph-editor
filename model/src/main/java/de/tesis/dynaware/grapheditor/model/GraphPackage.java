@@ -566,13 +566,22 @@ public interface GraphPackage extends EPackage {
 	int GCONNECTOR__CONNECTION_DETACHED_ON_DRAG = 9;
 
 	/**
+	 * The feature id for the '<em><b>Library Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GCONNECTOR__LIBRARY_ID = 10;
+
+	/**
 	 * The number of structural features of the '<em>GConnector</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GCONNECTOR_FEATURE_COUNT = 10;
+	int GCONNECTOR_FEATURE_COUNT = 11;
 
 	/**
 	 * The number of operations of the '<em>GConnector</em>' class.
@@ -1170,6 +1179,17 @@ public interface GraphPackage extends EPackage {
 	EAttribute getGConnector_ConnectionDetachedOnDrag();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.tesis.dynaware.grapheditor.model.GConnector#getLibraryId <em>Library Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Library Id</em>'.
+	 * @see de.tesis.dynaware.grapheditor.model.GConnector#getLibraryId()
+	 * @see #getGConnector()
+	 * @generated
+	 */
+	EAttribute getGConnector_LibraryId();
+
+	/**
 	 * Returns the meta object for class '{@link de.tesis.dynaware.grapheditor.model.GJoint <em>GJoint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1645,6 +1665,14 @@ public interface GraphPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute GCONNECTOR__CONNECTION_DETACHED_ON_DRAG = eINSTANCE.getGConnector_ConnectionDetachedOnDrag();
+
+		/**
+		 * The meta object literal for the '<em><b>Library Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GCONNECTOR__LIBRARY_ID = eINSTANCE.getGConnector_LibraryId();
 
 		/**
 		 * The meta object literal for the '{@link de.tesis.dynaware.grapheditor.model.impl.GJointImpl <em>GJoint</em>}' class.

@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GConnectorImpl#getX <em>X</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GConnectorImpl#getY <em>Y</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GConnectorImpl#isConnectionDetachedOnDrag <em>Connection Detached On Drag</em>}</li>
+ *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GConnectorImpl#getLibraryId <em>Library Id</em>}</li>
  * </ul>
  *
  * @generated
@@ -215,6 +216,26 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
 	 * @ordered
 	 */
 	protected boolean connectionDetachedOnDrag = CONNECTION_DETACHED_ON_DRAG_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLibraryId() <em>Library Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLibraryId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int LIBRARY_ID_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getLibraryId() <em>Library Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLibraryId()
+	 * @generated
+	 * @ordered
+	 */
+	protected int libraryId = LIBRARY_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -481,6 +502,29 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
 	 * @generated
 	 */
 	@Override
+	public int getLibraryId() {
+		return libraryId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setLibraryId(int newLibraryId) {
+		int oldLibraryId = libraryId;
+		libraryId = newLibraryId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GCONNECTOR__LIBRARY_ID, oldLibraryId, libraryId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case GraphPackage.GCONNECTOR__PARENT:
@@ -547,6 +591,8 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
 				return getY();
 			case GraphPackage.GCONNECTOR__CONNECTION_DETACHED_ON_DRAG:
 				return isConnectionDetachedOnDrag();
+			case GraphPackage.GCONNECTOR__LIBRARY_ID:
+				return getLibraryId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -591,6 +637,9 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
 			case GraphPackage.GCONNECTOR__CONNECTION_DETACHED_ON_DRAG:
 				setConnectionDetachedOnDrag((Boolean)newValue);
 				return;
+			case GraphPackage.GCONNECTOR__LIBRARY_ID:
+				setLibraryId((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -633,6 +682,9 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
 			case GraphPackage.GCONNECTOR__CONNECTION_DETACHED_ON_DRAG:
 				setConnectionDetachedOnDrag(CONNECTION_DETACHED_ON_DRAG_EDEFAULT);
 				return;
+			case GraphPackage.GCONNECTOR__LIBRARY_ID:
+				setLibraryId(LIBRARY_ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -665,6 +717,8 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
 				return y != Y_EDEFAULT;
 			case GraphPackage.GCONNECTOR__CONNECTION_DETACHED_ON_DRAG:
 				return connectionDetachedOnDrag != CONNECTION_DETACHED_ON_DRAG_EDEFAULT;
+			case GraphPackage.GCONNECTOR__LIBRARY_ID:
+				return libraryId != LIBRARY_ID_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -695,6 +749,8 @@ public class GConnectorImpl extends MinimalEObjectImpl.Container implements GCon
 		result.append(y);
 		result.append(", connectionDetachedOnDrag: ");
 		result.append(connectionDetachedOnDrag);
+		result.append(", libraryId: ");
+		result.append(libraryId);
 		result.append(')');
 		return result.toString();
 	}

@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GConnector#getX <em>X</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GConnector#getY <em>Y</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GConnector#isConnectionDetachedOnDrag <em>Connection Detached On Drag</em>}</li>
+ *   <li>{@link de.tesis.dynaware.grapheditor.model.GConnector#getLibraryId <em>Library Id</em>}</li>
  * </ul>
  *
  * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGConnector()
@@ -284,5 +285,31 @@ public interface GConnector extends EObject {
 	 * @generated
 	 */
 	void setConnectionDetachedOnDrag(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Library Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Library Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Library Id</em>' attribute.
+	 * @see #setLibraryId(int)
+	 * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGConnector_LibraryId()
+	 * @model
+	 * @generated
+	 */
+	int getLibraryId();
+
+	/**
+	 * Sets the value of the '{@link de.tesis.dynaware.grapheditor.model.GConnector#getLibraryId <em>Library Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Library Id</em>' attribute.
+	 * @see #getLibraryId()
+	 * @generated
+	 */
+	void setLibraryId(int value);
 
 } // GConnector

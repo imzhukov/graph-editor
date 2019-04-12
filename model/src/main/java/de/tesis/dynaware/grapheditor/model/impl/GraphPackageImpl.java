@@ -562,6 +562,16 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getGConnector_LibraryId() {
+		return (EAttribute)gConnectorEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getGJoint() {
 		return gJointEClass;
 	}
@@ -731,6 +741,7 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		createEAttribute(gConnectorEClass, GCONNECTOR__X);
 		createEAttribute(gConnectorEClass, GCONNECTOR__Y);
 		createEAttribute(gConnectorEClass, GCONNECTOR__CONNECTION_DETACHED_ON_DRAG);
+		createEAttribute(gConnectorEClass, GCONNECTOR__LIBRARY_ID);
 
 		gJointEClass = createEClass(GJOINT);
 		createEAttribute(gJointEClass, GJOINT__ID);
@@ -823,6 +834,7 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		initEAttribute(getGConnector_X(), ecorePackage.getEDouble(), "x", null, 0, 1, GConnector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGConnector_Y(), ecorePackage.getEDouble(), "y", null, 0, 1, GConnector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGConnector_ConnectionDetachedOnDrag(), ecorePackage.getEBoolean(), "connectionDetachedOnDrag", "true", 1, 1, GConnector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGConnector_LibraryId(), ecorePackage.getEInt(), "libraryId", null, 0, 1, GConnector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(gJointEClass, GJoint.class, "GJoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGJoint_Id(), ecorePackage.getEInt(), "id", null, 0, 1, GJoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
