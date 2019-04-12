@@ -232,6 +232,26 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getGConnectable_SortedId() {
+		return (EAttribute)gConnectableEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getGConnectable_SortedSum() {
+		return (EAttribute)gConnectableEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getGNode() {
 		return gNodeEClass;
 	}
@@ -675,6 +695,8 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 
 		gConnectableEClass = createEClass(GCONNECTABLE);
 		createEReference(gConnectableEClass, GCONNECTABLE__CONNECTORS);
+		createEAttribute(gConnectableEClass, GCONNECTABLE__SORTED_ID);
+		createEAttribute(gConnectableEClass, GCONNECTABLE__SORTED_SUM);
 
 		gNodeEClass = createEClass(GNODE);
 		createEAttribute(gNodeEClass, GNODE__ID);
@@ -765,6 +787,8 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 
 		initEClass(gConnectableEClass, GConnectable.class, "GConnectable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGConnectable_Connectors(), this.getGConnector(), this.getGConnector_Parent(), "connectors", null, 0, -1, GConnectable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGConnectable_SortedId(), ecorePackage.getEInt(), "sortedId", null, 0, 1, GConnectable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGConnectable_SortedSum(), ecorePackage.getEInt(), "sortedSum", null, 0, 1, GConnectable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(gNodeEClass, GNode.class, "GNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGNode_Id(), ecorePackage.getEInt(), "id", "-1", 0, 1, GNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

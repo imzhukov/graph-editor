@@ -158,13 +158,31 @@ public interface GraphPackage extends EPackage {
 	int GCONNECTABLE__CONNECTORS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Sorted Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GCONNECTABLE__SORTED_ID = 1;
+
+	/**
+	 * The feature id for the '<em><b>Sorted Sum</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GCONNECTABLE__SORTED_SUM = 2;
+
+	/**
 	 * The number of structural features of the '<em>GConnectable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GCONNECTABLE_FEATURE_COUNT = 1;
+	int GCONNECTABLE_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>GConnectable</em>' class.
@@ -193,6 +211,24 @@ public interface GraphPackage extends EPackage {
 	 * @ordered
 	 */
 	int GNODE__CONNECTORS = GCONNECTABLE__CONNECTORS;
+
+	/**
+	 * The feature id for the '<em><b>Sorted Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GNODE__SORTED_ID = GCONNECTABLE__SORTED_ID;
+
+	/**
+	 * The feature id for the '<em><b>Sorted Sum</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GNODE__SORTED_SUM = GCONNECTABLE__SORTED_SUM;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -338,6 +374,24 @@ public interface GraphPackage extends EPackage {
 	 * @ordered
 	 */
 	int GCONNECTION__CONNECTORS = GCONNECTABLE__CONNECTORS;
+
+	/**
+	 * The feature id for the '<em><b>Sorted Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GCONNECTION__SORTED_ID = GCONNECTABLE__SORTED_ID;
+
+	/**
+	 * The feature id for the '<em><b>Sorted Sum</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GCONNECTION__SORTED_SUM = GCONNECTABLE__SORTED_SUM;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -754,6 +808,28 @@ public interface GraphPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getGConnectable_Connectors();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.tesis.dynaware.grapheditor.model.GConnectable#getSortedId <em>Sorted Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sorted Id</em>'.
+	 * @see de.tesis.dynaware.grapheditor.model.GConnectable#getSortedId()
+	 * @see #getGConnectable()
+	 * @generated
+	 */
+	EAttribute getGConnectable_SortedId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.tesis.dynaware.grapheditor.model.GConnectable#getSortedSum <em>Sorted Sum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sorted Sum</em>'.
+	 * @see de.tesis.dynaware.grapheditor.model.GConnectable#getSortedSum()
+	 * @see #getGConnectable()
+	 * @generated
+	 */
+	EAttribute getGConnectable_SortedSum();
 
 	/**
 	 * Returns the meta object for class '{@link de.tesis.dynaware.grapheditor.model.GNode <em>GNode</em>}'.
@@ -1299,6 +1375,22 @@ public interface GraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference GCONNECTABLE__CONNECTORS = eINSTANCE.getGConnectable_Connectors();
+
+		/**
+		 * The meta object literal for the '<em><b>Sorted Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GCONNECTABLE__SORTED_ID = eINSTANCE.getGConnectable_SortedId();
+
+		/**
+		 * The meta object literal for the '<em><b>Sorted Sum</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GCONNECTABLE__SORTED_SUM = eINSTANCE.getGConnectable_SortedSum();
 
 		/**
 		 * The meta object literal for the '{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl <em>GNode</em>}' class.

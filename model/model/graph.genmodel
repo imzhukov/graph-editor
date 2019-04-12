@@ -19,6 +19,8 @@
     </genClasses>
     <genClasses image="false" ecoreClass="graph.ecore#//GConnectable">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference graph.ecore#//GConnectable/connectors"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//GConnectable/sortedId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//GConnectable/sortedSum"/>
     </genClasses>
     <genClasses ecoreClass="graph.ecore#//GNode">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//GNode/id"/>

@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GConnectable#getConnectors <em>Connectors</em>}</li>
+ *   <li>{@link de.tesis.dynaware.grapheditor.model.GConnectable#getSortedId <em>Sorted Id</em>}</li>
+ *   <li>{@link de.tesis.dynaware.grapheditor.model.GConnectable#getSortedSum <em>Sorted Sum</em>}</li>
  * </ul>
  *
  * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGConnectable()
@@ -40,5 +42,57 @@ public interface GConnectable extends EObject {
 	 * @generated
 	 */
 	EList<GConnector> getConnectors();
+
+	/**
+	 * Returns the value of the '<em><b>Sorted Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sorted Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sorted Id</em>' attribute.
+	 * @see #setSortedId(int)
+	 * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGConnectable_SortedId()
+	 * @model
+	 * @generated
+	 */
+	int getSortedId();
+
+	/**
+	 * Sets the value of the '{@link de.tesis.dynaware.grapheditor.model.GConnectable#getSortedId <em>Sorted Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Sorted Id</em>' attribute.
+	 * @see #getSortedId()
+	 * @generated
+	 */
+	void setSortedId(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Sorted Sum</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sorted Sum</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sorted Sum</em>' attribute.
+	 * @see #setSortedSum(int)
+	 * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGConnectable_SortedSum()
+	 * @model
+	 * @generated
+	 */
+	int getSortedSum();
+
+	/**
+	 * Sets the value of the '{@link de.tesis.dynaware.grapheditor.model.GConnectable#getSortedSum <em>Sorted Sum</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Sorted Sum</em>' attribute.
+	 * @see #getSortedSum()
+	 * @generated
+	 */
+	void setSortedSum(int value);
 
 } // GConnectable
