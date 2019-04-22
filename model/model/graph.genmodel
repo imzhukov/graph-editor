@@ -55,6 +55,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//GConnector/x"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//GConnector/y"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//GConnector/connectionDetachedOnDrag"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//GConnector/libraryId"/>
     </genClasses>
     <genClasses ecoreClass="graph.ecore#//GJoint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//GJoint/id"/>

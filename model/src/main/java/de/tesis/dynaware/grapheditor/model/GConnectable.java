@@ -54,7 +54,7 @@ public interface GConnectable extends EObject {
 	 * @return the value of the '<em>Sorted Id</em>' attribute.
 	 * @see #setSortedId(int)
 	 * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGConnectable_SortedId()
-	 * @model
+	 * @model unique="false"
 	 * @generated
 	 */
 	int getSortedId();
@@ -80,7 +80,7 @@ public interface GConnectable extends EObject {
 	 * @return the value of the '<em>Sorted Sum</em>' attribute.
 	 * @see #setSortedSum(int)
 	 * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGConnectable_SortedSum()
-	 * @model
+	 * @model unique="false"
 	 * @generated
 	 */
 	int getSortedSum();
