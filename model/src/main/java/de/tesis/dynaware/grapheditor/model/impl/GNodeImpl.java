@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getX <em>X</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getY <em>Y</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getWidth <em>Width</em>}</li>
@@ -86,6 +87,26 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 	 * @ordered
 	 */
 	protected String type = TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getX() <em>X</em>}' attribute.
@@ -330,6 +351,29 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GNODE__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GNODE__NAME, oldName, name));
 	}
 
 	/**
@@ -618,6 +662,8 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 				return getId();
 			case GraphPackage.GNODE__TYPE:
 				return getType();
+			case GraphPackage.GNODE__NAME:
+				return getName();
 			case GraphPackage.GNODE__X:
 				return getX();
 			case GraphPackage.GNODE__Y:
@@ -656,6 +702,9 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 				return;
 			case GraphPackage.GNODE__TYPE:
 				setType((String)newValue);
+				return;
+			case GraphPackage.GNODE__NAME:
+				setName((String)newValue);
 				return;
 			case GraphPackage.GNODE__X:
 				setX((Double)newValue);
@@ -706,6 +755,9 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 			case GraphPackage.GNODE__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
+			case GraphPackage.GNODE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case GraphPackage.GNODE__X:
 				setX(X_EDEFAULT);
 				return;
@@ -752,6 +804,8 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 				return id != ID_EDEFAULT;
 			case GraphPackage.GNODE__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			case GraphPackage.GNODE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case GraphPackage.GNODE__X:
 				return x != X_EDEFAULT;
 			case GraphPackage.GNODE__Y:
@@ -790,6 +844,8 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 		result.append(id);
 		result.append(", type: ");
 		result.append(type);
+		result.append(", name: ");
+		result.append(name);
 		result.append(", x: ");
 		result.append(x);
 		result.append(", y: ");

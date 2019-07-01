@@ -282,6 +282,16 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getGNode_Name() {
+		return (EAttribute)gNodeEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EAttribute getGNode_X() {
 		return (EAttribute)gNodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -711,6 +721,7 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		gNodeEClass = createEClass(GNODE);
 		createEAttribute(gNodeEClass, GNODE__ID);
 		createEAttribute(gNodeEClass, GNODE__TYPE);
+		createEAttribute(gNodeEClass, GNODE__NAME);
 		createEAttribute(gNodeEClass, GNODE__X);
 		createEAttribute(gNodeEClass, GNODE__Y);
 		createEAttribute(gNodeEClass, GNODE__WIDTH);
@@ -804,6 +815,7 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		initEClass(gNodeEClass, GNode.class, "GNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGNode_Id(), ecorePackage.getEInt(), "id", "-1", 0, 1, GNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGNode_Type(), ecorePackage.getEString(), "type", null, 0, 1, GNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGNode_Name(), ecorePackage.getEString(), "name", null, 0, 1, GNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGNode_X(), ecorePackage.getEDouble(), "x", "0", 1, 1, GNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGNode_Y(), ecorePackage.getEDouble(), "y", "0", 1, 1, GNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGNode_Width(), ecorePackage.getEDouble(), "width", "151", 1, 1, GNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -249,13 +249,22 @@ public interface GraphPackage extends EPackage {
 	int GNODE__TYPE = GCONNECTABLE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GNODE__NAME = GCONNECTABLE_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>X</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GNODE__X = GCONNECTABLE_FEATURE_COUNT + 2;
+	int GNODE__X = GCONNECTABLE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Y</b></em>' attribute.
@@ -264,7 +273,7 @@ public interface GraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GNODE__Y = GCONNECTABLE_FEATURE_COUNT + 3;
+	int GNODE__Y = GCONNECTABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Width</b></em>' attribute.
@@ -273,7 +282,7 @@ public interface GraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GNODE__WIDTH = GCONNECTABLE_FEATURE_COUNT + 4;
+	int GNODE__WIDTH = GCONNECTABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Height</b></em>' attribute.
@@ -282,7 +291,7 @@ public interface GraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GNODE__HEIGHT = GCONNECTABLE_FEATURE_COUNT + 5;
+	int GNODE__HEIGHT = GCONNECTABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
@@ -291,7 +300,7 @@ public interface GraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GNODE__SUBGRAPH = GCONNECTABLE_FEATURE_COUNT + 6;
+	int GNODE__SUBGRAPH = GCONNECTABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Rotate Angle</b></em>' attribute.
@@ -300,7 +309,7 @@ public interface GraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GNODE__ROTATE_ANGLE = GCONNECTABLE_FEATURE_COUNT + 7;
+	int GNODE__ROTATE_ANGLE = GCONNECTABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Library Block Id</b></em>' attribute.
@@ -309,7 +318,7 @@ public interface GraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GNODE__LIBRARY_BLOCK_ID = GCONNECTABLE_FEATURE_COUNT + 8;
+	int GNODE__LIBRARY_BLOCK_ID = GCONNECTABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Page Id</b></em>' attribute.
@@ -318,7 +327,7 @@ public interface GraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GNODE__PAGE_ID = GCONNECTABLE_FEATURE_COUNT + 9;
+	int GNODE__PAGE_ID = GCONNECTABLE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Db Object Id</b></em>' attribute.
@@ -327,7 +336,7 @@ public interface GraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GNODE__DB_OBJECT_ID = GCONNECTABLE_FEATURE_COUNT + 10;
+	int GNODE__DB_OBJECT_ID = GCONNECTABLE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -336,7 +345,7 @@ public interface GraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GNODE__PARAMETERS = GCONNECTABLE_FEATURE_COUNT + 11;
+	int GNODE__PARAMETERS = GCONNECTABLE_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>GNode</em>' class.
@@ -345,7 +354,7 @@ public interface GraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GNODE_FEATURE_COUNT = GCONNECTABLE_FEATURE_COUNT + 12;
+	int GNODE_FEATURE_COUNT = GCONNECTABLE_FEATURE_COUNT + 13;
 
 	/**
 	 * The number of operations of the '<em>GNode</em>' class.
@@ -871,6 +880,17 @@ public interface GraphPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getGNode_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.tesis.dynaware.grapheditor.model.GNode#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.tesis.dynaware.grapheditor.model.GNode#getName()
+	 * @see #getGNode()
+	 * @generated
+	 */
+	EAttribute getGNode_Name();
 
 	/**
 	 * Returns the meta object for the attribute '{@link de.tesis.dynaware.grapheditor.model.GNode#getX <em>X</em>}'.
@@ -1437,6 +1457,14 @@ public interface GraphPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute GNODE__TYPE = eINSTANCE.getGNode_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GNODE__NAME = eINSTANCE.getGNode_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>X</b></em>' attribute feature.
