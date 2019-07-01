@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GNode#getId <em>Id</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GNode#getType <em>Type</em>}</li>
- *   <li>{@link de.tesis.dynaware.grapheditor.model.GNode#getName <em>Name</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GNode#getX <em>X</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GNode#getY <em>Y</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GNode#getWidth <em>Width</em>}</li>
@@ -26,6 +25,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GNode#getPageId <em>Page Id</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GNode#getDbObjectId <em>Db Object Id</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GNode#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link de.tesis.dynaware.grapheditor.model.GNode#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGNode()

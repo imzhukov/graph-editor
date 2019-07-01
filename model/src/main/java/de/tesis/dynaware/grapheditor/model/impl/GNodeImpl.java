@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getType <em>Type</em>}</li>
- *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getX <em>X</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getY <em>Y</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getWidth <em>Width</em>}</li>
@@ -43,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getPageId <em>Page Id</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getDbObjectId <em>Db Object Id</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GNodeImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -87,26 +87,6 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 	 * @ordered
 	 */
 	protected String type = TYPE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getX() <em>X</em>}' attribute.
@@ -287,6 +267,26 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 	 * @ordered
 	 */
 	protected EList<GParameter> parameters;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -662,8 +662,6 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 				return getId();
 			case GraphPackage.GNODE__TYPE:
 				return getType();
-			case GraphPackage.GNODE__NAME:
-				return getName();
 			case GraphPackage.GNODE__X:
 				return getX();
 			case GraphPackage.GNODE__Y:
@@ -684,6 +682,8 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 				return getDbObjectId();
 			case GraphPackage.GNODE__PARAMETERS:
 				return getParameters();
+			case GraphPackage.GNODE__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -702,9 +702,6 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 				return;
 			case GraphPackage.GNODE__TYPE:
 				setType((String)newValue);
-				return;
-			case GraphPackage.GNODE__NAME:
-				setName((String)newValue);
 				return;
 			case GraphPackage.GNODE__X:
 				setX((Double)newValue);
@@ -737,6 +734,9 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends GParameter>)newValue);
 				return;
+			case GraphPackage.GNODE__NAME:
+				setName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -754,9 +754,6 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 				return;
 			case GraphPackage.GNODE__TYPE:
 				setType(TYPE_EDEFAULT);
-				return;
-			case GraphPackage.GNODE__NAME:
-				setName(NAME_EDEFAULT);
 				return;
 			case GraphPackage.GNODE__X:
 				setX(X_EDEFAULT);
@@ -788,6 +785,9 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 			case GraphPackage.GNODE__PARAMETERS:
 				getParameters().clear();
 				return;
+			case GraphPackage.GNODE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -804,8 +804,6 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 				return id != ID_EDEFAULT;
 			case GraphPackage.GNODE__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
-			case GraphPackage.GNODE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case GraphPackage.GNODE__X:
 				return x != X_EDEFAULT;
 			case GraphPackage.GNODE__Y:
@@ -826,6 +824,8 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 				return dbObjectId != DB_OBJECT_ID_EDEFAULT;
 			case GraphPackage.GNODE__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
+			case GraphPackage.GNODE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -844,8 +844,6 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 		result.append(id);
 		result.append(", type: ");
 		result.append(type);
-		result.append(", name: ");
-		result.append(name);
 		result.append(", x: ");
 		result.append(x);
 		result.append(", y: ");
@@ -862,6 +860,8 @@ public class GNodeImpl extends GConnectableImpl implements GNode {
 		result.append(pageId);
 		result.append(", dbObjectId: ");
 		result.append(dbObjectId);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}
