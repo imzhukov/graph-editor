@@ -54,6 +54,10 @@ public class ZoomService {
         }
     }
 
+    public double getCurrentZoomFactor() {
+        return currentZoomFactor;
+    }
+
     /**
      * Mouse wheel handler: zoom to pivot point
      */
