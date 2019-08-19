@@ -712,13 +712,22 @@ public interface GraphPackage extends EPackage {
 	int GPARAMETER__VALUE = 2;
 
 	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GPARAMETER__PARENT = 3;
+
+	/**
 	 * The number of structural features of the '<em>GParameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GPARAMETER_FEATURE_COUNT = 3;
+	int GPARAMETER_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>GParameter</em>' class.
@@ -1318,6 +1327,17 @@ public interface GraphPackage extends EPackage {
 	EAttribute getGParameter_Value();
 
 	/**
+	 * Returns the meta object for the reference '{@link de.tesis.dynaware.grapheditor.model.GParameter#getParent <em>Parent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Parent</em>'.
+	 * @see de.tesis.dynaware.grapheditor.model.GParameter#getParent()
+	 * @see #getGParameter()
+	 * @generated
+	 */
+	EReference getGParameter_Parent();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1785,6 +1805,14 @@ public interface GraphPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute GPARAMETER__VALUE = eINSTANCE.getGParameter_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GPARAMETER__PARENT = eINSTANCE.getGParameter_Parent();
 
 	}
 

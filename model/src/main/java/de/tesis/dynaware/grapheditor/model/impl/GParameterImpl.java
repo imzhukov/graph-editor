@@ -2,13 +2,13 @@
  */
 package de.tesis.dynaware.grapheditor.model.impl;
 
+import de.tesis.dynaware.grapheditor.model.GNode;
 import de.tesis.dynaware.grapheditor.model.GParameter;
 import de.tesis.dynaware.grapheditor.model.GraphPackage;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GParameterImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GParameterImpl#getType <em>Type</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GParameterImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.tesis.dynaware.grapheditor.model.impl.GParameterImpl#getParent <em>Parent</em>}</li>
  * </ul>
  *
  * @generated
@@ -87,6 +88,16 @@ public class GParameterImpl extends MinimalEObjectImpl.Container implements GPar
 	 * @ordered
 	 */
 	protected String value = VALUE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParent()
+	 * @generated
+	 * @ordered
+	 */
+	protected GNode parent;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -182,6 +193,46 @@ public class GParameterImpl extends MinimalEObjectImpl.Container implements GPar
 	 * @generated
 	 */
 	@Override
+	public GNode getParent() {
+		if (parent != null && parent.eIsProxy()) {
+			InternalEObject oldParent = (InternalEObject)parent;
+			parent = (GNode)eResolveProxy(oldParent);
+			if (parent != oldParent) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GraphPackage.GPARAMETER__PARENT, oldParent, parent));
+			}
+		}
+		return parent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GNode basicGetParent() {
+		return parent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setParent(GNode newParent) {
+		GNode oldParent = parent;
+		parent = newParent;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.GPARAMETER__PARENT, oldParent, parent));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case GraphPackage.GPARAMETER__ID:
@@ -190,6 +241,9 @@ public class GParameterImpl extends MinimalEObjectImpl.Container implements GPar
 				return getType();
 			case GraphPackage.GPARAMETER__VALUE:
 				return getValue();
+			case GraphPackage.GPARAMETER__PARENT:
+				if (resolve) return getParent();
+				return basicGetParent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -210,6 +264,9 @@ public class GParameterImpl extends MinimalEObjectImpl.Container implements GPar
 				return;
 			case GraphPackage.GPARAMETER__VALUE:
 				setValue((String)newValue);
+				return;
+			case GraphPackage.GPARAMETER__PARENT:
+				setParent((GNode)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -232,6 +289,9 @@ public class GParameterImpl extends MinimalEObjectImpl.Container implements GPar
 			case GraphPackage.GPARAMETER__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
+			case GraphPackage.GPARAMETER__PARENT:
+				setParent((GNode)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -250,6 +310,8 @@ public class GParameterImpl extends MinimalEObjectImpl.Container implements GPar
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case GraphPackage.GPARAMETER__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case GraphPackage.GPARAMETER__PARENT:
+				return parent != null;
 		}
 		return super.eIsSet(featureID);
 	}

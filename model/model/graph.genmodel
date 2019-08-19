@@ -69,6 +69,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//GParameter/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//GParameter/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//GParameter/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference graph.ecore#//GParameter/parent"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

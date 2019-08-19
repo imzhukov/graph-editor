@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GParameter#getId <em>Id</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GParameter#getType <em>Type</em>}</li>
  *   <li>{@link de.tesis.dynaware.grapheditor.model.GParameter#getValue <em>Value</em>}</li>
+ *   <li>{@link de.tesis.dynaware.grapheditor.model.GParameter#getParent <em>Parent</em>}</li>
  * </ul>
  *
  * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGParameter()
@@ -100,5 +101,31 @@ public interface GParameter extends EObject {
 	 * @generated
 	 */
 	void setValue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parent</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parent</em>' reference.
+	 * @see #setParent(GNode)
+	 * @see de.tesis.dynaware.grapheditor.model.GraphPackage#getGParameter_Parent()
+	 * @model required="true"
+	 * @generated
+	 */
+	GNode getParent();
+
+	/**
+	 * Sets the value of the '{@link de.tesis.dynaware.grapheditor.model.GParameter#getParent <em>Parent</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Parent</em>' reference.
+	 * @see #getParent()
+	 * @generated
+	 */
+	void setParent(GNode value);
 
 } // GParameter
