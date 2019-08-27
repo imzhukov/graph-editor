@@ -88,8 +88,8 @@ public class ZoomService {
                     return;
                 }
 
-                final double mouseX = event.getSceneX() - graphEditor.getView().getBoundsInParent().getMinX();
-                final double mouseY = event.getSceneY() - graphEditor.getView().getBoundsInParent().getMinY();
+                final double mouseX = event.getX() - graphEditor.getView().getBoundsInParent().getMinX();
+                final double mouseY = event.getY() - graphEditor.getView().getBoundsInParent().getMinY();
 
                 final double startX = graphEditorContainer.windowXProperty().get();
                 final double startY = graphEditorContainer.windowYProperty().get();
