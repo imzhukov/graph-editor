@@ -89,9 +89,17 @@ public class JointCreator {
 
         root.setOnMouseEntered(event -> updateHoverEffectPosition(event, root));
         root.setOnMouseMoved(event -> updateHoverEffectPosition(event, root));
-        root.setOnMouseExited(event -> hoverEffect.setVisible(false));
+        root.setOnMouseExited(event -> {
+            if(event.isConsumed()){
+                return;
+            }
+            hoverEffect.setVisible(false);
+        });
 
         root.setOnMouseDragged(event -> {
+            if(event.isConsumed()){
+                return;
+            }
 
             if (!event.getButton().equals(MouseButton.PRIMARY) || temporarySelectedJointSkin == null) {
                 return;
@@ -103,6 +111,9 @@ public class JointCreator {
 
         // This handler creates 2 temporary joints which can be dragged around.
         root.setOnMousePressed(event -> {
+            if(event.isConsumed()){
+                return;
+            }
 
             final double sceneX = event.getSceneX();
             final double sceneY = event.getSceneY();
@@ -137,6 +148,9 @@ public class JointCreator {
 
         // This handler updates the model with the new joints *only* if the connection shape has actually changed.
         root.setOnMouseReleased(event -> {
+            if(event.isConsumed()){
+                return;
+            }
 
             if (!event.getButton().equals(MouseButton.PRIMARY) || temporarySelectedJointSkin == null) {
                 return;
@@ -161,6 +175,9 @@ public class JointCreator {
      * @param root the root node of the connection
      */
     private void updateHoverEffectPosition(final MouseEvent event, final Group root) {
+        if(event.isConsumed()){
+            return;
+        }
 
         final double sceneX = event.getSceneX();
         final double sceneY = event.getSceneY();

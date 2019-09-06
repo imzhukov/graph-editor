@@ -5,10 +5,12 @@ package de.tesis.dynaware.grapheditor.core.skins.defaults;
 
 import javafx.beans.value.ChangeListener;
 import javafx.css.PseudoClass;
+import javafx.event.Event;
 import javafx.geometry.Point2D;
 import de.tesis.dynaware.grapheditor.GJointSkin;
 import de.tesis.dynaware.grapheditor.model.GJoint;
 import de.tesis.dynaware.grapheditor.utils.DraggableBox;
+import javafx.scene.input.MouseEvent;
 
 /**
  * The default joint skin.
@@ -42,6 +44,10 @@ public class DefaultJointSkin extends GJointSkin {
         getRoot().setSnapToGridOffset(new Point2D(SNAP_OFFSET, SNAP_OFFSET));
 
         addSelectionListener();
+
+        getRoot().addEventHandler(MouseEvent.MOUSE_PRESSED,this::handlerMousePressed);
+        getRoot().addEventHandler(MouseEvent.MOUSE_RELEASED,this::handlerMouseReleased);
+        getRoot().addEventHandler(MouseEvent.MOUSE_DRAGGED,this::handlerMouseDragged);
     }
 
     /**
@@ -58,6 +64,28 @@ public class DefaultJointSkin extends GJointSkin {
                 getRoot().pseudoClassStateChanged(PSEUDO_CLASS_SELECTED, false);
             }
         });
+    }
+
+    private void handlerMousePressed(MouseEvent t) {
+        DefaultConnectionSkin connectionSkin = (DefaultConnectionSkin) getGraphEditor().getSkinLookup().lookupConnection(this.getJoint().getConnection());
+        connectionSkin.setIsJointSelected(true);
+        connectionSkin.setWasSelected(connectionSkin.selectedProperty().getValue());
+        connectionSkin.changeVisualSelection(true);
+    }
+
+
+    private void handlerMouseReleased(MouseEvent t) {
+        DefaultConnectionSkin connectionSkin = (DefaultConnectionSkin) getGraphEditor().getSkinLookup().lookupConnection(this.getJoint().getConnection());
+        connectionSkin.setIsJointSelected(false);
+        connectionSkin.setIsDragged(false);
+        connectionSkin.setSelected(connectionSkin.wasSelected());
+        connectionSkin.changeVisualSelection(connectionSkin.wasSelected());
+    }
+
+    private <T extends Event> void handlerMouseDragged(T t) {
+        DefaultConnectionSkin connectionSkin = (DefaultConnectionSkin) getGraphEditor().getSkinLookup().lookupConnection(this.getJoint().getConnection());
+        connectionSkin.setIsJointSelected(false);
+        connectionSkin.setIsDragged(true);
     }
 
     @Override

@@ -5,6 +5,9 @@ package de.tesis.dynaware.grapheditor.core.skins.defaults;
 
 import java.util.List;
 
+import javafx.css.PseudoClass;
+import javafx.event.Event;
+import javafx.scene.input.MouseEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,10 +33,16 @@ public class DefaultConnectionSkin extends SimpleConnectionSkin {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultConnectionSkin.class);
 
+    public static final PseudoClass PSEUDO_CLASS_SELECTED = PseudoClass.getPseudoClass("selected");
+
     private final JointCreator jointCreator;
     private final JointCleaner jointCleaner;
     private final JointAlignmentManager jointAlignmentManager;
     private final CursorOffsetCalculator cursorOffsetCalculator;
+
+    private boolean isJointSelected;
+    private boolean wasSelected;
+    private boolean isDragged;
 
     /**
      * Creates a new default connection skin instance.
@@ -52,7 +61,11 @@ public class DefaultConnectionSkin extends SimpleConnectionSkin {
         jointAlignmentManager = new JointAlignmentManager(connection);
 
         jointCreator.addJointCreationHandler(root);
+
+        root.addEventHandler(MouseEvent.MOUSE_RELEASED, this::handleMouseReleased);
+        selectedProperty().addListener((observable, oldValue, newValue) -> changeVisualSelection(newValue));
     }
+
 
     @Override
     public void setGraphEditor(final GraphEditor graphEditor) {
@@ -66,11 +79,45 @@ public class DefaultConnectionSkin extends SimpleConnectionSkin {
 
     @Override
     public void setJointSkins(final List<GJointSkin> jointSkins) {
-
         super.setJointSkins(jointSkins);
 
         jointCleaner.addCleaningHandlers(jointSkins);
         jointAlignmentManager.addAlignmentHandlers(jointSkins);
+    }
+
+    public void changeVisualSelection(boolean selected) {
+        if (selected || isJointSelected) {
+            root.pseudoClassStateChanged(PSEUDO_CLASS_SELECTED, true);
+        } else {
+            root.pseudoClassStateChanged(PSEUDO_CLASS_SELECTED, false);
+        }
+    }
+
+    public void setIsJointSelected(boolean value){
+        isJointSelected = value;
+    }
+
+    public void setIsDragged(boolean dragged) {
+        isDragged = dragged;
+    }
+
+    public boolean wasSelected(){
+        return wasSelected;
+    }
+
+    public void setWasSelected(boolean b){
+        wasSelected = b;
+    }
+
+    private <T extends Event> void handleMouseReleased(T t) {
+        if (isDragged) {
+            setSelected(wasSelected());
+            changeVisualSelection(wasSelected());
+        } else {
+            setSelected(true);
+        }
+        isJointSelected = false;
+        isDragged = false;
     }
 
     /**
