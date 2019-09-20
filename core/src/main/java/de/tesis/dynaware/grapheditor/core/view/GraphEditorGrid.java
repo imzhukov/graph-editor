@@ -32,7 +32,8 @@ public class GraphEditorGrid extends Group {
     // This is to make the stroke be drawn 'on pixel'.
     private static final double HALF_PIXEL_OFFSET = -0.5;
 
-    private static final Color DEFAULT_GRID_COLOR = Color.rgb(222, 248, 255);
+//    private static final Color DEFAULT_GRID_COLOR = Color.rgb(222, 248, 255);
+    private static final Color DEFAULT_GRID_COLOR = Color.BLACK;
 
     private GraphEditorProperties editorProperties;
 
@@ -102,6 +103,7 @@ public class GraphEditorGrid extends Group {
             hLine.setStartY((i + 1) * spacing + HALF_PIXEL_OFFSET);
             hLine.setEndY((i + 1) * spacing + HALF_PIXEL_OFFSET);
             hLine.strokeProperty().bind(gridColor);
+            hLine.setOpacity(0.1);
 
             getChildren().add(hLine);
         }
@@ -115,6 +117,7 @@ public class GraphEditorGrid extends Group {
             vLine.setStartY(0);
             vLine.setEndY(height);
             vLine.strokeProperty().bind(gridColor);
+            vLine.setOpacity(0.1);
 
             getChildren().add(vLine);
         }

@@ -90,7 +90,7 @@ public class GModelImpl extends MinimalEObjectImpl.Container implements GModel {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double CONTENT_WIDTH_EDEFAULT = 3000.0;
+	public static final double CONTENT_WIDTH_EDEFAULT = 3000.0;
 
 	/**
 	 * The cached value of the '{@link #getContentWidth() <em>Content Width</em>}' attribute.
@@ -110,7 +110,7 @@ public class GModelImpl extends MinimalEObjectImpl.Container implements GModel {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double CONTENT_HEIGHT_EDEFAULT = 2250.0;
+	public static final double CONTENT_HEIGHT_EDEFAULT = 2250.0;
 
 	/**
 	 * The cached value of the '{@link #getContentHeight() <em>Content Height</em>}' attribute.

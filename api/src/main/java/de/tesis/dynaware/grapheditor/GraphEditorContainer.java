@@ -3,13 +3,8 @@
  */
 package de.tesis.dynaware.grapheditor;
 
-import de.tesis.dynaware.grapheditor.model.GConnector;
-import de.tesis.dynaware.grapheditor.model.GNode;
-import de.tesis.dynaware.grapheditor.model.GraphFactory;
+import de.tesis.dynaware.grapheditor.zoom.ZoomService;
 import javafx.beans.value.ChangeListener;
-import javafx.scene.input.DataFormat;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import de.tesis.dynaware.grapheditor.model.GModel;
@@ -64,6 +59,8 @@ public class GraphEditorContainer extends AutoScrollingWindow {
     public GraphEditorContainer() {
         initializeMinimap();
         createModelChangeListener();
+//        this.setStyle("-fx-border-color: red ;-fx-border-width: 5");
+        this.setStyle("-fx-background-color: lightgrey");
     }
 
     /**
@@ -113,10 +110,17 @@ public class GraphEditorContainer extends AutoScrollingWindow {
      * <b>Note:</b> customisation of the minimap's content and layout has not been extensively tested.
      * </p>
      *
-     * @param the graph editor minimap
+     * @return the graph editor minimap
      */
     public Pane getMinimap() {
         return minimap;
+    }
+
+    @Override
+    public void checkWindowBounds(){
+        if(!ZoomService.freeScalingProperty().getValue()){
+            super.checkWindowBounds();
+        }
     }
 
     /**

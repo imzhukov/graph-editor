@@ -3,12 +3,16 @@ package de.tesis.dynaware.grapheditor.zoom;
 import de.tesis.dynaware.grapheditor.GraphEditor;
 import de.tesis.dynaware.grapheditor.GraphEditorContainer;
 import de.tesis.dynaware.grapheditor.window.WindowPosition;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.*;
 import javafx.scene.transform.Scale;
 
 public class ZoomService {
+    private static BooleanProperty freeScaling = new SimpleBooleanProperty(false);
+
     private static final double MAX_SCALE = 10.0d;
     private double MIN_SCALE = 0.0;
     private double currentZoomFactor = 1.0D;
@@ -39,6 +43,18 @@ public class ZoomService {
         scaleTransform.yProperty().bind(scaleTransform.xProperty());
 
         this.graphEditor.getView().getTransforms().add(scaleTransform);
+
+        freeScaling.addListener((observable, oldValue, newValue) -> {
+            if(oldValue && !newValue){
+                MIN_SCALE = Math.max(
+                        Math.ceil(graphEditorContainer.getWidth() / graphEditor.getView().getWidth() * 100)/100D,
+                        Math.ceil(graphEditorContainer.getHeight() / graphEditor.getView().getHeight() * 100)/100D
+                );
+                scaleTransform.setX(MIN_SCALE);
+                currentZoomFactor = MIN_SCALE;
+                graphEditorContainer.panTo(0,0);
+            }
+        });
     }
 
     // Only works with javafx Scene
@@ -58,15 +74,23 @@ public class ZoomService {
         return currentZoomFactor;
     }
 
+    public static void setFreeScaling(boolean freeScaling){
+        freeScalingProperty().setValue(freeScaling);
+    }
+
+    public static BooleanProperty freeScalingProperty(){
+        return freeScaling;
+    }
+
     /**
      * Mouse wheel handler: zoom to pivot point
      */
     private EventHandler<ScrollEvent> onScrollEventHandler = new EventHandler<ScrollEvent>() {
         public void handle(ScrollEvent event) {
-            if (MIN_SCALE == 0.0) {
-                MIN_SCALE = Math.min(
-                        Math.ceil(graphEditorContainer.getWidth() / graphEditor.getView().getWidth() * 10)/10D,
-                        Math.ceil(graphEditorContainer.getHeight() / graphEditor.getView().getHeight() * 10)/10D
+            if (MIN_SCALE == 0.0 && !freeScaling.getValue()) {
+                MIN_SCALE = Math.max(
+                        Math.ceil(graphEditorContainer.getWidth() / graphEditor.getView().getWidth() * 100)/100D,
+                        Math.ceil(graphEditorContainer.getHeight() / graphEditor.getView().getHeight() * 100)/100D
                 );
             }
 
@@ -116,7 +140,9 @@ public class ZoomService {
     };
 
     private static double clamp( double value, double min, double max) {
-
+        if(freeScaling.getValue()){
+            min = 0;
+        }
         if( Double.compare(value, min) < 0)
             return min;
 
