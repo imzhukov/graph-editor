@@ -49,6 +49,7 @@ public class GraphEditorContainer extends AutoScrollingWindow {
 
     private GraphEditor graphEditor;
     private ChangeListener<GModel> modelChangeListener;
+    private Region content = new Region();
 
     /**
      * Creates a new {@link GraphEditorContainer}.
@@ -117,9 +118,36 @@ public class GraphEditorContainer extends AutoScrollingWindow {
     }
 
     @Override
+    public void setContent(Region content){
+        super.setContent(content);
+        this.content = content;
+    }
+
+    @Override
     public void checkWindowBounds(){
-        if(!ZoomService.freeScalingProperty().getValue()){
-            super.checkWindowBounds();
+        if(content != null && !ZoomService.freeScalingProperty().getValue()){
+            if (windowXProperty().get() < 0) {
+                windowXProperty().set(0);
+            }
+
+            if (windowYProperty().get() < 0) {
+                windowYProperty().set(0);
+            }
+
+            final double zoomFactor = content.getLocalToSceneTransform().getMxx();
+            final double maxX = zoomFactor * content.getWidth() - getWidth();
+            final double maxY = zoomFactor * content.getHeight() - getHeight();
+
+            if (windowXProperty().get() > maxX) {
+                windowXProperty().set(maxX/2);
+            }
+
+            if (windowYProperty().get() > maxY) {
+                windowYProperty().set(maxY/2);
+            }
+
+            windowXProperty().set(Math.round(windowXProperty().get()));
+            windowYProperty().set(Math.round(windowYProperty().get()));
         }
     }
 

@@ -88,9 +88,9 @@ public class ZoomService {
     private EventHandler<ScrollEvent> onScrollEventHandler = new EventHandler<ScrollEvent>() {
         public void handle(ScrollEvent event) {
             if (MIN_SCALE == 0.0 && !freeScaling.getValue()) {
-                MIN_SCALE = Math.max(
-                        Math.ceil(graphEditorContainer.getWidth() / graphEditor.getView().getWidth() * 100)/100D,
-                        Math.ceil(graphEditorContainer.getHeight() / graphEditor.getView().getHeight() * 100)/100D
+                MIN_SCALE = Math.min(
+                        Math.ceil(graphEditorContainer.getWidth() / graphEditor.getView().getWidth() * 1000)/1000D,
+                        Math.ceil(graphEditorContainer.getHeight() / graphEditor.getView().getHeight() * 1000)/1000D
                 );
             }
 
