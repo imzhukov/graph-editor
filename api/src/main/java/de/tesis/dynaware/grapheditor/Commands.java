@@ -97,26 +97,36 @@ public class Commands {
         }
     }
 
+    public static void addNodes(final GModel model, final List<GNode> nodes) {
+        final EditingDomain editingDomain = getEditingDomain(model);
+
+        if (editingDomain != null) {
+            final CompoundCommand command = new CompoundCommand();
+            nodes.stream().forEach(node -> command.append(AddCommand.create(editingDomain, model, NODES, node)));
+            if (command.canExecute())
+                editingDomain.getCommandStack().execute(command);
+        }
+    }
+
     /**
-     * Adds a node to the model.
+     * Add a connections to the model.
      *
      * <p>
-     * The node's x, y, width, and height values should be set before calling this method.
+     * The connection's joints (x, y) should be set before calling this method.
      * </p>
      *
      * @param model the {@link GModel} to which the node should be added
-     * @param node the {@link GNode} to add to the model
+     * @param connections the {@link GConnection} to add to the model
      */
-    public static void addConnection(final GModel model, final GConnection connection) {
+    public static void addConnections(final GModel model, final List<GConnection> connections) {
 
         final EditingDomain editingDomain = getEditingDomain(model);
 
         if (editingDomain != null) {
-            final Command command = AddCommand.create(editingDomain, model, CONNECTIONS, connection);
-
-            if (command.canExecute()) {
+            final CompoundCommand command = new CompoundCommand();
+            connections.stream().forEach(connection -> command.append(AddCommand.create(editingDomain, model, CONNECTIONS, connection)));
+            if (command.canExecute())
                 editingDomain.getCommandStack().execute(command);
-            }
         }
     }
 
