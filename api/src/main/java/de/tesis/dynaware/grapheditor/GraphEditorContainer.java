@@ -139,11 +139,18 @@ public class GraphEditorContainer extends AutoScrollingWindow {
             final double maxY = zoomFactor * content.getHeight() - getHeight();
 
             if (windowXProperty().get() > maxX) {
-                windowXProperty().set(maxX/2);
+                if (maxX < 0) //If the size of the visible area is greater than the size of the scaled content, we do equal margins on both sides
+                    windowXProperty().set(maxX/2);
+                else
+                    windowXProperty().set(maxX);
             }
 
+
             if (windowYProperty().get() > maxY) {
-                windowYProperty().set(maxY/2);
+                if (maxY < 0) //If the size of the visible area is greater than the size of the scaled content, we do equal margins on both sides
+                    windowYProperty().set(maxY/2);
+                else
+                    windowYProperty().set(maxY);
             }
 
             windowXProperty().set(Math.round(windowXProperty().get()));
