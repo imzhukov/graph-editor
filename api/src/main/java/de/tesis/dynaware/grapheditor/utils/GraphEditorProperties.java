@@ -35,6 +35,8 @@ public class GraphEditorProperties {
     private static final double DEFAULT_BOUND_VALUE = 15;
     public static final double DEFAULT_GRID_SPACING = 12;
 
+    private static DoubleProperty gridSpacingProperty = new SimpleDoubleProperty(DEFAULT_GRID_SPACING);
+
     // Not currently configurable.
     private final boolean northBoundActive = true;
     private final boolean westBoundActive = true;
@@ -52,7 +54,6 @@ public class GraphEditorProperties {
     // Off by default.
     private final BooleanProperty gridVisibleProperty = new SimpleBooleanProperty();
     private final BooleanProperty snapToGridProperty = new SimpleBooleanProperty();
-    private final DoubleProperty gridSpacingProperty = new SimpleDoubleProperty(DEFAULT_GRID_SPACING);
 
     private final ObservableMap<String, String> customProperties = FXCollections.observableHashMap();
 
@@ -83,7 +84,38 @@ public class GraphEditorProperties {
 
         gridVisibleProperty.set(editorProperties.isGridVisible());
         snapToGridProperty.set(editorProperties.isSnapToGridOn());
-        gridSpacingProperty.set(editorProperties.getGridSpacing());
+    }
+
+    /**
+     * Gets the current grid spacing in pixels.
+     *
+     * @return the current grid spacing
+     */
+    public static double getGridSpacing() {
+        return gridSpacingProperty.get();
+    }
+
+    /**
+     * Sets the grid spacing to be used if the grid is visible and/or snap-to-grid is enabled.
+     *
+     * <p>
+     * Integer values are recommended to avoid sub-pixel positioning effects.
+     * </p>
+     *
+     * @param gridSpacing the grid spacing to be used
+     */
+    public static void setGridSpacing(final double gridSpacing) {
+        gridSpacingProperty.set(gridSpacing);
+    }
+
+    /**
+     * Gets the grid spacing property.
+     *
+     * @return the grid spacing {@link DoubleProperty}.
+     */
+
+    public static DoubleProperty gridSpacingProperty() {
+        return gridSpacingProperty;
     }
 
     /**
@@ -264,37 +296,6 @@ public class GraphEditorProperties {
      */
     public BooleanProperty snapToGridProperty() {
         return snapToGridProperty;
-    }
-
-    /**
-     * Gets the current grid spacing in pixels.
-     *
-     * @return the current grid spacing
-     */
-    public double getGridSpacing() {
-        return gridSpacingProperty.get();
-    }
-
-    /**
-     * Sets the grid spacing to be used if the grid is visible and/or snap-to-grid is enabled.
-     *
-     * <p>
-     * Integer values are recommended to avoid sub-pixel positioning effects.
-     * </p>
-     *
-     * @param gridSpacing the grid spacing to be used
-     */
-    public void setGridSpacing(final double gridSpacing) {
-        gridSpacingProperty.set(gridSpacing);
-    }
-
-    /**
-     * Gets the grid spacing property.
-     *
-     * @return the grid spacing {@link DoubleProperty}.
-     */
-    public DoubleProperty gridSpacingProperty() {
-        return gridSpacingProperty;
     }
 
     /**

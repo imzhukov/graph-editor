@@ -46,13 +46,7 @@ public class ZoomService {
 
         freeScaling.addListener((observable, oldValue, newValue) -> {
             if(oldValue && !newValue){
-                MIN_SCALE = Math.max(
-                        Math.ceil(graphEditorContainer.getWidth() / graphEditor.getView().getWidth() * 100)/100D,
-                        Math.ceil(graphEditorContainer.getHeight() / graphEditor.getView().getHeight() * 100)/100D
-                );
-                scaleTransform.setX(MIN_SCALE);
-                currentZoomFactor = MIN_SCALE;
-                graphEditorContainer.panTo(0,0);
+                returnToFullView(graphEditor, graphEditorContainer);
             }
         });
     }
@@ -87,11 +81,13 @@ public class ZoomService {
      */
     private EventHandler<ScrollEvent> onScrollEventHandler = new EventHandler<ScrollEvent>() {
         public void handle(ScrollEvent event) {
-            if (MIN_SCALE == 0.0 && !freeScaling.getValue()) {
+            if (!freeScaling.getValue()) {
                 MIN_SCALE = Math.min(
                         Math.ceil(graphEditorContainer.getWidth() / graphEditor.getView().getWidth() * 1000)/1000D,
                         Math.ceil(graphEditorContainer.getHeight() / graphEditor.getView().getHeight() * 1000)/1000D
                 );
+            } else {
+                MIN_SCALE = 0;
             }
 
             if (event.isControlDown()) {
@@ -139,10 +135,17 @@ public class ZoomService {
         }
     };
 
+    private void returnToFullView(GraphEditor graphEditor, GraphEditorContainer graphEditorContainer) {
+        MIN_SCALE = Math.min(
+                Math.ceil(graphEditorContainer.getWidth() / graphEditor.getView().getWidth() * 1000)/1000D,
+                Math.ceil(graphEditorContainer.getHeight() / graphEditor.getView().getHeight() * 1000)/1000D
+        );
+        scaleTransform.setX(MIN_SCALE);
+        currentZoomFactor = MIN_SCALE;
+        graphEditorContainer.panTo(0,0);
+    }
+
     private static double clamp( double value, double min, double max) {
-        if(freeScaling.getValue()){
-            min = 0;
-        }
         if( Double.compare(value, min) < 0)
             return min;
 
