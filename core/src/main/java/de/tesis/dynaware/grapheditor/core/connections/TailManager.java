@@ -40,7 +40,7 @@ public class TailManager {
      * Creates a new tail and adds it to the view.
      * 
      * @param connector the connector where the tail starts from
-     * @param the mouse event responsible for creating the tail
+     * @param event mouse event responsible for creating the tail
      */
     public void create(final GConnector connector, final MouseEvent event) {
 
@@ -64,7 +64,7 @@ public class TailManager {
      * 
      * @param connector the connector that the connection was detached from
      * @param connection the connection that was detached
-     * @param the mouse event responsible for creating the tail
+     * @param event mouse event responsible for creating the tail
      */
     public void createFromConnection(final GConnector connector, final GConnection connection, final MouseEvent event) {
 
@@ -91,7 +91,7 @@ public class TailManager {
     /**
      * Updates the tail position based on new cursor position.
      * 
-     * @param the mouse event responsible for updating the position
+     * @param event mouse event responsible for updating the position
      */
     public void updatePosition(final MouseEvent event) {
 

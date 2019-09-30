@@ -7,7 +7,7 @@ import de.tesis.dynaware.grapheditor.model.GModel;
 import de.tesis.dynaware.grapheditor.model.GNode;
 import de.tesis.dynaware.grapheditor.model.GraphPackage;
 
-import java.util.Collection;
+import java.util.*;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -61,6 +61,8 @@ public class GModelImpl extends MinimalEObjectImpl.Container implements GModel {
 	 * @ordered
 	 */
 	protected EList<GConnection> connections;
+
+	protected Set<GConnection> connectionsForRedraw;
 
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -165,6 +167,14 @@ public class GModelImpl extends MinimalEObjectImpl.Container implements GModel {
 			connections = new EObjectContainmentEList<GConnection>(GConnection.class, this, GraphPackage.GMODEL__CONNECTIONS);
 		}
 		return connections;
+	}
+
+	@Override
+	public Set<GConnection> getConnectionsForRedraw(){
+		if(connectionsForRedraw == null){
+			connectionsForRedraw = new HashSet<>();
+		}
+		return connectionsForRedraw;
 	}
 
 	/**

@@ -382,11 +382,11 @@ public class SelectionCreator {
         }
 
         if (viewDraggedHandler != null) {
-            view.removeEventHandler(MouseEvent.MOUSE_PRESSED, viewDraggedHandler);
+            view.removeEventHandler(MouseEvent.MOUSE_DRAGGED, viewDraggedHandler);
         }
 
         if (viewReleasedHandler != null) {
-            view.removeEventHandler(MouseEvent.MOUSE_PRESSED, viewReleasedHandler);
+            view.removeEventHandler(MouseEvent.MOUSE_RELEASED, viewReleasedHandler);
         }
 
         viewPressedHandler = event -> handleViewPressed(event);
@@ -500,6 +500,8 @@ public class SelectionCreator {
         deselectedJoints.forEach(joint -> skinLookup.lookupJoint(joint).setSelected(false));
         selectedConnections.forEach(connection -> skinLookup.lookupConnection(connection).setSelected(true));
         deselectedConnections.forEach(connection -> skinLookup.lookupConnection(connection).setSelected(false));
+
+        addConnectionsForRedraw(selectedNodes, selectedConnections);
     }
 
     /**
@@ -556,6 +558,18 @@ public class SelectionCreator {
 
         return connectionsToSelect;
     }
+
+    /**
+     * Add all selected connections and connections that bindings with selected nodes to list for redraw
+     */
+    private void addConnectionsForRedraw(List<GNode> selectedNodes, List<GConnection> selectedConnections) {
+        selectedNodes.stream()
+                .flatMap(node -> node.getConnectors().stream())
+                .flatMap(connector -> connector.getConnections().stream())
+                .forEach(connection -> model.getConnectionsForRedraw().add(connection));
+        selectedConnections.forEach(connection -> model.getConnectionsForRedraw().add(connection));
+    }
+
 
     /**
      * Stores the currently selected objects in this class' backup lists.

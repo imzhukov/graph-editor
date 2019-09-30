@@ -45,6 +45,8 @@ public class DefaultJointSkin extends GJointSkin {
 
         addSelectionListener();
 
+        getRoot().addEventFilter(MouseEvent.MOUSE_PRESSED, this::filterMousePressed);
+
         getRoot().addEventHandler(MouseEvent.MOUSE_PRESSED,this::handlerMousePressed);
         getRoot().addEventHandler(MouseEvent.MOUSE_RELEASED,this::handlerMouseReleased);
         getRoot().addEventHandler(MouseEvent.MOUSE_DRAGGED,this::handlerMouseDragged);
@@ -65,6 +67,15 @@ public class DefaultJointSkin extends GJointSkin {
             }
         });
     }
+
+    private void filterMousePressed(MouseEvent event){
+        if(getGraphEditor() != null){
+            if(getGraphEditor().getModel() != null) {
+                getGraphEditor().getModel().getConnectionsForRedraw().add(getJoint().getConnection());
+            }
+        }
+    }
+
 
     private void handlerMousePressed(MouseEvent t) {
         DefaultConnectionSkin connectionSkin = (DefaultConnectionSkin) getGraphEditor().getSkinLookup().lookupConnection(this.getJoint().getConnection());

@@ -24,7 +24,7 @@ public class GraphEditorViewLayer extends Region {
     protected void layoutChildren() {
         super.layoutChildren();
         if (connectionLayouter != null) {
-            connectionLayouter.redraw();
+            connectionLayouter.redraw(true);
         }
     }
 

@@ -43,13 +43,13 @@ public class ConnectionLayouter {
 
         this.model = model;
 
-        redraw();
+        redraw(false);
     }
 
     /**
      * Redraws all connections according to the latest layout values.
      */
-    public void redraw() {
+    public void redraw(boolean redraw) {
 
         if (model == null) {
             return;
@@ -57,13 +57,17 @@ public class ConnectionLayouter {
 
         final Map<GConnection, List<Point2D>> allPoints = new HashMap<>();
 
-        for (final GConnection connection : model.getConnections()) {
+//        List<GConnection> connections = model.getConnections();
+        List<GConnection> connectionsForRedraw = new ArrayList<>(model.getConnectionsForRedraw());
+        List<GConnection> connections = redraw ? connectionsForRedraw : model.getConnections();
+
+        for (final GConnection connection : connections) {
             final List<Point2D> points = createPoints(connection);
             skinLookup.lookupConnection(connection).applyConstraints(points);
             allPoints.put(connection, points);
         }
 
-        for (final GConnection connection : model.getConnections()) {
+        for (final GConnection connection : connections) {
             skinLookup.lookupConnection(connection).draw(allPoints.get(connection), allPoints);
         }
     }

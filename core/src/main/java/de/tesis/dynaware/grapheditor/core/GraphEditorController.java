@@ -78,7 +78,7 @@ public class GraphEditorController {
         modelMemory = new ModelMemory();
         connectionLayouter = new ConnectionLayouter(skinManager);
         connectorDragManager = new ConnectorDragManager(skinManager, connectionEventManager, view);
-        selectionManager = new DefaultSelectionManager(skinManager, view, modelEditingManager);
+        selectionManager = new DefaultSelectionManager(skinManager, view, modelEditingManager, connectionEventManager);
 
         view.setConnectionLayouter(connectionLayouter);
     }

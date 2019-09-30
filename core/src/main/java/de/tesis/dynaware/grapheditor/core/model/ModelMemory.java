@@ -296,7 +296,7 @@ public class ModelMemory {
      * present at the time of the call.
      * </p>
      *
-     * @param a {@link GModel} instance
+     * @param {@link GModel} instance
      */
     private void rememberOldElements(final GModel model) {
 

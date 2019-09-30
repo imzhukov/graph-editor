@@ -45,7 +45,7 @@ public class DefaultGraphEditor implements GraphEditor {
 
         // Skin manager needs 'this' reference so users can access GraphEditor inside their custom skins.
         skinManager = new SkinManager(this);
-        connectionEventManager = new ConnectionEventManager();
+        connectionEventManager = new ConnectionEventManager(this);
 
         controller = new GraphEditorController(skinManager, connectionEventManager);
 

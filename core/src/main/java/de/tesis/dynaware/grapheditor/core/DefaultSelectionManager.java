@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 
+import de.tesis.dynaware.grapheditor.core.connections.ConnectionEventManager;
 import javafx.collections.ObservableList;
 import javafx.geometry.Rectangle2D;
 
@@ -62,10 +63,10 @@ public class DefaultSelectionManager implements SelectionManager {
      * @param modelEditingManager the {@link ModelEditingManager} in use
      */
     public DefaultSelectionManager(final SkinLookup skinLookup, final GraphEditorView view,
-            final ModelEditingManager modelEditingManager) {
+            final ModelEditingManager modelEditingManager, final ConnectionEventManager connectionEventManager) {
 
         selectionDragManager = new SelectionDragManager(skinLookup, view);
-        selectionDeleter = new SelectionDeleter(skinLookup, modelEditingManager);
+        selectionDeleter = new SelectionDeleter(skinLookup, modelEditingManager, connectionEventManager);
         selectionCreator = new SelectionCreator(skinLookup, view, selectionDragManager);
         selectionTracker = new SelectionTracker(skinLookup);
         selectionCopier = new SelectionCopier(skinLookup, selectionTracker, selectionCreator, selectionDeleter);

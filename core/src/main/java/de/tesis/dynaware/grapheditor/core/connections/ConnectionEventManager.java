@@ -2,6 +2,8 @@ package de.tesis.dynaware.grapheditor.core.connections;
 
 import java.util.function.BiConsumer;
 
+import de.tesis.dynaware.grapheditor.GraphEditor;
+import de.tesis.dynaware.grapheditor.model.GModel;
 import org.eclipse.emf.common.command.CompoundCommand;
 
 import de.tesis.dynaware.grapheditor.model.GConnection;
@@ -13,6 +15,18 @@ public class ConnectionEventManager {
 
     private BiConsumer<GConnection, CompoundCommand> connectionCreatedHandler;
     private BiConsumer<GConnection, CompoundCommand> connectionRemovedHandler;
+
+    private GraphEditor graphEditor;
+
+    public ConnectionEventManager(GraphEditor graphEditor){
+        this.graphEditor = graphEditor;
+        this.setOnConnectionCreated((connection,command) -> {
+            graphEditor.getModel().getConnectionsForRedraw().add(connection);
+        });
+        this.setOnConnectionRemoved((connection,command) -> {
+            graphEditor.getModel().getConnectionsForRedraw().remove(connection);
+        });
+    }
 
     /**
      * Sets the handler to be called when connections are created.

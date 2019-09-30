@@ -6,6 +6,8 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
+import java.util.Set;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>GModel</b></em>'.
@@ -59,6 +61,8 @@ public interface GModel extends EObject {
 	 * @generated
 	 */
 	EList<GConnection> getConnections();
+
+	Set<GConnection> getConnectionsForRedraw();
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.

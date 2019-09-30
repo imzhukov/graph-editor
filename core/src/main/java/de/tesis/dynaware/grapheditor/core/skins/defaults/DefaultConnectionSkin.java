@@ -62,6 +62,8 @@ public class DefaultConnectionSkin extends SimpleConnectionSkin {
 
         jointCreator.addJointCreationHandler(root);
 
+        root.addEventFilter(MouseEvent.MOUSE_PRESSED, this::filterMousePressed);
+
         root.addEventHandler(MouseEvent.MOUSE_RELEASED, this::handleMouseReleased);
         selectedProperty().addListener((observable, oldValue, newValue) -> changeVisualSelection(newValue));
     }
@@ -108,6 +110,15 @@ public class DefaultConnectionSkin extends SimpleConnectionSkin {
     public void setWasSelected(boolean b){
         wasSelected = b;
     }
+
+    private void filterMousePressed(MouseEvent event){
+        if(getGraphEditor() != null){
+            if(getGraphEditor().getModel() != null) {
+                getGraphEditor().getModel().getConnectionsForRedraw().add(getConnection());
+            }
+        }
+    }
+
 
     private <T extends Event> void handleMouseReleased(T t) {
         if (isDragged) {

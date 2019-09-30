@@ -5,6 +5,7 @@ import de.tesis.dynaware.grapheditor.GraphEditorContainer;
 import de.tesis.dynaware.grapheditor.window.WindowPosition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.*;
@@ -44,6 +45,9 @@ public class ZoomService {
 
         this.graphEditor.getView().getTransforms().add(scaleTransform);
 
+        this.graphEditor.getView().widthProperty().addListener(updateScaleListener());
+        this.graphEditor.getView().widthProperty().addListener(updateScaleListener());
+
         freeScaling.addListener((observable, oldValue, newValue) -> {
             if(oldValue && !newValue){
                 returnToFullView(graphEditor, graphEditorContainer);
@@ -82,10 +86,12 @@ public class ZoomService {
     private EventHandler<ScrollEvent> onScrollEventHandler = new EventHandler<ScrollEvent>() {
         public void handle(ScrollEvent event) {
             if (!freeScaling.getValue()) {
-                MIN_SCALE = Math.min(
-                        Math.ceil(graphEditorContainer.getWidth() / graphEditor.getView().getWidth() * 1000)/1000D,
-                        Math.ceil(graphEditorContainer.getHeight() / graphEditor.getView().getHeight() * 1000)/1000D
-                );
+                if (MIN_SCALE == 0) {
+                    MIN_SCALE = Math.min(
+                            Math.ceil(graphEditorContainer.getWidth() / graphEditor.getView().getWidth() * 1000)/1000D,
+                            Math.ceil(graphEditorContainer.getHeight() / graphEditor.getView().getHeight() * 1000)/1000D
+                    );
+                }
             } else {
                 MIN_SCALE = 0;
             }
@@ -134,6 +140,13 @@ public class ZoomService {
             }
         }
     };
+
+    private ChangeListener updateScaleListener(){
+        return (observable, oldValue, newValue) -> MIN_SCALE = Math.min(
+                Math.ceil(graphEditorContainer.getWidth() / graphEditor.getView().getWidth() * 1000)/1000D,
+                Math.ceil(graphEditorContainer.getHeight() / graphEditor.getView().getHeight() * 1000)/1000D
+        );
+    }
 
     private void returnToFullView(GraphEditor graphEditor, GraphEditorContainer graphEditorContainer) {
         MIN_SCALE = Math.min(

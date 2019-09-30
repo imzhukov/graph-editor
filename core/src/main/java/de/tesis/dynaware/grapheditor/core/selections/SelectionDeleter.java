@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
+import de.tesis.dynaware.grapheditor.core.connections.ConnectionEventManager;
 import org.eclipse.emf.common.command.CompoundCommand;
 
 import de.tesis.dynaware.grapheditor.SkinLookup;
@@ -24,6 +25,7 @@ public class SelectionDeleter {
 
     private final SkinLookup skinLookup;
     private final ModelEditingManager modelEditingManager;
+    private final ConnectionEventManager connectionEventManager;
 
     /**
      * Creates a new selection deleter. Only one instance should exist per {@link DefaultGraphEditor} instance.
@@ -31,9 +33,10 @@ public class SelectionDeleter {
      * @param skinLookup the {@link SkinLookup} used to look up skins
      * @param modelEditingManager the {@link ModelEditingManager} used to make changes to the model
      */
-    public SelectionDeleter(final SkinLookup skinLookup, final ModelEditingManager modelEditingManager) {
+    public SelectionDeleter(final SkinLookup skinLookup, final ModelEditingManager modelEditingManager,  final ConnectionEventManager connectionEventManager) {
         this.skinLookup = skinLookup;
         this.modelEditingManager = modelEditingManager;
+        this.connectionEventManager = connectionEventManager;
     }
 
     /**
@@ -72,6 +75,7 @@ public class SelectionDeleter {
         if (!nodesToDelete.isEmpty() || !connectionsToDelete.isEmpty()) {
 
             final CompoundCommand command = modelEditingManager.remove(nodesToDelete, connectionsToDelete);
+            connectionsToDelete.forEach(connection -> connectionEventManager.notifyConnectionRemoved(connection,command));
 
             if (consumer != null) {
                 consumer.accept(nodesToDelete, command);
