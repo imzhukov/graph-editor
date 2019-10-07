@@ -45,7 +45,7 @@ public class GraphEditorContainer extends AutoScrollingWindow {
     private static final double MINIMAP_RIGHT_INDENT = 10;
     private static final double MINIMAP_TOP_INDENT = 10;
 
-    private final GraphEditorMinimap minimap = new GraphEditorMinimap(MINIMAP_WIDTH);
+    private GraphEditorMinimap minimap;
 
     private GraphEditor graphEditor;
     private ChangeListener<GModel> modelChangeListener;
@@ -60,8 +60,8 @@ public class GraphEditorContainer extends AutoScrollingWindow {
     public GraphEditorContainer() {
         initializeMinimap();
         createModelChangeListener();
-//        this.setStyle("-fx-border-color: red ;-fx-border-width: 5");
         this.setStyle("-fx-background-color: lightgrey");
+//        minimap = new GraphEditorMinimap(MINIMAP_WIDTH);
     }
 
     /**
@@ -91,16 +91,16 @@ public class GraphEditorContainer extends AutoScrollingWindow {
             }
 
             setContent(view);
-            minimap.setContent(view);
-            minimap.setModel(model);
-            minimap.setSkinLookup(skinLookup);
+//            minimap.setContent(view);
+//            minimap.setModel(model);
+//            minimap.setSkinLookup(skinLookup);
 
             view.toBack();
             //view.setOnScroll(event -> panBy(-event.getDeltaX(), -event.getDeltaY()));
 
         } else {
-            minimap.setContent(null);
-            minimap.setModel(null);
+//            minimap.setContent(null);
+//            minimap.setModel(null);
         }
     }
 
@@ -163,12 +163,12 @@ public class GraphEditorContainer extends AutoScrollingWindow {
      */
     private void initializeMinimap() {
 
-        getChildren().add(minimap);
-
-        minimap.setWindow(this);
-        minimap.layoutXProperty().bind(widthProperty().subtract(MINIMAP_WIDTH + MINIMAP_RIGHT_INDENT));
-        minimap.setLayoutY(MINIMAP_TOP_INDENT);
-        minimap.setVisible(false);
+//        getChildren().add(minimap);
+//
+//        minimap.setWindow(this);
+//        minimap.layoutXProperty().bind(widthProperty().subtract(MINIMAP_WIDTH + MINIMAP_RIGHT_INDENT));
+//        minimap.setLayoutY(MINIMAP_TOP_INDENT);
+//        minimap.setVisible(false);
     }
 
     /**

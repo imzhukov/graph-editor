@@ -3,6 +3,7 @@
  */
 package de.tesis.dynaware.grapheditor.core.skins.defaults;
 
+import de.tesis.dynaware.grapheditor.model.GNode;
 import javafx.beans.value.ChangeListener;
 import javafx.css.PseudoClass;
 import javafx.event.Event;
@@ -69,10 +70,15 @@ public class DefaultJointSkin extends GJointSkin {
     }
 
     private void filterMousePressed(MouseEvent event){
-        if(getGraphEditor() != null){
-            if(getGraphEditor().getModel() != null) {
-                getGraphEditor().getModel().getConnectionsForRedraw().add(getJoint().getConnection());
+        if(getGraphEditor() != null && getGraphEditor().getModel() != null){
+            for(GNode node : getGraphEditor().getModel().getNodes()){
+                if(getGraphEditor().getSkinLookup().lookupNode(node).isSelected()) {
+                    node.getConnectors()
+                            .stream().flatMap(connector -> connector.getConnections().stream())
+                            .forEach(connection -> getGraphEditor().getModel().getConnectionsForRedraw().add(connection));
+                }
             }
+            getGraphEditor().getModel().getConnectionsForRedraw().add(getJoint().getConnection());
         }
     }
 

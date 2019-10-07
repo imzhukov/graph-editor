@@ -67,7 +67,7 @@ public class PanningWindow extends PannableCanvas {
         widthProperty().addListener(windowSizeChangeListener);
         heightProperty().addListener(windowSizeChangeListener);
 
-        initializeCacheWhenMouseOutside();
+//        initializeCacheWhenMouseOutside();
     }
 
     /**
