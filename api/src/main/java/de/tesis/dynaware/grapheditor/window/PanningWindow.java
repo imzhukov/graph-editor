@@ -46,7 +46,7 @@ public class PanningWindow extends PannableCanvas {
     private double windowYAtClick;
 
     private boolean panningGestureActive;
-    private boolean cacheWhilePanning = true;
+    private boolean cacheWhilePanning = false;
     private boolean cacheWhileMouseOutside;
     private boolean cacheOnMouseRelease;
 
