@@ -90,9 +90,9 @@ public class DefaultConnectionSkin extends SimpleConnectionSkin {
 
     public void changeVisualSelection(boolean selected) {
         if (selected || isJointSelected) {
-            root.pseudoClassStateChanged(PSEUDO_CLASS_SELECTED, true);
+            path.pseudoClassStateChanged(PSEUDO_CLASS_SELECTED, true);
         } else {
-            root.pseudoClassStateChanged(PSEUDO_CLASS_SELECTED, false);
+            path.pseudoClassStateChanged(PSEUDO_CLASS_SELECTED, false);
         }
     }
 

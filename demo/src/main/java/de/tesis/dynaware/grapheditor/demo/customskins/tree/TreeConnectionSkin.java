@@ -16,6 +16,7 @@ import de.tesis.dynaware.grapheditor.GJointSkin;
 import de.tesis.dynaware.grapheditor.model.GConnection;
 import de.tesis.dynaware.grapheditor.utils.Arrow;
 import de.tesis.dynaware.grapheditor.utils.GeometryUtils;
+import javafx.scene.shape.Shape;
 
 /**
  * Connection skin for the 'tree-like' graph. Pretty much just an arrow.
@@ -68,6 +69,11 @@ public class TreeConnectionSkin extends GConnectionSkin {
     @Override
     public Node getRoot() {
         return root;
+    }
+
+    @Override
+    public Shape getPath(){
+        return arrow.getLine();
     }
 
     @Override

@@ -24,6 +24,7 @@ import de.tesis.dynaware.grapheditor.core.skins.defaults.utils.RectangularConnec
 import de.tesis.dynaware.grapheditor.model.GConnection;
 import de.tesis.dynaware.grapheditor.model.GNode;
 import de.tesis.dynaware.grapheditor.utils.GeometryUtils;
+import javafx.scene.shape.Shape;
 
 /**
  * A simple rectangular connection skin.
@@ -91,6 +92,11 @@ public class SimpleConnectionSkin extends GConnectionSkin {
     @Override
     public Node getRoot() {
         return root;
+    }
+
+    @Override
+    public Shape getPath(){
+        return path;
     }
 
     @Override

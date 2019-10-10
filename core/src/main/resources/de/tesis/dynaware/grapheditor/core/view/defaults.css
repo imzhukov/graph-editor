@@ -86,9 +86,14 @@
 }
 
 .default-connection {
-	-fx-stroke-width: 1;
-	-fx-stroke: darkslategrey;
-	-fx-effect: dropshadow(one-pass-box, rgba(180, 180, 180), 5, 0, 1, 1);
+/*	-fx-stroke-width: 1;*/
+	-fx-stroke: black;
+/*	-fx-effect: dropshadow(one-pass-box, rgba(180, 180, 180), 5, 0, 1, 1);*/
+}
+
+.default-connection:selected  {
+    -fx-stroke-width: 2px;
+    -fx-stroke-dash-array: 5;
 }
 
 .default-connection-background {

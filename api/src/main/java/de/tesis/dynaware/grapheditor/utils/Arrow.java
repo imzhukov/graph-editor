@@ -5,6 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.shape.ArcTo;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
 
 /**
  * An arrow shape.
@@ -144,5 +145,9 @@ public class Arrow extends Group {
         head.setCenter(headX, headY);
         head.setAngle(Math.toDegrees(-angle));
         head.draw();
+    }
+
+    public Shape getLine(){
+        return line;
     }
 }

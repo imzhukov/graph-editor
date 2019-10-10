@@ -9,6 +9,7 @@ import java.util.Map;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Line;
 import de.tesis.dynaware.grapheditor.model.GConnection;
+import javafx.scene.shape.Shape;
 
 /**
  * The skin class for a {@link GConnection}. Responsible for visualizing connections in the graph editor.
@@ -28,6 +29,8 @@ public abstract class GConnectionSkin extends GSkin {
 
     private final GConnection connection;
 
+
+
     /**
      * Creates a new {@link GConnectionSkin}.
      *
@@ -45,6 +48,12 @@ public abstract class GConnectionSkin extends GSkin {
     public GConnection getConnection() {
         return connection;
     }
+
+    /**
+     * Gets the visible path of connection.
+     * <p>Use for styling connection.</p>
+     */
+    public abstract Shape getPath();
 
     /**
      * Sets the skin objects for all joints inside the connection.
