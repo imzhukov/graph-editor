@@ -302,6 +302,7 @@ public class ResizableBox extends DraggableBox {
 
         final double yDragDistance = (y - lastMouseY) / scaleFactor;
         final double minResizeHeight = Math.max(getMinHeight(), 0);
+        final double maxResizeHeight = getMaxHeight() > 0 ? getMaxHeight() : Double.MAX_VALUE;
 
         double newLayoutY = lastLayoutY + yDragDistance;
         double newHeight = lastHeight - yDragDistance;
@@ -328,6 +329,9 @@ public class ResizableBox extends DraggableBox {
         } else if (newHeight < minResizeHeight) {
             newLayoutY = lastLayoutY + lastHeight - minResizeHeight;
             newHeight = minResizeHeight;
+        } else if (newHeight > maxResizeHeight){
+            newLayoutY = lastLayoutY + lastHeight - maxResizeHeight;
+            newHeight = maxResizeHeight;
         }
 
         setLayoutY(newLayoutY);
@@ -350,6 +354,7 @@ public class ResizableBox extends DraggableBox {
 
         final double minResizeHeight = Math.max(getMinHeight(), 0);
         final double maxAvailableHeight = maxParentHeight - getLayoutY() - editorProperties.getSouthBoundValue();
+        final double maxResizeHeight = getMaxHeight() > 0 ? Math.min(getMaxHeight(), maxAvailableHeight) : maxAvailableHeight;
 
         double newHeight = lastHeight + yDragDistance;
 
@@ -362,8 +367,8 @@ public class ResizableBox extends DraggableBox {
         }
 
         // Min & max resize logic here.
-        if (newHeight > maxAvailableHeight) {
-            newHeight = maxAvailableHeight;
+        if (newHeight > maxResizeHeight) {
+            newHeight = maxResizeHeight;
         } else if (newHeight < minResizeHeight) {
             newHeight = minResizeHeight;
         }
@@ -387,6 +392,7 @@ public class ResizableBox extends DraggableBox {
 
         final double minResizeWidth = Math.max(getMinWidth(), 0);
         final double maxAvailableWidth = maxParentWidth - getLayoutX() - editorProperties.getEastBoundValue();
+        final double maxResizeWidth = getMaxWidth() > 0 ? Math.min(getMaxWidth(), maxAvailableWidth) : maxAvailableWidth;
 
         double newWidth = lastWidth + xDragDistance;
 
@@ -399,8 +405,8 @@ public class ResizableBox extends DraggableBox {
         }
 
         // Min & max resize logic here.
-        if (newWidth > maxAvailableWidth) {
-            newWidth = maxAvailableWidth;
+        if (newWidth > maxResizeWidth) {
+            newWidth = maxResizeWidth;
         } else if (newWidth < minResizeWidth) {
             newWidth = minResizeWidth;
         }
@@ -419,6 +425,7 @@ public class ResizableBox extends DraggableBox {
 
         final double xDragDistance = (x - lastMouseX) / scaleFactor;
         final double minResizeWidth = Math.max(getMinWidth(), 0);
+        final double maxResizeWidth = getMaxWidth() > 0 ? getMaxWidth() : Double.MAX_VALUE;
 
         double newLayoutX = lastLayoutX + xDragDistance;
         double newWidth = lastWidth - xDragDistance;
@@ -445,6 +452,9 @@ public class ResizableBox extends DraggableBox {
         } else if (newWidth < minResizeWidth) {
             newLayoutX = lastLayoutX + lastWidth - minResizeWidth;
             newWidth = minResizeWidth;
+        } else if (newWidth > maxResizeWidth){
+            newLayoutX = lastLayoutX + lastWidth - maxResizeWidth;
+            newWidth = maxResizeWidth;
         }
 
         setLayoutX(newLayoutX);
