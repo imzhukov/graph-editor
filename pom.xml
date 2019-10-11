@@ -6,7 +6,7 @@
 	<name>${component.name}</name>
 	<groupId>de.tesis.dynaware</groupId>
 	<artifactId>de.tesis.dynaware.grapheditor</artifactId>
-	<version>3.1.8</version>
+	<version>3.1.9</version>
 	<packaging>pom</packaging>
 
 	<description>A library for creating and editing graph-like diagrams in JavaFX</description>
@@ -73,12 +73,12 @@
 		<repository>
 			<id>nexus</id>
 			<name>Releases</name>
-			<url>http://192.168.2.67:8090/nexus/content/repositories/releases//</url>
+			<url>http://192.168.2.67:8081/repository/maven-releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>nexus</id>
 			<name>Snapshots</name>
-			<url>http://192.168.2.67:8090/nexus/content/repositories/snapshots/</url>
+			<url>http://192.168.2.67:8081/repository/maven-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 
