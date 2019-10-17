@@ -85,12 +85,17 @@ public class GraphEditorView extends Region {
         getChildren().add(selectionBox);
     }
 
+    public ConnectionLayouter getConnectionLayouter(){
+        return connectionLayouter;
+    }
+
     /**
      * Sets the connection-layouter to be used by the view.
      *
      * @param connectionLayouter the graph editor's {@link ConnectionLayouter} instance
      */
     public void setConnectionLayouter(final ConnectionLayouter connectionLayouter) {
+        this.connectionLayouter = connectionLayouter;
         getChildren().forEach(node -> {
             if (node instanceof GraphEditorViewLayer) {
                 ((GraphEditorViewLayer) node).setConnectionLayouter(connectionLayouter);
