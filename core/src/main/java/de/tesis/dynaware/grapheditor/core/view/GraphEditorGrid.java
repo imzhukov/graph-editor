@@ -87,12 +87,13 @@ public class GraphEditorGrid extends Group {
      */
     public void draw(final double width, final double height) {
 
-        final double spacing = editorProperties.getGridSpacing();
+        final double spacingX = editorProperties.getGridSpacingX();
+        final double spacingY = editorProperties.getGridSpacingY();
 
         getChildren().clear();
 
-        final int hLineCount = (int) Math.floor((height + 1) / spacing);
-        final int vLineCount = (int) Math.floor((width + 1) / spacing);
+        final int hLineCount = (int) Math.floor((height + 1) / spacingY);
+        final int vLineCount = (int) Math.floor((width + 1) / spacingX);
 
         for (int i = 0; i < hLineCount; i++) {
 
@@ -100,8 +101,8 @@ public class GraphEditorGrid extends Group {
 
             hLine.setStartX(0);
             hLine.setEndX(width);
-            hLine.setStartY((i + 1) * spacing + HALF_PIXEL_OFFSET);
-            hLine.setEndY((i + 1) * spacing + HALF_PIXEL_OFFSET);
+            hLine.setStartY((i + 1) * spacingY + HALF_PIXEL_OFFSET);
+            hLine.setEndY((i + 1) * spacingY + HALF_PIXEL_OFFSET);
             hLine.strokeProperty().bind(gridColor);
             hLine.setOpacity(0.1);
 
@@ -112,8 +113,8 @@ public class GraphEditorGrid extends Group {
 
             final Line vLine = new Line();
 
-            vLine.setStartX((i + 1) * spacing + HALF_PIXEL_OFFSET);
-            vLine.setEndX((i + 1) * spacing + HALF_PIXEL_OFFSET);
+            vLine.setStartX((i + 1) * spacingX + HALF_PIXEL_OFFSET);
+            vLine.setEndX((i + 1) * spacingX + HALF_PIXEL_OFFSET);
             vLine.setStartY(0);
             vLine.setEndY(height);
             vLine.strokeProperty().bind(gridColor);

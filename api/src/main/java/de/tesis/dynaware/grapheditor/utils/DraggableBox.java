@@ -390,9 +390,15 @@ public class DraggableBox extends StackPane {
      *
      * @return the input value rounded to the nearest multiple of the grid spacing
      */
-    protected double roundToGridSpacing(final double value) {
+    protected double roundToGridSpacingX(final double value) {
 
-        final double spacing = editorProperties.getGridSpacing();
+        final double spacing = editorProperties.getGridSpacingX();
+        return spacing * Math.round(value / spacing);
+    }
+
+    protected double roundToGridSpacingY(final double value) {
+
+        final double spacing = editorProperties.getGridSpacingY();
         return spacing * Math.round(value / spacing);
     }
 
@@ -439,7 +445,7 @@ public class DraggableBox extends StackPane {
 
         if (editorProperties.isSnapToGridOn()) {
             // The -1 here is to put the rectangle border exactly on top of a grid line.
-            newLayoutX = roundToGridSpacing(newLayoutX - snapToGridOffset.getX()) + snapToGridOffset.getX() - 1;
+            newLayoutX = roundToGridSpacingX(newLayoutX - snapToGridOffset.getX()) + snapToGridOffset.getX() - 1;
         } else {
             // Even if snap-to-grid is off, we use Math.round to ensure drawing 'on-pixel' when zoomed in past 100%.
             newLayoutX = Math.round(newLayoutX);
@@ -474,7 +480,7 @@ public class DraggableBox extends StackPane {
 
         if (editorProperties.isSnapToGridOn()) {
             // The -1 here is to put the rectangle border exactly on top of a grid line.
-            newLayoutY = roundToGridSpacing(newLayoutY - snapToGridOffset.getY()) + snapToGridOffset.getY() - 1;
+            newLayoutY = roundToGridSpacingY(newLayoutY - snapToGridOffset.getY()) + snapToGridOffset.getY() - 1;
         } else {
             // Even if snap-to-grid is off, we use Math.round to ensure drawing 'on-pixel' when zoomed in past 100%.
             newLayoutY = Math.round(newLayoutY);

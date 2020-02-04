@@ -33,9 +33,11 @@ public class GraphEditorProperties {
     public static final double DEFAULT_MAX_HEIGHT = Double.MAX_VALUE;
 
     private static final double DEFAULT_BOUND_VALUE = 15;
-    public static final double DEFAULT_GRID_SPACING = 12;
+    public static final double DEFAULT_GRID_SPACING_X = 12;
+    public static final double DEFAULT_GRID_SPACING_Y = 12;
 
-    private static DoubleProperty gridSpacingProperty = new SimpleDoubleProperty(DEFAULT_GRID_SPACING);
+    private static DoubleProperty gridSpacingPropertyX = new SimpleDoubleProperty(DEFAULT_GRID_SPACING_X);
+    private static DoubleProperty gridSpacingPropertyY = new SimpleDoubleProperty(DEFAULT_GRID_SPACING_Y);
 
     // Not currently configurable.
     private final boolean northBoundActive = true;
@@ -91,8 +93,8 @@ public class GraphEditorProperties {
      *
      * @return the current grid spacing
      */
-    public static double getGridSpacing() {
-        return gridSpacingProperty.get();
+    public static double getGridSpacingX() {
+        return gridSpacingPropertyX.get();
     }
 
     /**
@@ -104,8 +106,30 @@ public class GraphEditorProperties {
      *
      * @param gridSpacing the grid spacing to be used
      */
-    public static void setGridSpacing(final double gridSpacing) {
-        gridSpacingProperty.set(gridSpacing);
+    public static void setGridSpacingX(final double gridSpacing) {
+        gridSpacingPropertyX.set(gridSpacing);
+    }
+
+    /**
+     * Gets the grid spacing property.
+     *
+     * @return the grid spacing {@link DoubleProperty}.
+     */
+    public static double getGridSpacingY() {
+        return gridSpacingPropertyY.get();
+    }
+
+    /**
+     * Sets the grid spacing to be used if the grid is visible and/or snap-to-grid is enabled.
+     *
+     * <p>
+     * Integer values are recommended to avoid sub-pixel positioning effects.
+     * </p>
+     *
+     * @param gridSpacing the grid spacing to be used
+     */
+    public static void setGridSpacingY(final double gridSpacing) {
+        gridSpacingPropertyY.set(gridSpacing);
     }
 
     /**
@@ -114,10 +138,12 @@ public class GraphEditorProperties {
      * @return the grid spacing {@link DoubleProperty}.
      */
 
-    public static DoubleProperty gridSpacingProperty() {
-        return gridSpacingProperty;
+    public static DoubleProperty XgridSpacingProperty() {
+        return gridSpacingPropertyX;
     }
-
+    public static DoubleProperty YgridSpacingProperty() {
+        return gridSpacingPropertyY;
+    }
     /**
      * Gets whether the north bound is active.
      *

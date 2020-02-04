@@ -203,7 +203,8 @@ public class GraphEditorView extends Region {
         grid.setVisible(editorProperties.isGridVisible());
 
         editorProperties.gridVisibleProperty().addListener((v, o, n) -> grid.setVisible(n));
-        editorProperties.gridSpacingProperty().addListener((v, o, n) -> grid.draw(getWidth(), getHeight()));
+        editorProperties.XgridSpacingProperty().addListener((v, o, n) -> grid.draw(getWidth(), getHeight()));
+        editorProperties.YgridSpacingProperty().addListener((v, o, n) -> grid.draw(getWidth(), getHeight()));
     }
 
     /**

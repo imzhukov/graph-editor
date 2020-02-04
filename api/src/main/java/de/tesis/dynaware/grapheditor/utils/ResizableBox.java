@@ -311,7 +311,7 @@ public class ResizableBox extends DraggableBox {
         if (editorProperties.isSnapToGridOn()) {
 
             // The -1 here is to put the rectangle border exactly on top of a grid line.
-            final double roundedLayoutY = roundToGridSpacing(newLayoutY) - 1;
+            final double roundedLayoutY = roundToGridSpacingY(newLayoutY) - 1;
             newHeight = newHeight - roundedLayoutY + newLayoutY;
             newLayoutY = roundedLayoutY;
         } else {
@@ -360,7 +360,7 @@ public class ResizableBox extends DraggableBox {
 
         // Snap-to-grid logic here.
         if (editorProperties.isSnapToGridOn()) {
-            newHeight = roundToGridSpacing(newHeight + lastLayoutY) - lastLayoutY;
+            newHeight = roundToGridSpacingY(newHeight + lastLayoutY) - lastLayoutY;
         } else {
             // Even if snap-to-grid is off, we use Math.round to ensure drawing 'on-pixel' when zoomed in past 100%.
             newHeight = Math.round(newHeight);
@@ -398,7 +398,7 @@ public class ResizableBox extends DraggableBox {
 
         // Snap-to-grid logic here.
         if (editorProperties.isSnapToGridOn()) {
-            newWidth = roundToGridSpacing(newWidth + lastLayoutX) - lastLayoutX;
+            newWidth = roundToGridSpacingX(newWidth + lastLayoutX) - lastLayoutX;
         } else {
             // Even if snap-to-grid is off, we use Math.round to ensure drawing 'on-pixel' when zoomed in past 100%.
             newWidth = Math.round(newWidth);
@@ -434,7 +434,7 @@ public class ResizableBox extends DraggableBox {
         if (editorProperties.isSnapToGridOn()) {
 
             // The -1 here is to put the rectangle border exactly on top of a grid line.
-            final double roundedLayoutX = roundToGridSpacing(newLayoutX) - 1;
+            final double roundedLayoutX = roundToGridSpacingX(newLayoutX) - 1;
             newWidth = newWidth - roundedLayoutX + newLayoutX;
             newLayoutX = roundedLayoutX;
         } else {

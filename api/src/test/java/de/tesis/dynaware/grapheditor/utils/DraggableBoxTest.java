@@ -28,7 +28,8 @@ public class DraggableBoxTest {
     private static final double BOX_INITIAL_Y = 39;
 
     private static final double BOUNDARY_INDENT = 12;
-    private static final double GRID_SPACING = 11;
+    private static final double GRID_SPACING_X = 11;
+    private static final double GRID_SPACING_Y = 11;
     private static final double ALIGNMENT_THRESHOLD = 16;
 
     private final DraggableBox box = new DraggableBox();
@@ -79,15 +80,16 @@ public class DraggableBoxTest {
     public void testDrag_SnapToGrid() {
 
         properties.setSnapToGrid(true);
-        properties.setGridSpacing(GRID_SPACING);
+        properties.setGridSpacingX(GRID_SPACING_X);
+        properties.setGridSpacingY(GRID_SPACING_Y);
 
         dragBy(box, 14, 17);
 
         final double x = box.getLayoutX();
         final double y = box.getLayoutY();
 
-        assertTrue(x == Math.round(x / GRID_SPACING) * GRID_SPACING - 1);
-        assertTrue(y == Math.round(y / GRID_SPACING) * GRID_SPACING - 1);
+        assertTrue(x == Math.round(x / GRID_SPACING_X) * GRID_SPACING_X - 1);
+        assertTrue(y == Math.round(y / GRID_SPACING_Y) * GRID_SPACING_Y - 1);
     }
 
     @Test
