@@ -44,8 +44,8 @@
 		<manifest.bundle.version>1.3.1-${maven.build.timestamp}</manifest.bundle.version>
 		<maven.build.timestamp.format>yyyymmddhhmm</maven.build.timestamp.format>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<compiler.version>1.8</compiler.version>
-		<maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
+		<compiler.version>13</compiler.version>
+		<maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
 		<maven.surefire.plugin.version>2.17</maven.surefire.plugin.version>
 		<maven.bundle.plugin.version>2.4.0</maven.bundle.plugin.version>
 		<maven.jar.plugin.version>2.4</maven.jar.plugin.version>
@@ -56,7 +56,7 @@
 		<org.eclipse.emf.common.version>2.9.2-v20131212-0545</org.eclipse.emf.common.version>
 		<org.eclipse.emf.ecore.xmi.version>2.9.1-v20131212-0545</org.eclipse.emf.ecore.xmi.version>
 		<org.eclipse.emf.edit.version>2.3.0-v200706262000</org.eclipse.emf.edit.version>
-		<junit.version>4.11</junit.version>
+		<junit.version>4.12</junit.version>
 		<mockito.version>1.9.5</mockito.version>
 		<org.slf4j.version>1.7.5</org.slf4j.version>
 		<ch.qos.logback.version>1.0.13</ch.qos.logback.version>
@@ -144,8 +144,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>${maven.compiler.plugin.version}</version>
 					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
+						<source>13</source>
+						<target>13</target>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -169,23 +169,23 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${maven.javadoc.plugin.version}</version>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<additionalparam>-Xdoclint:none</additionalparam>
-					<quiet>true</quiet>
-				</configuration>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--				<artifactId>maven-javadoc-plugin</artifactId>-->
+<!--				<version>${maven.javadoc.plugin.version}</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>attach-javadocs</id>-->
+<!--						<goals>-->
+<!--							<goal>jar</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--				<configuration>-->
+<!--					<additionalparam>-Xdoclint:none</additionalparam>-->
+<!--					<quiet>true</quiet>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 			<!--<plugin>-->
 				<!--<groupId>org.sonatype.plugins</groupId>-->
 				<!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
