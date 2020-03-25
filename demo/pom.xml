@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>de.tesis.dynaware</groupId>
 		<artifactId>de.tesis.dynaware.grapheditor</artifactId>
-		<version>3.1.11</version>
+		<version>3.1.12</version>
 	</parent>
 	<name>${component.name}::Demo</name>
 
@@ -32,7 +32,12 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j.version}</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>13</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
