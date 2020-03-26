@@ -131,22 +131,22 @@ public class SimpleConnectionSkin extends GConnectionSkin {
         final boolean pointsRequireRedraw = !points.equals(this.points);
 
         // If we are showing detours, get all intersections with connections *behind* this one. Otherwise in front.
-//        final Map<Integer, List<Double>> intersections = intersectionFinder.find(allPoints, checkShowDetours());
-//
-//        final boolean intersectionsStayedNull = this.intersections == null && intersections == null;
-//        final boolean intersectionsSame = intersections != null && intersections.equals(this.intersections);
-//        final boolean intersectionsRequireRedraw = !(intersectionsStayedNull || intersectionsSame);
-//
-//        if (pointsRequireRedraw || intersectionsRequireRedraw) {
-//            drawAllSegments(points, intersections);
-//        }
+        final Map<Integer, List<Double>> intersections = intersectionFinder.find(allPoints, checkShowDetours());
 
-        if(pointsRequireRedraw){
-            drawAllSegments(points, null);
+        final boolean intersectionsStayedNull = this.intersections == null && intersections == null;
+        final boolean intersectionsSame = intersections != null && intersections.equals(this.intersections);
+        final boolean intersectionsRequireRedraw = !(intersectionsStayedNull || intersectionsSame);
+
+        if (pointsRequireRedraw || intersectionsRequireRedraw) {
+            drawAllSegments(points, intersections);
         }
 
+//        if(pointsRequireRedraw){
+//            drawAllSegments(points, null);
+//        }
+
         this.points = points;
-//        this.intersections = intersections;
+        this.intersections = intersections;
     }
 
     /**
@@ -288,23 +288,23 @@ public class SimpleConnectionSkin extends GConnectionSkin {
             final Point2D start = points.get(i);
             final Point2D end = points.get(i + 1);
 
-//            List<Double> segmentIntersections;
-//
-//            if (intersections != null && intersections.get(i) != null) {
-//                segmentIntersections = intersections.get(i);
-//            } else {
-//                segmentIntersections = new ArrayList<>();
-//            }
+            List<Double> segmentIntersections;
+
+            if (intersections != null && intersections.get(i) != null) {
+                segmentIntersections = intersections.get(i);
+            } else {
+                segmentIntersections = new ArrayList<>();
+            }
 
             final ConnectionSegment segment;
 
-//            if (checkShowDetours()) {
-//                segment = new DetouredConnectionSegment(start, end, segmentIntersections);
-//            } else {
-//                segment = new GappedConnectionSegment(start, end, segmentIntersections);
-//            }
+            if (checkShowDetours()) {
+                segment = new DetouredConnectionSegment(start, end, segmentIntersections);
+            } else {
+                segment = new GappedConnectionSegment(start, end, segmentIntersections);
+            }
 
-            segment = new GappedConnectionSegment(start, end, null);
+//            segment = new GappedConnectionSegment(start, end, null);
             segment.draw();
 
             connectionSegments.add(segment);

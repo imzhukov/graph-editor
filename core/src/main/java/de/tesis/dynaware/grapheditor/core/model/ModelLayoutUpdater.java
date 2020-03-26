@@ -36,7 +36,6 @@ public class ModelLayoutUpdater {
      * @param modelEditingManager the {@link ModelEditingManager} used to update the model values
      */
     public ModelLayoutUpdater(final SkinLookup skinLookup, final ModelEditingManager modelEditingManager) {
-
         this.skinLookup = skinLookup;
         this.modelEditingManager = modelEditingManager;
     }
@@ -63,18 +62,18 @@ public class ModelLayoutUpdater {
         final Map<GJoint, EventHandler<MouseEvent>> oldJointReleasedHandlers = new HashMap<>(jointReleasedHandlers);
 
         for (final GNode node : model.getNodes()) {
-
+            //Firstly remove the old handlers of node
             if (oldNodeReleasedHandlers.get(node) != null) {
-                removeHandler(node, oldNodeReleasedHandlers.get(node));
+                skinLookup.lookupNode(node).getRoot().removeEventHandler(MouseEvent.MOUSE_RELEASED, oldNodeReleasedHandlers.get(node));
             }
             addHandler(node);
         }
 
         for (final GConnection connection : model.getConnections()) {
             for (final GJoint joint : connection.getJoints()) {
-
+                //Firstly remove the old handlers of joint
                 if (oldJointReleasedHandlers.get(joint) != null) {
-                    removeHandler(joint, oldJointReleasedHandlers.get(joint));
+                    skinLookup.lookupJoint(joint).getRoot().removeEventHandler(MouseEvent.MOUSE_RELEASED, oldJointReleasedHandlers.get(joint));
                 }
                 addHandler(joint);
             }
@@ -87,12 +86,13 @@ public class ModelLayoutUpdater {
      * @param node the {@link GNode} whose values should be updated
      */
     private void addHandler(final GNode node) {
-
-        skinLookup.lookupNode(node).getRoot().setOnMouseReleased(event -> {
+        EventHandler<MouseEvent> handler = event -> {
             if (checkNodeChanged(node)) {
                 modelEditingManager.updateLayoutValues(skinLookup);
             }
-        });
+        };
+        skinLookup.lookupNode(node).getRoot().setOnMouseReleased(handler);
+        nodeReleasedHandlers.put(node, handler);
     }
 
     /**
@@ -101,32 +101,13 @@ public class ModelLayoutUpdater {
      * @param joint the {@link GJoint} whose values should be updated
      */
     private void addHandler(final GJoint joint) {
-
-        skinLookup.lookupJoint(joint).getRoot().setOnMouseReleased(event -> {
+        EventHandler<MouseEvent> handler = event -> {
             if (checkJointChanged(joint)) {
                 modelEditingManager.updateLayoutValues(skinLookup);
             }
-        });
-    }
-
-    /**
-     * Removes a mouse-released handler from a node skin's root JavaFX node.
-     *
-     * @param node the {@link GNode} whose handler should be removed
-     * @param handler the mouse-released handler to remove
-     */
-    private void removeHandler(final GNode node, final EventHandler<MouseEvent> handler) {
-        skinLookup.lookupNode(node).getRoot().removeEventHandler(MouseEvent.MOUSE_RELEASED, handler);
-    }
-
-    /**
-     * Removes a mouse-released handler from a joint skin's root JavaFX node.
-     *
-     * @param joint the {@link GJoint} whose handler should be removed
-     * @param handler the mouse-released handler to remove
-     */
-    private void removeHandler(final GJoint joint, final EventHandler<MouseEvent> handler) {
-        skinLookup.lookupJoint(joint).getRoot().removeEventHandler(MouseEvent.MOUSE_RELEASED, handler);
+        };
+        skinLookup.lookupJoint(joint).getRoot().setOnMouseReleased(handler);
+        jointReleasedHandlers.put(joint,handler);
     }
 
     /**

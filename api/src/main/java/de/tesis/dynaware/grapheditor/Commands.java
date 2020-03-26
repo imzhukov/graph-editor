@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import de.tesis.dynaware.grapheditor.model.*;
 import javafx.scene.layout.Region;
 
 import org.eclipse.emf.common.command.Command;
@@ -22,12 +23,6 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.tesis.dynaware.grapheditor.model.GConnection;
-import de.tesis.dynaware.grapheditor.model.GConnector;
-import de.tesis.dynaware.grapheditor.model.GJoint;
-import de.tesis.dynaware.grapheditor.model.GModel;
-import de.tesis.dynaware.grapheditor.model.GNode;
-import de.tesis.dynaware.grapheditor.model.GraphPackage;
 import de.tesis.dynaware.grapheditor.utils.LogMessages;
 
 /**
@@ -106,6 +101,20 @@ public class Commands {
             if (command.canExecute())
                 editingDomain.getCommandStack().execute(command);
         }
+    }
+
+    public static CompoundCommand addParametersToNode(final GModel model, final GNode node, final List<GParameter> parameterList, final boolean execute){
+        final EditingDomain editingDomain = getEditingDomain(model);
+        final CompoundCommand command = new CompoundCommand();
+
+        if(editingDomain != null) {
+            parameterList.forEach(gParameter -> {
+                command.append(AddCommand.create(editingDomain, node, GraphPackage.Literals.GNODE__PARAMETERS, gParameter));
+            });
+            if(execute && command.canExecute())
+                editingDomain.getCommandStack().execute(command);
+        }
+        return command;
     }
 
     /**

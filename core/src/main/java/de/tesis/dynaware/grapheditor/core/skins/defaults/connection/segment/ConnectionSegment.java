@@ -55,7 +55,7 @@ public abstract class ConnectionSegment {
             sign = start.getY() < end.getY() ? 1 : -1;
         }
 
-//        filterIntersections();
+        filterIntersections();
     }
 
     /**
@@ -68,14 +68,14 @@ public abstract class ConnectionSegment {
      */
     public void draw() {
 
-//        if (!intersections.isEmpty()) {
-//            drawToFirstIntersection(intersections.get(0));
-//            drawBetweenIntersections();
-//            drawFromLastIntersection(intersections.get(intersections.size() - 1));
-//        } else {
-//            drawStraight();
-//        }
-        drawStraight();
+        if (!intersections.isEmpty()) {
+            drawToFirstIntersection(intersections.get(0));
+            drawBetweenIntersections();
+            drawFromLastIntersection(intersections.get(intersections.size() - 1));
+        } else {
+            drawStraight();
+        }
+//        drawStraight();
     }
 
     /**

@@ -248,7 +248,7 @@ public class GraphEditorController {
 
         skinManager.addNodes(modelMemory.getNodesToAdd());
         skinManager.removeNodes(modelMemory.getNodesToRemove());
-        skinManager.updateNodes(modelMemory.getNodesToUpdate());
+        skinManager.updateNodes(modelMemory.getNodesToUpdate()); // Update connectors position in updated nodes
         skinManager.removeConnectors(modelMemory.getConnectorsToRemove());
 
         skinManager.addConnections(modelMemory.getConnectionsToAdd());
@@ -262,6 +262,11 @@ public class GraphEditorController {
             skinManager.addJoints(connection, modelMemory.getJointsToAdd().get(connection));
         }
 
-        skinManager.initializeAll();
+//        skinManager.initializeAll();
+        skinManager.reloadNodesFromModel(modelMemory.getNodesToAdd());
+        for (final GConnection connection : modelMemory.getJointsToAdd().keySet()) {
+            skinManager.reloadJointsFromModel(modelMemory.getJointsToAdd().get(connection));
+        }
+
     }
 }

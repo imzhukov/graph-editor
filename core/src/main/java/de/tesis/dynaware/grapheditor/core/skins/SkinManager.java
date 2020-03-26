@@ -281,6 +281,18 @@ public class SkinManager implements SkinLookup {
         }
     }
 
+    public void reloadNodesFromModel(final List<GNode> nodesToReload){
+        for (final GNode node : nodesToReload) {
+            lookupNode(node).initialize();
+        }
+    }
+
+    public void reloadJointsFromModel(final List<GJoint> jointsToReload){
+        for(final GJoint joint : jointsToReload){
+            lookupJoint(joint).initialize();
+        }
+    }
+
     @Override
     public GNodeSkin lookupNode(final GNode node) {
         return nodeSkins.get(node);

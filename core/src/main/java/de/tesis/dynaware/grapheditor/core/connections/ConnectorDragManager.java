@@ -54,9 +54,9 @@ public class ConnectorDragManager {
 
     private final Map<GConnector, EventHandler<MouseEvent>> dragDetectedHandlers = new HashMap<>();
     private final Map<GConnector, EventHandler<MouseEvent>> mouseDraggedHandlers = new HashMap<>();
-    private final Map<GConnector, EventHandler<MouseEvent>> mouseDragEnteredHandlers = new HashMap<>();
-    private final Map<GConnector, EventHandler<MouseEvent>> mouseDragExitedHandlers = new HashMap<>();
-    private final Map<GConnector, EventHandler<MouseEvent>> mouseDragReleasedHandlers = new HashMap<>();
+    private final Map<GConnector, EventHandler<MouseDragEvent>> mouseDragEnteredHandlers = new HashMap<GConnector, EventHandler<MouseDragEvent>>();
+    private final Map<GConnector, EventHandler<MouseDragEvent>> mouseDragExitedHandlers = new HashMap<GConnector, EventHandler<MouseDragEvent>>();
+    private final Map<GConnector, EventHandler<MouseDragEvent>> mouseDragReleasedHandlers = new HashMap<GConnector, EventHandler<MouseDragEvent>>();
 
     private GConnectorValidator validator = new DefaultConnectorValidator();
 
@@ -222,6 +222,11 @@ public class ConnectorDragManager {
         root.addEventHandler(MouseEvent.MOUSE_EXITED, newMouseExitedHandler);
         root.addEventHandler(MouseEvent.MOUSE_RELEASED, newMouseReleasedHandler);
         root.addEventHandler(MouseEvent.MOUSE_MOVED, newMouseMovedHandler);
+
+        mouseEnteredHandlers.put(connector, newMouseEnteredHandler);
+        mouseExitedHandlers.put(connector, newMouseExitedHandler);
+        mouseReleasedHandlers.put(connector, newMouseReleasedHandler);
+        mouseMovedHandlers.put(connector, newMouseMovedHandler);
     }
 
     /**
@@ -244,6 +249,13 @@ public class ConnectorDragManager {
         root.addEventHandler(MouseDragEvent.MOUSE_DRAG_ENTERED, newMouseDragEnteredHandler);
         root.addEventHandler(MouseDragEvent.MOUSE_DRAG_EXITED, newMouseDragExitedHandler);
         root.addEventHandler(MouseDragEvent.MOUSE_DRAG_RELEASED, newMouseDragReleasedHandler);
+
+        dragDetectedHandlers.put(connector, newDragDetectedHandler);
+        mouseDraggedHandlers.put(connector, newMouseDraggedHandler);
+        mouseDragEnteredHandlers.put(connector, newMouseDragEnteredHandler);
+        mouseDragExitedHandlers.put(connector, newMouseDragExitedHandler);
+        mouseDragReleasedHandlers.put(connector, newMouseDragReleasedHandler);
+
     }
 
     /**
