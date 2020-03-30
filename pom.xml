@@ -6,7 +6,7 @@
 	<name>${component.name}</name>
 	<groupId>de.tesis.dynaware</groupId>
 	<artifactId>de.tesis.dynaware.grapheditor</artifactId>
-	<version>3.1.12</version>
+	<version>3.1.13</version>
 	<packaging>pom</packaging>
 
 	<description>A library for creating and editing graph-like diagrams in JavaFX</description>
@@ -59,7 +59,7 @@
 		<junit.version>4.12</junit.version>
 		<mockito.version>1.9.5</mockito.version>
 		<org.slf4j.version>1.7.5</org.slf4j.version>
-		<ch.qos.logback.version>1.0.13</ch.qos.logback.version>
+<!--		<ch.qos.logback.version>1.0.13</ch.qos.logback.version>-->
 	</properties>
 
 	<modules>
