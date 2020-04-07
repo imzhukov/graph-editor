@@ -103,6 +103,11 @@ public class Commands {
         }
     }
 
+    /**Create the one {@link CompoundCommand} to add a list of GParameter on Gnode.
+     *
+     * @param execute define the command will be execute or not
+     * @return {@link CompoundCommand} this command can be unite with others in another CompoundCommand for one executing if created many GNode one by one
+     * */
     public static CompoundCommand addParametersToNode(final GModel model, final GNode node, final List<GParameter> parameterList, final boolean execute){
         final EditingDomain editingDomain = getEditingDomain(model);
         final CompoundCommand command = new CompoundCommand();
