@@ -3,6 +3,7 @@
  */
 package de.tesis.dynaware.grapheditor.demo.customskins.tree;
 
+import de.tesis.dynaware.grapheditor.utils.EventHandlersManager;
 import javafx.css.PseudoClass;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -27,6 +28,8 @@ public class TreeConnectorSkin extends GConnectorSkin {
     private final Pane root = new Pane();
     private final Circle circle = new Circle(RADIUS);
 
+    private EventHandlersManager eventHandlersManager;
+
     /**
      * Creates a new {@link TreeConnectorSkin} instance.
      *
@@ -35,6 +38,8 @@ public class TreeConnectorSkin extends GConnectorSkin {
     public TreeConnectorSkin(final GConnector connector) {
 
         super(connector);
+
+        eventHandlersManager = new EventHandlersManager(root);
 
         root.setMinSize(2 * RADIUS, 2 * RADIUS);
         root.setPrefSize(2 * RADIUS, 2 * RADIUS);
@@ -90,4 +95,10 @@ public class TreeConnectorSkin extends GConnectorSkin {
             break;
         }
     }
+
+    @Override
+    public EventHandlersManager getEventHandlersManager() {
+        return eventHandlersManager;
+    }
+
 }

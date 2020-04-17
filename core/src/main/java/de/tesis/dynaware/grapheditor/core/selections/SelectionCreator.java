@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
 
+import de.tesis.dynaware.grapheditor.utils.DraggableBox;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
@@ -180,24 +181,24 @@ public class SelectionCreator {
 
         for (final GNode node : model.getNodes()) {
 
-            final Region nodeRegion = skinLookup.lookupNode(node).getRoot();
+            final DraggableBox nodeRegion = skinLookup.lookupNode(node).getRoot();
 
             final EventHandler<MouseEvent> oldNodePressedHandler = nodePressedHandlers.get(node);
             final EventHandler<MouseEvent> oldNodeReleasedHandler = nodeReleasedHandlers.get(node);
 
             if (oldNodePressedHandler != null) {
-                nodeRegion.removeEventHandler(MouseEvent.MOUSE_PRESSED, oldNodePressedHandler);
+                nodeRegion.getEventHandlersManager().removeEventHandler(MouseEvent.MOUSE_PRESSED, oldNodePressedHandler, true);
             }
 
             if (oldNodeReleasedHandler != null) {
-                nodeRegion.removeEventHandler(MouseEvent.MOUSE_RELEASED, oldNodeReleasedHandler);
+                nodeRegion.getEventHandlersManager().removeEventHandler(MouseEvent.MOUSE_RELEASED, oldNodeReleasedHandler, true);
             }
 
             final EventHandler<MouseEvent> newNodePressedHandler = event -> handleNodePressed(event, node);
             final EventHandler<MouseEvent> newNodeReleasedHandler = event -> handleNodeReleased(event, node);
 
-            nodeRegion.addEventHandler(MouseEvent.MOUSE_PRESSED, newNodePressedHandler);
-            nodeRegion.addEventHandler(MouseEvent.MOUSE_RELEASED, newNodeReleasedHandler);
+            nodeRegion.getEventHandlersManager().addAndSaveEventHandler(MouseEvent.MOUSE_PRESSED, newNodePressedHandler);
+            nodeRegion.getEventHandlersManager().addAndSaveEventHandler(MouseEvent.MOUSE_RELEASED, newNodeReleasedHandler);
 
             nodePressedHandlers.put(node, newNodePressedHandler);
             nodeReleasedHandlers.put(node, newNodeReleasedHandler);
@@ -378,24 +379,24 @@ public class SelectionCreator {
     private void addDragSelectionMechanism() {
 
         if (viewPressedHandler != null) {
-            view.removeEventHandler(MouseEvent.MOUSE_PRESSED, viewPressedHandler);
+            view.getEventHandlersManager().removeEventHandler(MouseEvent.MOUSE_PRESSED, viewPressedHandler, true);
         }
 
         if (viewDraggedHandler != null) {
-            view.removeEventHandler(MouseEvent.MOUSE_DRAGGED, viewDraggedHandler);
+            view.getEventHandlersManager().removeEventHandler(MouseEvent.MOUSE_DRAGGED, viewDraggedHandler, true);
         }
 
         if (viewReleasedHandler != null) {
-            view.removeEventHandler(MouseEvent.MOUSE_RELEASED, viewReleasedHandler);
+            view.getEventHandlersManager().removeEventHandler(MouseEvent.MOUSE_RELEASED, viewReleasedHandler, true);
         }
 
         viewPressedHandler = event -> handleViewPressed(event);
         viewDraggedHandler = event -> handleViewDragged(event);
         viewReleasedHandler = event -> handleViewReleased(event);
 
-        view.addEventHandler(MouseEvent.MOUSE_PRESSED, viewPressedHandler);
-        view.addEventHandler(MouseEvent.MOUSE_DRAGGED, viewDraggedHandler);
-        view.addEventHandler(MouseEvent.MOUSE_RELEASED, viewReleasedHandler);
+        view.getEventHandlersManager().addAndSaveEventHandler(MouseEvent.MOUSE_PRESSED, viewPressedHandler);
+        view.getEventHandlersManager().addAndSaveEventHandler(MouseEvent.MOUSE_DRAGGED, viewDraggedHandler);
+        view.getEventHandlersManager().addAndSaveEventHandler(MouseEvent.MOUSE_RELEASED, viewReleasedHandler);
     }
 
     /**

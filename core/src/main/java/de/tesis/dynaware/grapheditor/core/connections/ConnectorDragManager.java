@@ -154,22 +154,26 @@ public class ConnectorDragManager {
      */
     private void removeOldMouseHandlers(final GConnector connector) {
 
-        final Node root = skinLookup.lookupConnector(connector).getRoot();
+        final GConnectorSkin gConnectorSkin = skinLookup.lookupConnector(connector);
 
         if (mouseEnteredHandlers.get(connector) != null) {
-            root.removeEventHandler(MouseEvent.MOUSE_ENTERED, mouseEnteredHandlers.get(connector));
+            gConnectorSkin.getEventHandlersManager()
+                    .removeEventHandler(MouseEvent.MOUSE_ENTERED, mouseEnteredHandlers.get(connector), true);
         }
 
         if (mouseExitedHandlers.get(connector) != null) {
-            root.removeEventHandler(MouseEvent.MOUSE_EXITED, mouseExitedHandlers.get(connector));
+            gConnectorSkin.getEventHandlersManager()
+                    .removeEventHandler(MouseEvent.MOUSE_EXITED, mouseExitedHandlers.get(connector), true);
         }
 
         if (mouseReleasedHandlers.get(connector) != null) {
-            root.removeEventHandler(MouseEvent.MOUSE_RELEASED, mouseReleasedHandlers.get(connector));
+            gConnectorSkin.getEventHandlersManager()
+                    .removeEventHandler(MouseEvent.MOUSE_RELEASED, mouseReleasedHandlers.get(connector), true);
         }
 
         if (mouseMovedHandlers.get(connector) != null) {
-            root.removeEventHandler(MouseEvent.MOUSE_MOVED, mouseMovedHandlers.get(connector));
+            gConnectorSkin.getEventHandlersManager()
+                    .removeEventHandler(MouseEvent.MOUSE_MOVED, mouseMovedHandlers.get(connector), true);
         }
     }
 
@@ -181,26 +185,31 @@ public class ConnectorDragManager {
      */
     private void removeOldMouseDragHandlers(final GConnector connector) {
 
-        final Node root = skinLookup.lookupConnector(connector).getRoot();
+        final GConnectorSkin gConnectorSkin = skinLookup.lookupConnector(connector);
 
         if (dragDetectedHandlers.get(connector) != null) {
-            root.removeEventHandler(MouseEvent.DRAG_DETECTED, dragDetectedHandlers.get(connector));
+            gConnectorSkin.getEventHandlersManager()
+                    .removeEventHandler(MouseEvent.DRAG_DETECTED, dragDetectedHandlers.get(connector), true);
         }
 
         if (mouseDraggedHandlers.get(connector) != null) {
-            root.removeEventHandler(MouseEvent.MOUSE_DRAGGED, mouseDraggedHandlers.get(connector));
+            gConnectorSkin.getEventHandlersManager()
+                    .removeEventHandler(MouseEvent.MOUSE_DRAGGED, mouseDraggedHandlers.get(connector), true);
         }
 
         if (mouseDragEnteredHandlers.get(connector) != null) {
-            root.removeEventHandler(MouseDragEvent.MOUSE_DRAG_ENTERED, mouseDragEnteredHandlers.get(connector));
+            gConnectorSkin.getEventHandlersManager()
+                    .removeEventHandler(MouseDragEvent.MOUSE_DRAG_ENTERED, mouseDragEnteredHandlers.get(connector), true);
         }
 
         if (mouseDragExitedHandlers.get(connector) != null) {
-            root.removeEventHandler(MouseDragEvent.MOUSE_DRAG_EXITED, mouseDragExitedHandlers.get(connector));
+            gConnectorSkin.getEventHandlersManager()
+                    .removeEventHandler(MouseDragEvent.MOUSE_DRAG_EXITED, mouseDragExitedHandlers.get(connector), true);
         }
 
         if (mouseDragReleasedHandlers.get(connector) != null) {
-            root.removeEventHandler(MouseDragEvent.MOUSE_DRAG_RELEASED, mouseDragReleasedHandlers.get(connector));
+            gConnectorSkin.getEventHandlersManager()
+                    .removeEventHandler(MouseDragEvent.MOUSE_DRAG_RELEASED, mouseDragReleasedHandlers.get(connector), true);
         }
     }
 
@@ -216,12 +225,12 @@ public class ConnectorDragManager {
         final EventHandler<MouseEvent> newMouseReleasedHandler = event -> handleMouseReleased(event, connector);
         final EventHandler<MouseEvent> newMouseMovedHandler = event -> event.consume();
 
-        final Node root = skinLookup.lookupConnector(connector).getRoot();
+        final GConnectorSkin gConnectorSkin = skinLookup.lookupConnector(connector);
 
-        root.addEventHandler(MouseEvent.MOUSE_ENTERED, newMouseEnteredHandler);
-        root.addEventHandler(MouseEvent.MOUSE_EXITED, newMouseExitedHandler);
-        root.addEventHandler(MouseEvent.MOUSE_RELEASED, newMouseReleasedHandler);
-        root.addEventHandler(MouseEvent.MOUSE_MOVED, newMouseMovedHandler);
+        gConnectorSkin.getEventHandlersManager().addAndSaveEventHandler(MouseEvent.MOUSE_ENTERED, newMouseEnteredHandler);
+        gConnectorSkin.getEventHandlersManager().addAndSaveEventHandler(MouseEvent.MOUSE_EXITED, newMouseExitedHandler);
+        gConnectorSkin.getEventHandlersManager().addAndSaveEventHandler(MouseEvent.MOUSE_RELEASED, newMouseReleasedHandler);
+        gConnectorSkin.getEventHandlersManager().addAndSaveEventHandler(MouseEvent.MOUSE_MOVED, newMouseMovedHandler);
 
         mouseEnteredHandlers.put(connector, newMouseEnteredHandler);
         mouseExitedHandlers.put(connector, newMouseExitedHandler);
@@ -242,20 +251,19 @@ public class ConnectorDragManager {
         final EventHandler<MouseDragEvent> newMouseDragExitedHandler = event -> handleDragExited(event, connector);
         final EventHandler<MouseDragEvent> newMouseDragReleasedHandler = event -> handleDragReleased(event, connector);
 
-        final Node root = skinLookup.lookupConnector(connector).getRoot();
+        final GConnectorSkin gConnectorSkin = skinLookup.lookupConnector(connector);
 
-        root.addEventHandler(MouseEvent.DRAG_DETECTED, newDragDetectedHandler);
-        root.addEventHandler(MouseEvent.MOUSE_DRAGGED, newMouseDraggedHandler);
-        root.addEventHandler(MouseDragEvent.MOUSE_DRAG_ENTERED, newMouseDragEnteredHandler);
-        root.addEventHandler(MouseDragEvent.MOUSE_DRAG_EXITED, newMouseDragExitedHandler);
-        root.addEventHandler(MouseDragEvent.MOUSE_DRAG_RELEASED, newMouseDragReleasedHandler);
+        gConnectorSkin.getEventHandlersManager().addAndSaveEventHandler(MouseEvent.DRAG_DETECTED, newDragDetectedHandler);
+        gConnectorSkin.getEventHandlersManager().addAndSaveEventHandler(MouseEvent.MOUSE_DRAGGED, newMouseDraggedHandler);
+        gConnectorSkin.getEventHandlersManager().addAndSaveEventHandler(MouseDragEvent.MOUSE_DRAG_ENTERED, newMouseDragEnteredHandler);
+        gConnectorSkin.getEventHandlersManager().addAndSaveEventHandler(MouseDragEvent.MOUSE_DRAG_EXITED, newMouseDragExitedHandler);
+        gConnectorSkin.getEventHandlersManager().addAndSaveEventHandler(MouseDragEvent.MOUSE_DRAG_RELEASED, newMouseDragReleasedHandler);
 
         dragDetectedHandlers.put(connector, newDragDetectedHandler);
         mouseDraggedHandlers.put(connector, newMouseDraggedHandler);
         mouseDragEnteredHandlers.put(connector, newMouseDragEnteredHandler);
         mouseDragExitedHandlers.put(connector, newMouseDragExitedHandler);
         mouseDragReleasedHandlers.put(connector, newMouseDragReleasedHandler);
-
     }
 
     /**

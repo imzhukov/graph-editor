@@ -3,6 +3,7 @@
  */
 package de.tesis.dynaware.grapheditor.core.skins.defaults;
 
+import de.tesis.dynaware.grapheditor.utils.EventHandlersManager;
 import javafx.css.PseudoClass;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -46,6 +47,8 @@ public class DefaultConnectorSkin extends GConnectorSkin {
     private final Pane root = new Pane();
     private final Polygon polygon = new Polygon();
 
+    private EventHandlersManager eventHandlersManager;
+
     private final AnimatedColor animatedColorAllowed;
     private final AnimatedColor animatedColorForbidden;
 
@@ -59,6 +62,8 @@ public class DefaultConnectorSkin extends GConnectorSkin {
         super(connector);
 
         performChecks();
+
+        eventHandlersManager = new EventHandlersManager(root);
 
         root.setManaged(false);
         root.resize(SIZE, SIZE);
@@ -113,6 +118,11 @@ public class DefaultConnectorSkin extends GConnectorSkin {
             polygon.pseudoClassStateChanged(PSEUDO_CLASS_ALLOWED, false);
             break;
         }
+    }
+
+    @Override
+    public EventHandlersManager getEventHandlersManager() {
+        return eventHandlersManager;
     }
 
     /**
@@ -192,7 +202,7 @@ public class DefaultConnectorSkin extends GConnectorSkin {
     /**
      * Checks that the connector has the correct values to be displayed using this skin.
      */
-    private void performChecks() {
+    protected void performChecks() {
         if (!DefaultConnectorTypes.isValid(getConnector().getType())) {
             LOGGER.error(LogMessages.UNSUPPORTED_CONNECTOR, getConnector().getType());
             getConnector().setType(DefaultConnectorTypes.LEFT_INPUT);

@@ -3,10 +3,14 @@
  */
 package de.tesis.dynaware.grapheditor.utils;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Point2D;
 import javafx.scene.CacheHint;
 import javafx.scene.Node;
@@ -50,6 +54,8 @@ public class DraggableBox extends StackPane {
 
     protected Region container;
 
+    protected EventHandlersManager eventHandlersManager = new EventHandlersManager(this);
+
     // Note that ResizableBox subclass currently pays no attention to alignment targets!
     private List<Double> alignmentTargetsX;
     private List<Double> alignmentTargetsY;
@@ -75,9 +81,14 @@ public class DraggableBox extends StackPane {
         // Must be default or quality for re-rasterization to occur after a scale transform.
         cacheHintProperty().set(CacheHint.DEFAULT);
 
-        addEventHandler(MouseEvent.MOUSE_PRESSED, this::handleMousePressed);
-        addEventHandler(MouseEvent.MOUSE_DRAGGED, this::handleMouseDragged);
-        addEventHandler(MouseEvent.MOUSE_RELEASED, this::handleMouseReleased);
+        //This handlers initialize to store a handlers in the map
+        EventHandler<MouseEvent> handlerMousePressed = this::handleMousePressed;
+        EventHandler<MouseEvent> handlerMouseDragged = this::handleMouseDragged;
+        EventHandler<MouseEvent> handlerMouseReleased = this::handleMouseReleased;
+
+        eventHandlersManager.addAndSaveEventHandler(MouseEvent.MOUSE_PRESSED, handlerMousePressed);
+        eventHandlersManager.addAndSaveEventHandler(MouseEvent.MOUSE_DRAGGED, handlerMouseDragged);
+        eventHandlersManager.addAndSaveEventHandler(MouseEvent.MOUSE_RELEASED, handlerMouseReleased);
     }
 
     /**
@@ -93,6 +104,11 @@ public class DraggableBox extends StackPane {
     public void setEditorProperties(final GraphEditorProperties editorProperties) {
         this.editorProperties = editorProperties;
     }
+
+    /**
+     *
+     */
+    public EventHandlersManager getEventHandlersManager(){ return this.eventHandlersManager; }
 
     /**
      * Gets whether dragging of the box is enabled in the x (horizontal) direction.

@@ -4,6 +4,13 @@
 package de.tesis.dynaware.grapheditor;
 
 import de.tesis.dynaware.grapheditor.model.GConnector;
+import de.tesis.dynaware.grapheditor.utils.EventHandlersManager;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
+import javafx.scene.input.MouseEvent;
+
+import java.util.HashMap;
 
 /**
  * The skin class for a {@link GConnector}. Responsible for visualizing connectors in the graph editor.
@@ -38,6 +45,11 @@ public abstract class GConnectorSkin extends GSkin {
     public GConnector getConnector() {
         return connector;
     }
+
+    /**
+     *
+     */
+    public abstract EventHandlersManager getEventHandlersManager();
 
     /**
      * Gets the width of the connector skin.

@@ -9,13 +9,18 @@ import de.tesis.dynaware.grapheditor.GNodeSkin;
 import de.tesis.dynaware.grapheditor.GTailSkin;
 import de.tesis.dynaware.grapheditor.core.DefaultGraphEditor;
 import de.tesis.dynaware.grapheditor.core.graphlayers.GraphEditorViewLayer;
+import de.tesis.dynaware.grapheditor.utils.EventHandlersManager;
 import de.tesis.dynaware.grapheditor.utils.GraphEditorProperties;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.CacheHint;
 import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 
 import java.util.Comparator;
+import java.util.HashMap;
 
 /**
  * The {@link Region} that all visual elements in the graph editor are added to.
@@ -55,6 +60,8 @@ public class GraphEditorView extends Region {
     private ConnectionLayouter connectionLayouter;
 
     private final SelectionBox selectionBox = new SelectionBox();
+
+    public EventHandlersManager eventHandlersManager = new EventHandlersManager(this);
 
     private GraphEditorProperties editorProperties;
     private Comparator<Node> comparator = (o1, o2) -> {
@@ -269,6 +276,11 @@ public class GraphEditorView extends Region {
             }
         });
     }
+
+    /**
+     *
+     * */
+    public EventHandlersManager getEventHandlersManager(){ return this.eventHandlersManager; }
 
     /**
      * Adds a listener to the width and height properties of the view to tell the grid to redraw.

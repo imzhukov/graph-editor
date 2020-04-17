@@ -5,11 +5,15 @@ package de.tesis.dynaware.grapheditor.utils;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
+
+import java.util.HashMap;
 
 /**
  * A draggable, resizable box that can display children.
@@ -36,20 +40,44 @@ public class ResizableBox extends DraggableBox {
 
     private boolean mouseInPositionForResize;
 
+    private EventHandler<MouseEvent> handlerMouseEntered;
+    private EventHandler<MouseEvent> handlerMouseMoved;
+    private EventHandler<MouseEvent> handlerMouseExited;
+
+    private boolean isResizeEnabled = true;
+
     /**
      * Creates an empty resizable box.
      */
     public ResizableBox() {
+        handlerMouseEntered = this::processMousePosition;
+        handlerMouseMoved = this::processMousePosition;
+        handlerMouseExited = this::handleMouseExited;
 
-        addEventHandler(MouseEvent.MOUSE_ENTERED, this::processMousePosition);
-        addEventHandler(MouseEvent.MOUSE_MOVED, this::processMousePosition);
-
-        addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
-            if (!event.isPrimaryButtonDown()) {
-                setCursor(null);
-            }
-        });
+        eventHandlersManager.addAndSaveEventHandler(MouseEvent.MOUSE_ENTERED, handlerMouseEntered);
+        eventHandlersManager.addAndSaveEventHandler(MouseEvent.MOUSE_MOVED, handlerMouseMoved);
+        eventHandlersManager.addAndSaveEventHandler(MouseEvent.MOUSE_EXITED, handlerMouseExited);
     }
+
+    /**
+     * Turn off resize to <b>any</b> direction.
+     * <p>Absolutely remove the resizing without opportunity to return</p>
+     * */
+    public void resizeOff(){
+        eventHandlersManager.removeEventHandler(MouseEvent.MOUSE_ENTERED, handlerMouseEntered, true);
+        eventHandlersManager.removeEventHandler(MouseEvent.MOUSE_MOVED, handlerMouseMoved, true);
+        eventHandlersManager.removeEventHandler(MouseEvent.MOUSE_EXITED, handlerMouseExited, true);
+
+        isResizeEnabled = false;
+    }
+
+    /**
+     * Show the able to resize to <b>any</b> direction
+     * */
+    public boolean isResizeEnabled(){
+        return isResizeEnabled;
+    }
+
 
     /**
      * Gets whether or not the box is resizable in the north (top) direction.
@@ -162,52 +190,67 @@ public class ResizableBox extends DraggableBox {
 
     @Override
     protected void handleMousePressed(final MouseEvent event) {
+        if (isResizeEnabled) {
+            super.handleMousePressed(event);
 
-        super.handleMousePressed(event);
+            if (!(getParent() instanceof Region)) {
+                return;
+            } else if (!event.getButton().equals(MouseButton.PRIMARY)) {
+                setCursor(null);
+                return;
+            }
 
-        if (!(getParent() instanceof Region)) {
-            return;
-        } else if (!event.getButton().equals(MouseButton.PRIMARY)) {
-            setCursor(null);
-            return;
+            storeClickValuesForResize(event.getX(), event.getY());
+        } else {
+            super.handleMousePressed(event);
         }
-
-        storeClickValuesForResize(event.getX(), event.getY());
     }
 
     @Override
     protected void handleMouseDragged(final MouseEvent event) {
+        if (isResizeEnabled) {
+            if (!(getParent() instanceof Region)) {
+                return;
+            } else if (!event.getButton().equals(MouseButton.PRIMARY)) {
+                setCursor(null);
+                return;
+            }
 
-        if (!(getParent() instanceof Region)) {
-            return;
-        } else if (!event.getButton().equals(MouseButton.PRIMARY)) {
-            setCursor(null);
-            return;
-        }
+            if (!dragActive) {
+                final Point2D cursorPosition = GeometryUtils.getCursorPosition(event, container);
+                storeClickValuesForDrag(cursorPosition.getX(), cursorPosition.getY());
+                storeClickValuesForResize(event.getX(), event.getY());
+            }
 
-        if (!dragActive) {
-            final Point2D cursorPosition = GeometryUtils.getCursorPosition(event, container);
-            storeClickValuesForDrag(cursorPosition.getX(), cursorPosition.getY());
-            storeClickValuesForResize(event.getX(), event.getY());
-        }
+            if (lastMouseRegion.equals(RectangleMouseRegion.INSIDE)) {
+                super.handleMouseDragged(event);
+            } else if (!lastMouseRegion.equals(RectangleMouseRegion.OUTSIDE)) {
+                final Point2D cursorPosition = GeometryUtils.getCursorPosition(event, container);
+                handleResize(cursorPosition.getX(), cursorPosition.getY());
+            }
 
-        if (lastMouseRegion.equals(RectangleMouseRegion.INSIDE)) {
+            dragActive = true;
+            event.consume();
+        } else {
             super.handleMouseDragged(event);
-        } else if (!lastMouseRegion.equals(RectangleMouseRegion.OUTSIDE)) {
-            final Point2D cursorPosition = GeometryUtils.getCursorPosition(event, container);
-            handleResize(cursorPosition.getX(), cursorPosition.getY());
         }
-
-        dragActive = true;
-        event.consume();
     }
 
     @Override
     protected void handleMouseReleased(final MouseEvent event) {
+        if (isResizeEnabled) {
+            super.handleMouseReleased(event);
+            if (event.getButton().equals(MouseButton.PRIMARY)) {
+                processMousePosition(event);
+            }
+        } else {
+            super.handleMouseReleased(event);
+        }
+    }
 
-        super.handleMouseReleased(event);
-        if (event.getButton().equals(MouseButton.PRIMARY)) {
-            processMousePosition(event);
+    private void handleMouseExited(final MouseEvent event){
+        if (!event.isPrimaryButtonDown()) {
+            setCursor(null);
         }
     }
 

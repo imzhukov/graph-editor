@@ -3,6 +3,7 @@
  */
 package de.tesis.dynaware.grapheditor.demo.customskins.titled;
 
+import de.tesis.dynaware.grapheditor.utils.EventHandlersManager;
 import javafx.css.PseudoClass;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -30,14 +31,17 @@ public class TitledConnectorSkin extends GConnectorSkin {
 
     private final Group forbiddenGraphic;
 
+    private EventHandlersManager eventHandlersManager;
+
+
     /**
      * Creates a new {@link TitledConnectorSkin} instance.
      *
      * @param connector the {@link GConnector} that this skin is representing
      */
     public TitledConnectorSkin(final GConnector connector) {
-
         super(connector);
+        eventHandlersManager = new EventHandlersManager(root);
 
         root.setMinSize(SIZE, SIZE);
         root.setPrefSize(SIZE, SIZE);
@@ -87,6 +91,11 @@ public class TitledConnectorSkin extends GConnectorSkin {
             forbiddenGraphic.setVisible(true);
             break;
         }
+    }
+
+    @Override
+    public EventHandlersManager getEventHandlersManager(){
+        return eventHandlersManager;
     }
 
     /**
