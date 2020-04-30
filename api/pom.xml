@@ -7,9 +7,13 @@
 	<parent>
 		<groupId>de.tesis.dynaware</groupId>
 		<artifactId>de.tesis.dynaware.grapheditor</artifactId>
-		<version>3.1.15</version>
+		<version>${grapheditor.project.version}</version>
 	</parent>
 	<name>${component.name}::API</name>
+	
+	<properties>
+		<grapheditor.project.version>3.1.15</grapheditor.project.version>
+    </properties>
 
 	<dependencies>
 		<dependency>
