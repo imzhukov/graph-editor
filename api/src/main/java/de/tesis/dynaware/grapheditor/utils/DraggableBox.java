@@ -106,7 +106,7 @@ public class DraggableBox extends StackPane {
     }
 
     /**
-     *
+     * Gets the EventHandlersManager that provide additional control of handlers
      */
     public EventHandlersManager getEventHandlersManager(){ return this.eventHandlersManager; }
 

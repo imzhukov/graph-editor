@@ -278,7 +278,7 @@ public class GraphEditorView extends Region {
     }
 
     /**
-     *
+     * Gets the EventHandlersManager that provide additional control of handlers
      * */
     public EventHandlersManager getEventHandlersManager(){ return this.eventHandlersManager; }
 

@@ -47,7 +47,7 @@ public abstract class GConnectorSkin extends GSkin {
     }
 
     /**
-     *
+     * Gets the EventHandlersManager that provide additional control of handlers
      */
     public abstract EventHandlersManager getEventHandlersManager();
 
