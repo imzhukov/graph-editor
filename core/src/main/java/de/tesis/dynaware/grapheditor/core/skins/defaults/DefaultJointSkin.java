@@ -48,18 +48,16 @@ public class DefaultJointSkin extends GJointSkin {
 
         getRoot().addEventFilter(MouseEvent.MOUSE_PRESSED, this::filterMousePressed);
 
-        getRoot().addEventHandler(MouseEvent.MOUSE_PRESSED,this::handlerMousePressed);
-        getRoot().addEventHandler(MouseEvent.MOUSE_RELEASED,this::handlerMouseReleased);
-        getRoot().addEventHandler(MouseEvent.MOUSE_DRAGGED,this::handlerMouseDragged);
+        getRoot().getEventHandlersManager().addAndSaveEventHandler(MouseEvent.MOUSE_PRESSED,this::handlerMousePressed);
+        getRoot().getEventHandlersManager().addAndSaveEventHandler(MouseEvent.MOUSE_RELEASED,this::handlerMouseReleased);
+        getRoot().getEventHandlersManager().addAndSaveEventHandler(MouseEvent.MOUSE_DRAGGED,this::handlerMouseDragged);
     }
 
     /**
      * Adds a listener to react to whether the joint is selected or not and change the CSS classes accordingly.
      */
     private void addSelectionListener() {
-
         selectedProperty().addListener((ChangeListener<Boolean>) (v, o, n) -> {
-
             if (n) {
                 getRoot().pseudoClassStateChanged(PSEUDO_CLASS_SELECTED, true);
                 getRoot().toFront();
@@ -83,7 +81,7 @@ public class DefaultJointSkin extends GJointSkin {
     }
 
 
-    private void handlerMousePressed(MouseEvent t) {
+    private void handlerMousePressed(Event t) {
         DefaultConnectionSkin connectionSkin = (DefaultConnectionSkin) getGraphEditor().getSkinLookup().lookupConnection(this.getJoint().getConnection());
         connectionSkin.setIsJointSelected(true);
         connectionSkin.setWasSelected(connectionSkin.selectedProperty().getValue());
@@ -91,7 +89,7 @@ public class DefaultJointSkin extends GJointSkin {
     }
 
 
-    private void handlerMouseReleased(MouseEvent t) {
+    private void handlerMouseReleased(Event t) {
         DefaultConnectionSkin connectionSkin = (DefaultConnectionSkin) getGraphEditor().getSkinLookup().lookupConnection(this.getJoint().getConnection());
         connectionSkin.setIsJointSelected(false);
         connectionSkin.setIsDragged(false);

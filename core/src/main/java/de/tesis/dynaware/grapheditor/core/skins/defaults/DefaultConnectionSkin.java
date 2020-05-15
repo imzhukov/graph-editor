@@ -61,11 +61,10 @@ public class DefaultConnectionSkin extends SimpleConnectionSkin {
         jointCleaner = new JointCleaner(connection);
         jointAlignmentManager = new JointAlignmentManager(connection);
 
-        jointCreator.addJointCreationHandler(root);
+        jointCreator.addJointCreationHandler(root, this);
 
         root.addEventFilter(MouseEvent.MOUSE_PRESSED, this::filterMousePressed);
-
-        root.addEventHandler(MouseEvent.MOUSE_RELEASED, this::handleMouseReleased);
+        getEventHandlersManager().addAndSaveEventHandler(MouseEvent.MOUSE_RELEASED, this::handleMouseReleased);
         selectedProperty().addListener((observable, oldValue, newValue) -> changeVisualSelection(newValue));
     }
 
@@ -112,7 +111,7 @@ public class DefaultConnectionSkin extends SimpleConnectionSkin {
         wasSelected = b;
     }
 
-    private void filterMousePressed(MouseEvent event){
+    private void filterMousePressed(Event event){
         if(getGraphEditor() != null && getGraphEditor().getModel() != null){
             for(GNode node : getGraphEditor().getModel().getNodes()){
                 if(getGraphEditor().getSkinLookup().lookupNode(node).isSelected()) {

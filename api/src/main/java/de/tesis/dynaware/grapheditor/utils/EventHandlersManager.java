@@ -18,9 +18,6 @@ public class EventHandlersManager {
         eventHandlersMap = new HashMap<>();
     }
 
-    /**
-     *
-     * */
     public void addAndSaveEventHandler(EventType type, EventHandler<? extends Event> eventHandler){
         node.addEventHandler(type, eventHandler);
         eventHandlersMap.put(eventHandler, type);

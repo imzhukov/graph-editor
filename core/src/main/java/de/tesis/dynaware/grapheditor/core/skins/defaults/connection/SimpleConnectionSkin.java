@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import de.tesis.dynaware.grapheditor.utils.EventHandlersManager;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -61,6 +62,7 @@ public class SimpleConnectionSkin extends GConnectionSkin {
     private static final String STYLE_CLASS_BACKGROUND = "default-connection-background";
 
     private final IntersectionFinder intersectionFinder;
+    private final EventHandlersManager eventHandlersManager;
 
     private List<GJointSkin> jointSkins;
     private List<Point2D> points;
@@ -83,6 +85,8 @@ public class SimpleConnectionSkin extends GConnectionSkin {
         root.getChildren().add(backgroundPath);
         root.getChildren().add(path);
 
+        eventHandlersManager = new EventHandlersManager(root);
+
         path.setMouseTransparent(true);
 
         backgroundPath.getStyleClass().setAll(STYLE_CLASS_BACKGROUND);
@@ -100,21 +104,22 @@ public class SimpleConnectionSkin extends GConnectionSkin {
     }
 
     @Override
-    public void setGraphEditor(final GraphEditor graphEditor) {
+    public EventHandlersManager getEventHandlersManager(){
+        return eventHandlersManager;
+    }
 
+    @Override
+    public void setGraphEditor(final GraphEditor graphEditor) {
         super.setGraphEditor(graphEditor);
         intersectionFinder.setSkinLookup(graphEditor.getSkinLookup());
     }
 
     @Override
     public void setJointSkins(final List<GJointSkin> jointSkins) {
-
         if (this.jointSkins != null) {
             removeOldRectangularConstraints();
         }
-
         this.jointSkins = jointSkins;
-
         addRectangularConstraints();
     }
 

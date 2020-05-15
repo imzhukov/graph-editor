@@ -6,6 +6,7 @@ package de.tesis.dynaware.grapheditor.demo.customskins.tree;
 import java.util.List;
 import java.util.Map;
 
+import de.tesis.dynaware.grapheditor.utils.EventHandlersManager;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -41,6 +42,8 @@ public class TreeConnectionSkin extends GConnectionSkin {
 
     private List<Point2D> points;
 
+    private EventHandlersManager eventHandlersManager;
+
     /**
      * Creates a new {@link TreeConnectionSkin} instance.
      *
@@ -55,6 +58,8 @@ public class TreeConnectionSkin extends GConnectionSkin {
 
         background.setManaged(false);
         background.getStyleClass().setAll(STYLE_CLASS_BACKGROUND);
+
+        eventHandlersManager = new EventHandlersManager(root);
 
         root.setOnMousePressed(this::handleMousePressed);
         root.setOnMouseDragged(this::handleMouseDragged);
@@ -74,6 +79,11 @@ public class TreeConnectionSkin extends GConnectionSkin {
     @Override
     public Shape getPath(){
         return arrow.getLine();
+    }
+
+    @Override
+    public EventHandlersManager getEventHandlersManager() {
+        return eventHandlersManager;
     }
 
     @Override

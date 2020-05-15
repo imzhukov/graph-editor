@@ -6,6 +6,7 @@ package de.tesis.dynaware.grapheditor;
 import java.util.List;
 import java.util.Map;
 
+import de.tesis.dynaware.grapheditor.utils.EventHandlersManager;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Line;
 import de.tesis.dynaware.grapheditor.model.GConnection;
@@ -54,6 +55,11 @@ public abstract class GConnectionSkin extends GSkin {
      * <p>Use for styling connection.</p>
      */
     public abstract Shape getPath();
+
+    /**
+     * Gets the EventHandlersManager that provide additional control of handlers
+     */
+    public abstract EventHandlersManager getEventHandlersManager();
 
     /**
      * Sets the skin objects for all joints inside the connection.
