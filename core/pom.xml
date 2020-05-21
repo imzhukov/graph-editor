@@ -12,7 +12,7 @@
 	<name>${component.name}::Core</name>
 	
 	<properties>
-		<grapheditor.project.version>3.1.15</grapheditor.project.version>
+		<grapheditor.project.version>3.1.16</grapheditor.project.version>
     </properties>
 
 	<dependencies>
