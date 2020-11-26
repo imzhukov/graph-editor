@@ -72,6 +72,10 @@ public class ZoomService {
         return currentZoomFactor;
     }
 
+    public void setCurrentZoomFactor(double currentZoomFactor) {
+        this.currentZoomFactor = currentZoomFactor;
+    }
+
     public static void setFreeScaling(boolean freeScaling){
         freeScalingProperty().setValue(freeScaling);
     }
