@@ -64,4 +64,4 @@ if __name__ == "__main__":
                 update_version_in_file(subdir + '\\' + file, new_version)
                 print('Update version in file: ' + subdir + '\\' + file)
 
-    git_commit(current_version)
+    git_commit(new_version)
